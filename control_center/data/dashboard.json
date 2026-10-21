@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T19:27:11Z",
+  "generated_at": "2026-10-21T19:28:01Z",
   "system": {
-    "status": "ready",
+    "status": "failed",
     "automation_enabled": false,
-    "current_stage": "Dry run passed; nothing uploaded",
-    "current_item_id": null,
+    "current_stage": "Stopped safely",
+    "current_item_id": "jack-sparrow-entrance-001",
     "last_success_at": null,
-    "last_error": null
+    "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2"
   },
   "channel": {
     "name": "Vidloom Cinema",
@@ -33,11 +33,11 @@
     "ai": "connected"
   },
   "metrics": {
-    "queued": 1,
+    "queued": 0,
     "building": 0,
     "scheduled": 0,
     "published": 0,
-    "failed": 0
+    "failed": 1
   },
   "queue": [
     {
@@ -45,14 +45,24 @@
       "project_path": "premium_pipeline/projects/jack_sparrow_entrance/project.json",
       "title": "Why Jack Sparrow's Entrance Is Perfect",
       "genre": "cinema_scene_breakdown",
-      "status": "ready",
+      "status": "failed",
       "scheduled_publish_at": null,
       "youtube_url": null,
-      "attempts": 3,
-      "last_error": null
+      "attempts": 4,
+      "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2"
     }
   ],
   "events": [
+    {
+      "at": "2026-10-21T19:28:01Z",
+      "level": "error",
+      "message": "Why Jack Sparrow's Entrance Is Perfect: Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2"
+    },
+    {
+      "at": "2026-10-21T19:28:01Z",
+      "level": "info",
+      "message": "Started Why Jack Sparrow's Entrance Is Perfect"
+    },
     {
       "at": "2026-10-21T12:11:15Z",
       "level": "success",

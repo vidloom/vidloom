@@ -14,13 +14,13 @@
         "Pirates of the Caribbean",
         "visual storytelling"
       ],
-      "status": "ready",
+      "status": "failed",
       "requested_publish_at": null,
       "scheduled_publish_at": null,
       "youtube_id": null,
       "youtube_url": null,
-      "attempts": 3,
-      "last_error": null
+      "attempts": 4,
+      "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2"
     }
   ]
 }
