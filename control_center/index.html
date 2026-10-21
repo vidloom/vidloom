@@ -27,7 +27,7 @@
         <a class="nav-item" href="#production" data-view="production">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></svg>
           Production
-          <span class="nav-count" id="navQueueCount">1</span>
+          <span class="nav-count" id="navQueueCount">—</span>
         </a>
         <a class="nav-item" href="#schedule" data-view="schedule">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></svg>
@@ -57,7 +57,7 @@
       <header class="topbar">
         <div>
           <p class="page-kicker">AUTONOMOUS STUDIO</p>
-          <h1>Good evening, Omie.</h1>
+          <h1>Good evening.</h1>
         </div>
         <div class="topbar-actions">
           <div class="studio-clock"><span id="liveClock">--:--:--</span><small>IST</small></div>
@@ -100,9 +100,9 @@
               <span class="poster-play">▶</span>
             </div>
             <div class="now-copy">
-              <span class="status-pill ready" id="currentStatus">READY</span>
-              <h3 id="currentTitle">Why Jack Sparrow's Entrance Is Perfect</h3>
-              <p id="currentMeta">32 seconds · Cinema scene breakdown</p>
+              <span class="status-pill held" id="currentStatus">LOCKED</span>
+              <h3 id="currentTitle">Private studio state locked</h3>
+              <p id="currentMeta">Owner authentication required</p>
             </div>
             <button class="icon-button" id="openProduction" aria-label="Open production queue" type="button">↗</button>
           </div>
@@ -115,13 +115,13 @@
           <p id="nextTimezone">Asia/Kolkata</p>
           <div class="hairline"></div>
           <div class="next-detail"><span>Cadence</span><strong id="cadence">Tue · Thu · Sat</strong></div>
-          <div class="next-detail"><span>Queue coverage</span><strong id="queueCoverage">1 release</strong></div>
+          <div class="next-detail"><span>Queue coverage</span><strong id="queueCoverage">Sign in</strong></div>
           <div class="release-countdown"><span>Release in</span><strong id="nextCountdown">--h --m</strong></div>
         </article>
       </section>
 
       <section class="metric-grid" aria-label="Channel metrics">
-        <article class="metric-card"><span>In queue</span><strong id="metricQueued">1</strong><small id="queueSignal">Needs 2 more</small></article>
+        <article class="metric-card"><span>In queue</span><strong id="metricQueued">—</strong><small id="queueSignal">Sign in to inspect</small></article>
         <article class="metric-card"><span>Building now</span><strong id="metricBuilding">0</strong><small>One build at a time</small></article>
         <article class="metric-card"><span>Scheduled</span><strong id="metricScheduled">0</strong><small>Private until release</small></article>
         <article class="metric-card"><span>Published</span><strong id="metricPublished">0</strong><small>Tracked by video ID</small></article>
