@@ -1,50 +1,50 @@
 {
   "verdict": "revise",
-  "summary": "The narration relies on broad, unsupported generalizations (e.g., “most movie heroes enter with explosions”), superlatives (“most ridiculous entrance”) and precise timing claims that aren’t backed by the supplied observations. While the core visual beats (tiny leaking boat, submerged mast, dry‑boot step) are present in the evidence, the script overstates them and fails to pose a clear hook‑question, making the payoff feel disconnected. Re‑writing the hook as a question, trimming subjective language, and aligning each claim strictly to the documented observations will bring the piece to release quality.",
-  "hook_score": 3,
+  "summary": "The narration follows the visual sequence but relies on several unsupported generalizations, superlatives, and precise timing statements that are not backed by the inspected observations. By removing or rephrasing those claims and aligning every statement to the concrete shots (O01‑O05), the piece will become evidence‑bound and ready for release.",
+  "hook_score": 6,
   "clarity_score": 5,
-  "payoff_score": 4,
+  "payoff_score": 7,
   "evidence_score": 4,
   "voice_score": 6,
   "claim_checks": [
     {
       "beat_id": "B01",
       "supported": false,
-      "note": "General claim about \"most movie heroes\" and superlative \"most ridiculous entrance\" are not evidenced; only the mast shot (O01) is shown."
+      "note": "The claim that \"most movie heroes enter with explosions\" and that this is \"the most ridiculous entrance\" are unsourced superlatives; the evidence only shows Jack on a mast (O01)."
     },
     {
       "beat_id": "B02",
       "supported": false,
-      "note": "Subversion of action‑hero expectations is an interpretive claim not directly observable in O02."
+      "note": "\"Subverts action hero expectations with deliberate comedic authority\" is an interpretive statement not directly evidenced by the close‑up (O02)."
     },
     {
       "beat_id": "B03",
       "supported": false,
-      "note": "Observation O03 confirms the tiny sinking boat, but the idea that Jack appears to command a galleon is not present in the evidence."
+      "note": "The idea that Jack appears to command a galleon is not captured in any observation; O03 only shows a tiny leaky rowboat and bailing. The phrase \"actively sinking\" is not explicitly documented in the observation detail."
     },
     {
       "beat_id": "B04",
       "supported": true,
-      "note": "O04 documents the submerged boat and Jack on the mast tip as described."
+      "note": "Observation O04 confirms the boat is submerged and Jack stands on the mast tip as it approaches the dock."
     },
     {
       "beat_id": "B05",
-      "supported": false,
-      "note": "O05 shows Jack stepping onto the dry dock without wet boots, but the phrasing \"exact moment\" and \"smoothly\" are timing/superlative claims lacking precise evidence."
+      "supported": true,
+      "note": "Observation O05 documents Jack stepping onto the dry pier without wetting his boots, matching the payoff claim."
     }
   ],
   "risks": [
-    "Unsupported generalizations about other movies’ entrances",
-    "Superlative language (most ridiculous, exact moment) not backed by observations",
-    "Precise timing claims without timestamps",
-    "Interpretive motives and subversion not evidenced"
+    "Unsupported superlatives (e.g., \"most ridiculous entrance\")",
+    "Generalized industry claims lacking evidence (e.g., \"most movie heroes enter with explosions\")",
+    "Interpretive statements about subversion without direct visual proof",
+    "Timing precision not verified (\"exact moment of arrival\")"
   ],
   "recommended_edits": [
-    "Rewrite the opening line into a clear question that can be answered by the footage (e.g., \"What happens when a pirate hero’s grand entrance meets a sinking dinghy?\")",
-    "Remove or qualify superlatives such as \"most ridiculous\" and \"exact moment\"",
-    "Align each claim to the specific observation IDs (e.g., reference O03 for the tiny boat, O04 for the submerged mast)",
-    "Avoid stating broad industry trends unless they can be sourced; focus on what the clip shows",
-    "Adjust the payoff sentence to state the visual outcome without asserting precise timing"
+    "Replace the opening claim with a fact‑based description of what the camera shows (Jack perched on a mast).",
+    "Remove or qualify superlatives such as \"most ridiculous\" and \"most...\".",
+    "Rephrase B02 to state the visual contrast observed in O02 rather than asserting subversion of expectations.",
+    "Adjust B03 to describe the tiny leaking boat shown in O03 without implying a galleon or active sinking unless directly visible.",
+    "Eliminate the exact‑timing language in B05 or qualify it (e.g., \"around the same moment\") to stay within the evidence."
   ],
   "version": 1,
   "provider": "Groq",
@@ -53,5 +53,5 @@
   "project_id": "jack_sparrow_entrance",
   "project_path": "premium_pipeline/projects/jack_sparrow_entrance/project.json",
   "project_digest": "8c6efcdaf5be78e5db8c8d5642ed7c1c00570776994154ff8f44f1fa9d599d33",
-  "generated_at": "2026-10-21T18:35:16Z"
+  "generated_at": "2026-10-21T19:27:11Z"
 }
