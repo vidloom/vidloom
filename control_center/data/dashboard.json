@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T19:28:01Z",
+  "generated_at": "2026-10-21T19:30:31Z",
   "system": {
     "status": "failed",
-    "automation_enabled": false,
+    "automation_enabled": true,
     "current_stage": "Stopped safely",
     "current_item_id": "jack-sparrow-entrance-001",
     "last_success_at": null,
@@ -30,7 +30,7 @@
     "youtube": "connected",
     "pipeline": "ready",
     "queue": "low",
-    "ai": "connected"
+    "ai": "complete"
   },
   "metrics": {
     "queued": 0,
@@ -53,6 +53,11 @@
     }
   ],
   "events": [
+    {
+      "at": "2026-10-21T19:30:31Z",
+      "level": "info",
+      "message": "Automation resumed"
+    },
     {
       "at": "2026-10-21T19:28:01Z",
       "level": "error",

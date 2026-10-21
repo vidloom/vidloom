@@ -43,7 +43,7 @@
     "required_verdict": "pass"
   },
   "automation": {
-    "enabled": false,
+    "enabled": true,
     "runner": "self-hosted",
     "max_upload_retries": 5,
     "minimum_queue_depth": 3,
