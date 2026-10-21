@@ -40,9 +40,7 @@
     "provider": "Groq",
     "model": "openai/gpt-oss-120b",
     "require_audit_before_upload": true,
-    "block_verdicts": [
-      "block"
-    ]
+    "required_verdict": "pass"
   },
   "automation": {
     "enabled": false,

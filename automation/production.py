@@ -84,8 +84,8 @@ def prepare_project(item: dict, config: dict, state: dict, *, allow_render: bool
             sys.executable, "-m", "automation.groq_editorial", item["project_path"],
             "--model", ai_config.get("model", "openai/gpt-oss-120b"),
         ]
-        if ai_config.get("require_audit_before_upload") and "block" in ai_config.get("block_verdicts", []):
-            command.append("--fail-on-block")
+        if ai_config.get("require_audit_before_upload") and ai_config.get("required_verdict") == "pass":
+            command.append("--require-pass")
         run(command)
     state["system"]["current_stage"] = "Validating evidence and editorial reviews"
     state["system"]["status"] = "building"

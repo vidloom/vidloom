@@ -152,7 +152,7 @@ def main() -> None:
     parser.add_argument("project", help="Repository-relative project.json path")
     parser.add_argument("--model", default="openai/gpt-oss-120b")
     parser.add_argument("--refresh", action="store_true")
-    parser.add_argument("--fail-on-block", action="store_true")
+    parser.add_argument("--require-pass", action="store_true", help="Exit nonzero unless the audit verdict is pass")
     args = parser.parse_args()
     project_path = resolve_project_path(args.project)
     result = audit(project_path, args.model, refresh=args.refresh)
@@ -163,7 +163,7 @@ def main() -> None:
             "hook_score", "clarity_score", "payoff_score", "evidence_score", "voice_score"
         )},
     }, indent=2))
-    if args.fail_on_block and result["verdict"] == "block":
+    if args.require_pass and result["verdict"] != "pass":
         raise SystemExit(2)
 
 
