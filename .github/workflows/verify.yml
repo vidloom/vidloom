@@ -22,3 +22,6 @@ jobs:
       - run: python -m automation.dashboard_state --output /tmp/vidloom-dashboard.json
       - name: Validate static application syntax
         run: node --check control_center/app.js
+      - name: Verify Cloudflare control plane
+        working-directory: cloudflare-control
+        run: npm ci && npm run check

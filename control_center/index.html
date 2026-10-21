@@ -47,7 +47,7 @@
         </div>
         <button class="identity-button" id="openConnection" type="button">
           <span class="avatar">OM</span>
-          <span class="identity-copy"><strong>Owner console</strong><small id="connectionLabel">Connect GitHub</small></span>
+          <span class="identity-copy"><strong>Owner console</strong><small id="connectionLabel">Sign in</small></span>
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
@@ -68,7 +68,7 @@
           </button>
           <button class="button button-primary" id="runCycle" type="button">
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"/></svg>
-            Run cycle
+            Safe run
           </button>
         </div>
       </header>
@@ -76,8 +76,8 @@
       <section class="notice" id="setupNotice" aria-live="polite">
         <div class="notice-icon"><span></span></div>
         <div>
-          <strong>Connect the final two services</strong>
-          <p>The dashboard is built. Add the YouTube OAuth secrets and register this machine as the private production runner.</p>
+          <strong id="noticeTitle">Owner sign-in required</strong>
+          <p id="noticeCopy">Sign in to load private studio state and use production controls.</p>
         </div>
         <button class="text-button" id="setupButton" type="button">Open setup <span>→</span></button>
       </section>
@@ -200,7 +200,11 @@
             <div><span><i id="aiDot"></i>Groq AI Director</span><strong id="aiHealth">Configured</strong></div>
             <div><span><i id="queueDot"></i>Queue depth</span><strong id="queueHealth">Low</strong></div>
           </div>
-          <button class="button button-ghost full" id="pauseAutomation" type="button">Resume automation</button>
+            <div class="control-stack">
+              <button class="button button-ghost full" id="pauseAutomation" type="button">Resume automation</button>
+              <button class="button button-secondary full" id="buildOnly" type="button">Build + QC only</button>
+              <button class="button button-danger full" id="uploadNow" type="button">Upload approved item</button>
+            </div>
         </article>
       </section>
 
@@ -213,13 +217,10 @@
 
   <dialog id="connectionDialog" class="modal">
     <form method="dialog" class="modal-card" id="connectionForm">
-      <div class="modal-head"><div><p class="eyebrow">Owner connection</p><h2>Connect GitHub controls</h2></div><button value="cancel" aria-label="Close">×</button></div>
-      <p class="modal-copy">The dashboard never stores your token in the repository or local storage. A fine-grained token is kept only for this browser tab.</p>
-      <label>Repository owner<input id="repoOwner" name="owner" autocomplete="off" placeholder="your-github-name" required></label>
-      <label>Repository name<input id="repoName" name="repo" autocomplete="off" placeholder="vidloom" required></label>
-      <label>Default branch<input id="repoBranch" name="branch" autocomplete="off" value="main" required></label>
-      <label>Fine-grained token<input id="repoToken" name="token" type="password" autocomplete="off" placeholder="github_pat_…"><small>Actions: write and Contents: write. Leave blank for read-only mode.</small></label>
-      <div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="saveConnection" value="default">Connect</button></div>
+      <div class="modal-head"><div><p class="eyebrow">Private control plane</p><h2>Unlock Vidloom</h2></div><button value="cancel" aria-label="Close">×</button></div>
+      <p class="modal-copy">Your GitHub credential stays encrypted on Cloudflare. This browser receives only a signed, HttpOnly owner session.</p>
+      <label>Control password<input id="controlPassword" name="password" type="password" autocomplete="current-password" placeholder="Your private password" required></label>
+      <div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="saveConnection" value="default">Unlock dashboard</button></div>
     </form>
   </dialog>
 

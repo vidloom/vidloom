@@ -79,11 +79,22 @@ YOUTUBE_CLIENT_SECRET
 YOUTUBE_REFRESH_TOKEN
 ```
 
-## 4. Connect website controls
+## 4. Deploy the private website controls
 
-Open the deployed Pages URL, choose **Connect GitHub**, and enter the owner,
-repository and branch. For direct Run/Pause/Queue buttons, create a short-lived
-fine-grained personal access token limited to this one repository with:
+The production console is a Cloudflare Worker. GitHub Pages remains only a
+static fallback. From the project root, use Cloudflare's browser login and set
+three hidden Worker secrets:
+
+```bash
+cd cloudflare-control
+npx wrangler login
+npx wrangler secret put GITHUB_TOKEN
+npx wrangler secret put CONTROL_PASSWORD
+npx wrangler secret put SESSION_SECRET
+npm run deploy
+```
+
+Use a fine-grained GitHub token limited to only `vidloom/vidloom` with:
 
 ```text
 Actions: write
@@ -91,8 +102,18 @@ Contents: write
 Metadata: read
 ```
 
-The token is held only in that browser tab's session. You can omit it and use
-the dashboard read-only while triggering workflows through GitHub's Actions UI.
+The token is encrypted by Cloudflare and never reaches browser JavaScript.
+`CONTROL_PASSWORD` is the password used to unlock the owner console.
+`SESSION_SECRET` must be a random 32+ byte value.
+
+For automatic website deployment on future pushes, create a Cloudflare API
+token from the **Edit Cloudflare Workers** template and save it as the GitHub
+Actions secret `CLOUDFLARE_API_TOKEN`. The non-secret account ID belongs in the
+repository variable `CLOUDFLARE_ACCOUNT_ID`. The workflow is:
+
+```text
+.github/workflows/deploy-cloudflare.yml
+```
 
 ## 5. Test, then go live
 

@@ -45,6 +45,8 @@ def select_item(queue_doc: dict, item_id: str | None) -> dict:
     if item_id:
         for item in items:
             if item.get("id") == item_id:
+                if item.get("status") != "ready":
+                    raise RuntimeError(f"Queue item {item_id} is {item.get('status')!r}, not 'ready'")
                 return item
         raise ValueError(f"Unknown queue item: {item_id}")
     for item in items:

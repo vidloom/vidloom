@@ -71,12 +71,15 @@ main { min-width: 0; padding: 26px clamp(24px, 4vw, 60px) 36px; }
 .live-state.failed span { background: var(--danger); }
 .button { height: 38px; border: 1px solid transparent; border-radius: 9px; padding: 0 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 710; cursor: pointer; transition: transform .16s, box-shadow .16s, background .16s; }
 .button:hover { transform: translateY(-1px); }
+.button:disabled, .row-action:disabled { cursor: not-allowed; opacity: .45; transform: none; }
 .button svg { width: 15px; height: 15px; }
 .button-primary { background: var(--ink); color: white; box-shadow: 0 8px 20px rgba(20,21,19,.14); }
 .button-primary:hover { background: #2c2e2a; }
 .button-secondary { border-color: var(--line); background: var(--surface); }
 .button-secondary:hover { border-color: var(--line-dark); background: white; }
 .button-ghost { border-color: var(--line); background: transparent; }
+.button-danger { border-color: #e6c7c2; background: #fff7f6; color: #9b3931; }
+.button-danger:hover { background: #fbe9e6; }
 .button.small { height: 32px; font-size: 11px; }
 .button.full { width: 100%; margin-top: 17px; }
 
@@ -183,13 +186,16 @@ main { min-width: 0; padding: 26px clamp(24px, 4vw, 60px) 36px; }
 .content-grid { margin-top: 14px; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(290px, .85fr); gap: 14px; }
 .queue-panel, .activity-panel, .schedule-panel, .health-panel { padding: 20px; }
 .queue-list { margin-top: 16px; display: grid; }
-.queue-row { min-height: 66px; display: grid; grid-template-columns: 34px minmax(0,1fr) auto auto; gap: 12px; align-items: center; border-top: 1px solid #e8e7e2; }
+.queue-row { min-height: 66px; display: grid; grid-template-columns: 34px minmax(0,1fr) auto auto auto; gap: 12px; align-items: center; border-top: 1px solid #e8e7e2; }
 .queue-row:first-child { border-top: 0; }
 .queue-index { width: 27px; height: 27px; display: grid; place-items: center; border-radius: 8px; background: #eeeee8; color: var(--muted); font-size: 9px; font-weight: 760; }
 .queue-copy { min-width: 0; }
 .queue-copy strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; }
 .queue-copy small { display: block; margin-top: 4px; color: var(--faint); font-size: 9px; }
 .queue-when { color: var(--muted); font-size: 9px; text-align: right; }
+.row-action { min-width: 51px; height: 27px; border: 1px solid var(--line); border-radius: 7px; background: white; color: var(--muted); font-size: 9px; font-weight: 700; cursor: pointer; }
+.row-action:hover { border-color: var(--line-dark); color: var(--ink); }
+.status-pill.held { background: #ebe9e4; color: #777970; }
 .queue-empty { padding: 35px 0; color: var(--muted); text-align: center; font-size: 11px; }
 .activity-list { margin-top: 17px; display: grid; gap: 14px; }
 .activity-item { position: relative; padding-left: 19px; }
@@ -216,6 +222,9 @@ main { min-width: 0; padding: 26px clamp(24px, 4vw, 60px) 36px; }
 .health-list i { width: 6px; height: 6px; border-radius: 50%; background: var(--warning); }
 .health-list i.good { background: var(--success); }
 .health-list i.bad { background: var(--danger); }
+.control-stack { display: grid; gap: 8px; margin-top: 17px; }
+.control-stack .button.full { margin-top: 0; }
+.identity-button.authenticated .avatar { box-shadow: 0 0 0 3px rgba(201,245,74,.18); }
 footer { margin-top: 20px; padding-top: 16px; display: flex; justify-content: space-between; border-top: 1px solid var(--line); color: var(--faint); font-size: 8px; letter-spacing: .08em; }
 
 .modal { width: min(520px, calc(100vw - 30px)); padding: 0; border: 0; border-radius: 16px; background: transparent; box-shadow: var(--shadow); }
@@ -267,6 +276,10 @@ footer { margin-top: 20px; padding-top: 16px; display: flex; justify-content: sp
   .now-bottom { grid-template-columns: 76px 1fr auto; }
   .video-placeholder { width: 76px; height: 90px; }
   .week-strip { grid-template-columns: repeat(4, 1fr); }
+  .queue-row { grid-template-columns: 30px minmax(0,1fr) auto; padding: 9px 0; }
+  .queue-when { display: none; }
+  .queue-row .status-pill { grid-column: 2; justify-self: start; }
+  .queue-row .row-action { grid-column: 3; grid-row: 1 / span 2; }
   .score-grid { grid-template-columns: repeat(3, 1fr); }
   .ai-bottom { align-items: stretch; flex-direction: column; }
   .button-neon { width: 100%; }

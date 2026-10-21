@@ -81,6 +81,8 @@ jobs:
           # A dry run is explicitly safe: it validates/renders/QCs and cannot
           # upload. Allow it while the global production switch remains paused.
           if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run --force); fi
+          # Build-only also cannot upload, so it is safe while publishing is paused.
+          if [ "$RUN_MODE" = "build" ]; then args+=(--force); fi
           .venv-automation/bin/python -m automation.production "${args[@]}"
 
       - name: Refresh public dashboard state

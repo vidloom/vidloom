@@ -4,6 +4,7 @@ import unittest
 from datetime import datetime, timezone
 
 from automation.schedule import next_publish_slot, requested_or_next
+from automation.production import select_item
 
 
 CONFIG = {
@@ -35,6 +36,11 @@ class ScheduleTests(unittest.TestCase):
     def test_requested_time_must_be_future(self):
         with self.assertRaisesRegex(ValueError, "future"):
             requested_or_next(CONFIG, "2020-01-01T00:00:00Z", datetime(2026, 10, 20, tzinfo=timezone.utc))
+
+    def test_explicit_held_item_cannot_run(self):
+        queue = {"items": [{"id": "held-one", "status": "held"}]}
+        with self.assertRaisesRegex(RuntimeError, "not 'ready'"):
+            select_item(queue, "held-one")
 
 
 if __name__ == "__main__":

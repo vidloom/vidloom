@@ -7,6 +7,8 @@ __pycache__/
 .env
 .env.*
 !.env.example
+.dev.vars
+!.dev.vars.example
 client_secret*.json
 token*.json
 credentials*.json
@@ -16,6 +18,10 @@ models/
 .cache/
 .gemini/
 gha-creds-*.json
+
+# Node and Cloudflare local state
+node_modules/
+.wrangler/
 
 # Generated renders and large scratch media stay on the private production host.
 output/

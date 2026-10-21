@@ -9,7 +9,7 @@ from automation.common import AI_STATE_PATH, CONFIG_PATH, QUEUE_PATH, STATE_PATH
 from automation.schedule import next_publish_slot
 
 
-PUBLIC_STATUSES = {"queued", "ready", "building", "qc", "uploading", "scheduled", "published", "failed"}
+PUBLIC_STATUSES = {"queued", "ready", "held", "building", "qc", "uploading", "scheduled", "published", "failed"}
 
 
 def build_public_state() -> dict:
