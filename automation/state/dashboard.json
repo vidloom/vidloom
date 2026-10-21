@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T13:07:48Z",
+  "generated_at": "2026-10-21T19:02:16Z",
   "system": {
     "status": "ready",
     "automation_enabled": false,
@@ -29,7 +29,8 @@
     "runner": "online",
     "youtube": "connected",
     "pipeline": "ready",
-    "queue": "low"
+    "queue": "low",
+    "ai": "complete"
   },
   "metrics": {
     "queued": 1,
@@ -41,6 +42,7 @@
   "queue": [
     {
       "id": "jack-sparrow-entrance-001",
+      "project_path": "premium_pipeline/projects/jack_sparrow_entrance/project.json",
       "title": "Why Jack Sparrow's Entrance Is Perfect",
       "genre": "cinema_scene_breakdown",
       "status": "ready",
@@ -86,5 +88,34 @@
       "level": "info",
       "message": "Control center created. Connect GitHub Actions and YouTube OAuth to go live."
     }
-  ]
+  ],
+  "ai": {
+    "provider": "Groq",
+    "model": "openai/gpt-oss-120b",
+    "status": "complete",
+    "verdict": "revise",
+    "project_id": "jack_sparrow_entrance",
+    "generated_at": "2026-10-21T18:35:16Z",
+    "summary": "The narration relies on broad, unsupported generalizations (e.g., “most movie heroes enter with explosions”), superlatives (“most ridiculous entrance”) and precise timing claims that aren’t backed by the supplied observations. While the core visual beats (tiny leaking boat, submerged mast, dry‑boot step) are present in the evidence, the script overstates them and fails to pose a clear hook‑question, making the payoff feel disconnected. Re‑writing the hook as a question, trimming subjective language, and aligning each claim strictly to the documented observations will bring the piece to release quality.",
+    "scores": {
+      "hook": 3,
+      "clarity": 5,
+      "payoff": 4,
+      "evidence": 4,
+      "voice": 6
+    },
+    "risks": [
+      "Unsupported generalizations about other movies’ entrances",
+      "Superlative language (most ridiculous, exact moment) not backed by observations",
+      "Precise timing claims without timestamps",
+      "Interpretive motives and subversion not evidenced"
+    ],
+    "recommended_edits": [
+      "Rewrite the opening line into a clear question that can be answered by the footage (e.g., \"What happens when a pirate hero’s grand entrance meets a sinking dinghy?\")",
+      "Remove or qualify superlatives such as \"most ridiculous\" and \"exact moment\"",
+      "Align each claim to the specific observation IDs (e.g., reference O03 for the tiny boat, O04 for the submerged mast)",
+      "Avoid stating broad industry trends unless they can be sourced; focus on what the clip shows",
+      "Adjust the payoff sentence to state the visual outcome without asserting precise timing"
+    ]
+  }
 }
