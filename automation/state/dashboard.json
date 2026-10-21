@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T11:19:17Z",
+  "generated_at": "2026-10-21T12:07:03Z",
   "system": {
     "status": "ready",
     "automation_enabled": false,
@@ -27,7 +27,7 @@
   },
   "health": {
     "runner": "local",
-    "youtube": "not_connected",
+    "youtube": "connected",
     "pipeline": "ready",
     "queue": "low"
   },
