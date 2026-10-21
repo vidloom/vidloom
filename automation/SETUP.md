@@ -49,12 +49,25 @@ In Google Cloud Console:
 1. Create/select a project and enable **YouTube Data API v3**.
 2. Configure the OAuth consent screen for your Google account.
 3. Create an OAuth 2.0 **Desktop app** client and download its JSON file.
-4. Install the GitHub CLI, authenticate it with `gh auth login`, then run:
+4. Install the GitHub CLI, authenticate it with `gh auth login`, then run. On
+   Fedora the packaged installation command is `sudo dnf install gh`; a local
+   install at `~/.local/bin/gh` also works.
 
 ```bash
 python3 -m venv .venv-automation
 .venv-automation/bin/pip install -r automation/requirements.txt
 .venv-automation/bin/python -m automation.oauth_setup
+```
+
+To authorize in a different browser or browser profile, pass
+`--no-open-browser`; the helper prints a URL that can be copied anywhere on the
+same machine:
+
+```bash
+.venv-automation/bin/python -m automation.oauth_setup \
+  --repo OWNER/REPO \
+  --client-json /absolute/path/to/client_secret.json \
+  --no-open-browser
 ```
 
 The helper opens Google's consent page and sends the client ID, client secret
