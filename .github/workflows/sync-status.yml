@@ -25,10 +25,10 @@ jobs:
       YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
       YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - run: python -m pip install --disable-pip-version-check -r automation/requirements.txt
@@ -42,10 +42,10 @@ jobs:
           git add automation/queue.json automation/state/dashboard.json control_center/data/dashboard.json
           git diff --cached --quiet || git commit -m "ops: sync YouTube status [skip ci]"
           git push
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: control_center
       - name: Deploy updated dashboard
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

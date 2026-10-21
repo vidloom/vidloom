@@ -32,7 +32,7 @@ jobs:
       YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
       VIDLOOM_RUNNER_ONLINE: "true"
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Install editorial dependencies
@@ -53,10 +53,10 @@ jobs:
           git add automation/state/ai.json automation/state/dashboard.json control_center/data/dashboard.json
           git diff --cached --quiet || git commit -m "ops: update Groq editorial audit [skip ci]"
           git push
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: control_center
       - name: Deploy updated dashboard
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
