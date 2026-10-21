@@ -1,0 +1,432 @@
+{
+  "duration": 23.065,
+  "lines": [
+    {
+      "spoken": "This mission was built so no fighter pilot could survive it.",
+      "captions": [
+        "BUILT TO BE",
+        "*IMPOSSIBLE*"
+      ],
+      "start": 0.0,
+      "end": 2.9,
+      "words": [
+        {
+          "text": "This",
+          "start": 0.0,
+          "end": 0.148041
+        },
+        {
+          "text": "mission",
+          "start": 0.159625,
+          "end": 0.518416
+        },
+        {
+          "text": "was",
+          "start": 0.53,
+          "end": 0.715166
+        },
+        {
+          "text": "built",
+          "start": 0.72675,
+          "end": 1.016083
+        },
+        {
+          "text": "so",
+          "start": 1.027666,
+          "end": 1.212832
+        },
+        {
+          "text": "no",
+          "start": 1.224458,
+          "end": 1.444374
+        },
+        {
+          "text": "fighter",
+          "start": 1.455916,
+          "end": 1.745249
+        },
+        {
+          "text": "pilot",
+          "start": 1.756833,
+          "end": 2.1619159999999997
+        },
+        {
+          "text": "could",
+          "start": 2.1734999999999998,
+          "end": 2.312375
+        },
+        {
+          "text": "survive",
+          "start": 2.324,
+          "end": 2.7406659999999996
+        },
+        {
+          "text": "it",
+          "start": 2.752208,
+          "end": 2.9
+        }
+      ]
+    },
+    {
+      "spoken": "Six hundred sixty knots. Canyon walls. A target just three meters wide.",
+      "captions": [
+        "*660 KNOTS*",
+        "CANYON WALLS",
+        "3-METER TARGET"
+      ],
+      "start": 2.985,
+      "end": 7.645,
+      "words": [
+        {
+          "text": "Six",
+          "start": 2.985,
+          "end": 3.219916
+        },
+        {
+          "text": "hundred",
+          "start": 3.2308749999999997,
+          "end": 3.570791
+        },
+        {
+          "text": "sixty",
+          "start": 3.58175,
+          "end": 3.9326250000000003
+        },
+        {
+          "text": "knots",
+          "start": 3.943583,
+          "end": 4.382166
+        },
+        {
+          "text": "Canyon",
+          "start": 4.711124999999999,
+          "end": 5.029124999999999
+        },
+        {
+          "text": "walls",
+          "start": 5.040082999999999,
+          "end": 5.500624
+        },
+        {
+          "text": "A",
+          "start": 5.82475,
+          "end": 5.9014999999999995
+        },
+        {
+          "text": "target",
+          "start": 5.912457999999999,
+          "end": 6.318166
+        },
+        {
+          "text": "just",
+          "start": 6.3291249999999994,
+          "end": 6.5922909999999995
+        },
+        {
+          "text": "three",
+          "start": 6.603249999999999,
+          "end": 6.866415999999999
+        },
+        {
+          "text": "meters",
+          "start": 6.877374999999999,
+          "end": 7.184374999999999
+        },
+        {
+          "text": "wide",
+          "start": 7.195333,
+          "end": 7.622957999999999
+        }
+      ]
+    },
+    {
+      "spoken": "The clock: two minutes, fifteen.",
+      "captions": [
+        "THE CLOCK",
+        "*02:15*"
+      ],
+      "start": 7.73,
+      "end": 10.41,
+      "words": [
+        {
+          "text": "The",
+          "start": 7.7299999999999995,
+          "end": 7.779748999999999
+        },
+        {
+          "text": "clock",
+          "start": 7.791665999999999,
+          "end": 8.184541
+        },
+        {
+          "text": "two",
+          "start": 8.708333,
+          "end": 8.874998999999999
+        },
+        {
+          "text": "minutes",
+          "start": 8.886916,
+          "end": 9.339291
+        },
+        {
+          "text": "fifteen",
+          "start": 9.791666,
+          "end": 10.351206999999999
+        }
+      ]
+    },
+    {
+      "spoken": "Every pilot said impossible.",
+      "captions": [
+        "EVERY PILOT SAID",
+        "*IMPOSSIBLE*"
+      ],
+      "start": 10.495,
+      "end": 12.225,
+      "words": [
+        {
+          "text": "Every",
+          "start": 10.495000000000001,
+          "end": 10.7495819
+        },
+        {
+          "text": "pilot",
+          "start": 10.761291,
+          "end": 11.170166
+        },
+        {
+          "text": "said",
+          "start": 11.181833000000001,
+          "end": 11.427166
+        },
+        {
+          "text": "impossible",
+          "start": 11.438875,
+          "end": 12.209916
+        }
+      ]
+    },
+    {
+      "spoken": "So Maverick took the jet himself.",
+      "captions": [
+        "MAVERICK TOOK",
+        "THE JET HIMSELF"
+      ],
+      "start": 12.31,
+      "end": 14.08,
+      "words": [
+        {
+          "text": "So",
+          "start": 12.310000000000002,
+          "end": 12.4105409
+        },
+        {
+          "text": "Maverick",
+          "start": 12.422,
+          "end": 12.915125000000002
+        },
+        {
+          "text": "took",
+          "start": 12.926625000000001,
+          "end": 13.167458000000002
+        },
+        {
+          "text": "the",
+          "start": 13.178916000000001,
+          "end": 13.259207000000002
+        },
+        {
+          "text": "jet",
+          "start": 13.270625,
+          "end": 13.500000000000002
+        },
+        {
+          "text": "himself",
+          "start": 13.511458000000001,
+          "end": 14.080000000000002
+        }
+      ]
+    },
+    {
+      "spoken": "Nine Gs. One bomb. No margin.",
+      "captions": [
+        "*NINE Gs*",
+        "ONE BOMB",
+        "NO MARGIN"
+      ],
+      "start": 14.165,
+      "end": 16.815,
+      "words": [
+        {
+          "text": "Nine",
+          "start": 14.165000000000003,
+          "end": 14.392499000000003
+        },
+        {
+          "text": "Gs",
+          "start": 14.403666000000001,
+          "end": 14.805457000000002
+        },
+        {
+          "text": "One",
+          "start": 15.151416000000001,
+          "end": 15.341166000000001
+        },
+        {
+          "text": "bomb",
+          "start": 15.352333000000002,
+          "end": 15.687166000000001
+        },
+        {
+          "text": "No",
+          "start": 16.033125000000002,
+          "end": 16.211708
+        },
+        {
+          "text": "margin",
+          "start": 16.222875000000002,
+          "end": 16.792083
+        }
+      ]
+    },
+    {
+      "spoken": "He hit the target...",
+      "captions": [
+        "HE HIT",
+        "THE TARGET"
+      ],
+      "start": 16.9,
+      "end": 17.84,
+      "words": [
+        {
+          "text": "He",
+          "start": 16.900000000000002,
+          "end": 16.942082000000003
+        },
+        {
+          "text": "hit",
+          "start": 16.954333000000002,
+          "end": 17.199416000000003
+        },
+        {
+          "text": "the",
+          "start": 17.211666,
+          "end": 17.309707000000003
+        },
+        {
+          "text": "target",
+          "start": 17.321958000000002,
+          "end": 17.840000000000003
+        }
+      ]
+    },
+    {
+      "spoken": "then stopped the clock with one second left.",
+      "captions": [
+        "ONE SECOND",
+        "*LEFT*"
+      ],
+      "start": 17.925,
+      "end": 20.285,
+      "words": [
+        {
+          "text": "then",
+          "start": 17.925000000000004,
+          "end": 18.093791000000003
+        },
+        {
+          "text": "stopped",
+          "start": 18.105708000000003,
+          "end": 18.498583000000004
+        },
+        {
+          "text": "the",
+          "start": 18.510458000000003,
+          "end": 18.569999000000003
+        },
+        {
+          "text": "clock",
+          "start": 18.581916000000003,
+          "end": 18.998582000000003
+        },
+        {
+          "text": "with",
+          "start": 19.010458000000003,
+          "end": 19.189041000000003
+        },
+        {
+          "text": "one",
+          "start": 19.200958000000004,
+          "end": 19.462874000000003
+        },
+        {
+          "text": "second",
+          "start": 19.474750000000004,
+          "end": 19.855708000000003
+        },
+        {
+          "text": "left",
+          "start": 19.867625000000004,
+          "end": 20.284291000000003
+        }
+      ]
+    },
+    {
+      "spoken": "That's not flying.",
+      "captions": [
+        "THAT'S NOT",
+        "FLYING"
+      ],
+      "start": 20.37,
+      "end": 21.43,
+      "words": [
+        {
+          "text": "That's",
+          "start": 20.370000000000005,
+          "end": 20.550000000000004
+        },
+        {
+          "text": "not",
+          "start": 20.562500000000007,
+          "end": 20.812500000000007
+        },
+        {
+          "text": "flying",
+          "start": 20.825000000000006,
+          "end": 21.400000000000006
+        }
+      ]
+    },
+    {
+      "spoken": "That's rewriting the limit.",
+      "captions": [
+        "HE REWROTE",
+        "*THE LIMIT*"
+      ],
+      "start": 21.515,
+      "end": 23.065,
+      "words": [
+        {
+          "text": "That's",
+          "start": 21.515000000000004,
+          "end": 21.772500000000004
+        },
+        {
+          "text": "rewriting",
+          "start": 21.785000000000004,
+          "end": 22.410000000000004
+        },
+        {
+          "text": "the",
+          "start": 22.422500000000003,
+          "end": 22.535000000000004
+        },
+        {
+          "text": "limit",
+          "start": 22.547500000000003,
+          "end": 23.035000000000004
+        }
+      ]
+    }
+  ]
+}

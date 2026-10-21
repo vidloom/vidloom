@@ -1,0 +1,40 @@
+[Script Info]
+Title: Shatter-Crisp Garlic Potatoes
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Montserrat ExtraBold,94,&H00FFFFFF,&H00C8FF,&H00090909,&H70000000,-1,0,0,0,100,100,0.3,0,1,8,2,5,84,84,350,1
+Style: HUD,JetBrains Mono SemiBold,24,&H00FFF4DE,&H00000000,&H70000000,&H00000000,-1,0,0,0,100,100,1.0,0,1,2,0,7,50,50,90,1
+Style: HUDRight,JetBrains Mono Medium,22,&H00E4C89A,&H00000000,&H70000000,&H00000000,-1,0,0,0,100,100,0.8,0,1,2,0,9,50,50,90,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 10,0:00:00.00,0:00:01.02,Caption,,0,0,0,,{\an5\pos(540,1410)\fs108\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}THESE POTATOES
+Dialogue: 10,0:00:01.02,0:00:02.55,Caption,,0,0,0,,{\an5\pos(540,1410)\fs108\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}SOUND LIKE {\c&H00C8FF&\blur0.45}GLASS{\c&HFFFFFF&}
+Dialogue: 10,0:00:02.55,0:00:03.57,Caption,,0,0,0,,{\an5\pos(540,1410)\fs108\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}NO OVEN
+Dialogue: 10,0:00:03.64,0:00:05.61,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}1 LB BABY POTATOES
+Dialogue: 10,0:00:05.61,0:00:07.10,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}HEAVILY SALTED WATER
+Dialogue: 10,0:00:07.10,0:00:08.09,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}UNTIL {\c&H00C8FF&\blur0.45}KNIFE-TENDER{\c&HFFFFFF&}
+Dialogue: 10,0:00:08.15,0:00:08.52,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}DRAIN
+Dialogue: 10,0:00:08.52,0:00:09.62,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}SHAKE THEM {\c&H00C8FF&\blur0.45}HARD{\c&HFFFFFF&}
+Dialogue: 10,0:00:09.68,0:00:10.44,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}RAGGED EDGES
+Dialogue: 10,0:00:10.44,0:00:11.58,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}BECOME THE {\c&H00C8FF&\blur0.45}CRUNCH{\c&HFFFFFF&}
+Dialogue: 10,0:00:11.64,0:00:13.04,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}INTO HOT OIL
+Dialogue: 10,0:00:13.04,0:00:13.98,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}DON'T TOUCH
+Dialogue: 10,0:00:13.98,0:00:15.38,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}UNTIL {\c&H00C8FF&\blur0.45}DEEP GOLD{\c&HFFFFFF&}
+Dialogue: 10,0:00:15.44,0:00:16.32,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}GARLIC + BUTTER
+Dialogue: 10,0:00:16.32,0:00:17.64,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}FINAL {\c&H00C8FF&\blur0.45}60 SECONDS{\c&HFFFFFF&}
+Dialogue: 10,0:00:17.70,0:00:18.23,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}PARMESAN
+Dialogue: 10,0:00:18.23,0:00:18.76,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}PARSLEY
+Dialogue: 10,0:00:18.76,0:00:19.81,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}FLAKY SALT
+Dialogue: 10,0:00:19.88,0:00:20.98,Caption,,0,0,0,,{\an5\pos(540,1410)\fs104\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}CREAMY CENTER
+Dialogue: 10,0:00:20.98,0:00:22.08,Caption,,0,0,0,,{\an5\pos(540,1410)\fs104\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}{\c&H00C8FF&\blur0.45}SHATTER-CRISP{\c&HFFFFFF&} SHELL
+Dialogue: 10,0:00:22.08,0:00:23.18,Caption,,0,0,0,,{\an5\pos(540,1410)\fs104\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}SAVE THIS
+Dialogue: 4,0:00:00.00,0:00:23.56,HUD,,0,0,0,,{\an7\pos(58,94)}VIDLOOM / 15-MINUTE CRUNCH
+Dialogue: 4,0:00:00.00,0:00:23.56,HUDRight,,0,0,0,,{\an9\pos(1020,94)}SAVEABLE RECIPE

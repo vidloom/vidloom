@@ -1,0 +1,84 @@
+{
+  "engine": "kokoro",
+  "duration": 23.185,
+  "beats": [
+    {
+      "text": "These potatoes sound like glass, and your oven isn't invited.",
+      "captions": [
+        "THESE POTATOES",
+        "SOUND LIKE *GLASS*",
+        "NO OVEN"
+      ],
+      "start": 0.0,
+      "end": 3.57
+    },
+    {
+      "text": "Boil one pound of baby potatoes in heavily salted water until knife tender.",
+      "captions": [
+        "1 LB BABY POTATOES",
+        "HEAVILY SALTED WATER",
+        "UNTIL *KNIFE-TENDER*"
+      ],
+      "start": 3.635,
+      "end": 8.085
+    },
+    {
+      "text": "Drain, then shake them hard.",
+      "captions": [
+        "DRAIN",
+        "SHAKE THEM *HARD*"
+      ],
+      "start": 8.15,
+      "end": 9.62
+    },
+    {
+      "text": "Those ragged edges become the crunch.",
+      "captions": [
+        "RAGGED EDGES",
+        "BECOME THE *CRUNCH*"
+      ],
+      "start": 9.685,
+      "end": 11.575
+    },
+    {
+      "text": "Drop them into hot oil, and don't touch them until deeply golden.",
+      "captions": [
+        "INTO HOT OIL",
+        "DON'T TOUCH",
+        "UNTIL *DEEP GOLD*"
+      ],
+      "start": 11.64,
+      "end": 15.38
+    },
+    {
+      "text": "Garlic and butter go in for the final minute.",
+      "captions": [
+        "GARLIC + BUTTER",
+        "FINAL *60 SECONDS*"
+      ],
+      "start": 15.445,
+      "end": 17.635
+    },
+    {
+      "text": "Parmesan. Parsley. Flaky salt.",
+      "captions": [
+        "PARMESAN",
+        "PARSLEY",
+        "FLAKY SALT"
+      ],
+      "start": 17.7,
+      "end": 19.81
+    },
+    {
+      "text": "Creamy center. Shatter crisp shell. Save this before dinner.",
+      "captions": [
+        "CREAMY CENTER",
+        "*SHATTER-CRISP* SHELL",
+        "SAVE THIS"
+      ],
+      "caption_size": 104,
+      "start": 19.875,
+      "end": 23.185
+    }
+  ]
+}

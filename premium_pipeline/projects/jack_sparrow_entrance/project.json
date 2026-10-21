@@ -1,0 +1,569 @@
+{
+  "version": 3,
+  "title": "The Greatest Character Entrance in Cinema History",
+  "fps": 30,
+  "total_frames": 960,
+  "brief": {
+    "audience": "Movie lovers, comedy fans, and short-form viewers looking for high-retention cinematic breakdowns.",
+    "viewer_problem": "Standard action heroes enter with generic explosions and CGI landings that feel predictable and dull.",
+    "promise": "Show how Pirates of the Caribbean created cinema's funniest, most iconic character entrance without a single line of dialogue.",
+    "original_contribution": "Deconstructs the visual comedic trick of using majestic heroic framing that inverts into slapstick survival, landing on the dry-boot punchline.",
+    "payoff": "Jack steps off the mast tip directly onto the dry pier planks at the exact millisecond the boat vanishes under water.",
+    "format": "story"
+  },
+  "narration": {
+    "path": "voice/take_01.wav",
+    "script": "Most movie heroes enter with explosions and a superhero landing. But Johnny Depp gave us the most ridiculous entrance in cinema history. He stands atop the mast like a legendary pirate king, until the camera pans down. It is a tiny, leaky rowboat. And it is actively sinking. By the time he reaches the harbor, the entire boat has vanished beneath the waves. Any normal pirate would panic and swim. Not Captain Jack Sparrow. At the exact second the mast hits the pier, he steps off without even getting his boots wet. That is how you arrive in style.",
+    "delivery": "Engaging, conversational, comedic commentary with authoritative presence",
+    "generation": "continuous_take",
+    "alignment_path": "voice/words_01.json",
+    "alignment_method": "manual_listened"
+  },
+  "assets": [
+    {
+      "id": "A01",
+      "path": "assets/source.mp4",
+      "kind": "video",
+      "source_url": "https://www.youtube.com/watch?v=Ov3q4JD-Fns",
+      "rights": "Fair use critique, commentary, and film analysis under Section 107",
+      "observations": [
+        {
+          "id": "O01",
+          "start": 0.5,
+          "end": 5.5,
+          "subject": "Jack Sparrow",
+          "action": "standing on mast top looking at horizon",
+          "continuity": "session_jack_entrance_01",
+          "detail": "Heroic framing of Captain Jack Sparrow perched high on the mast looking towards the horizon",
+          "inspected": true
+        },
+        {
+          "id": "O02",
+          "start": 10.5,
+          "end": 15.5,
+          "subject": "Jack Sparrow face",
+          "action": "squinting heroically into sunset",
+          "continuity": "session_jack_entrance_01",
+          "detail": "Close up of Johnny Depp squinting with solemn pirate captain authority into the sunset",
+          "inspected": true
+        },
+        {
+          "id": "O03",
+          "start": 20.5,
+          "end": 33.0,
+          "subject": "sinking Jolly Mon rowboat",
+          "action": "revealing tiny boat and bailing water",
+          "continuity": "session_jack_entrance_01",
+          "detail": "Camera reveals tiny rowboat Jolly Mon; Jack bails water with tin bucket while boat sinks",
+          "inspected": true
+        },
+        {
+          "id": "O04",
+          "start": 65.5,
+          "end": 75.0,
+          "subject": "submerged boat and mast",
+          "action": "sinking into ocean approaching dock",
+          "continuity": "session_jack_entrance_01",
+          "detail": "Boat is submerged beneath ocean surface; Jack stands poised on the remaining mast tip",
+          "inspected": true
+        },
+        {
+          "id": "O05",
+          "start": 74.5,
+          "end": 82.0,
+          "subject": "Jack stepping onto dock",
+          "action": "stepping dry off sinking mast onto pier",
+          "continuity": "session_jack_entrance_01",
+          "detail": "Jack Sparrow steps calmly off the sinking mast onto the dry dock planks without wetting boots",
+          "inspected": true
+        }
+      ]
+    }
+  ],
+  "beats": [
+    {
+      "id": "B01",
+      "word_first": 0,
+      "word_last": 9,
+      "role": "hook",
+      "claim": "Most movie heroes enter with explosions, but Johnny Depp gave cinema its most ridiculous entrance.",
+      "subject": "Jack Sparrow",
+      "action": "standing on mast top looking at horizon",
+      "source": "Pirates of the Caribbean (2003) opening mast silhouette establishing heroic expectations"
+    },
+    {
+      "id": "B02",
+      "word_first": 10,
+      "word_last": 21,
+      "role": "context",
+      "claim": "Johnny Depp subverts action hero expectations with deliberate comedic authority.",
+      "subject": "Jack Sparrow face",
+      "action": "squinting heroically into sunset",
+      "source": "Pirates of the Caribbean (2003) close up of Jack Sparrow squinting into sunset"
+    },
+    {
+      "id": "B03",
+      "word_first": 22,
+      "word_last": 47,
+      "role": "mechanism",
+      "claim": "He appears to command a galleon, but the camera reveals a tiny leaking rowboat actively sinking into the sea.",
+      "subject": "sinking Jolly Mon rowboat",
+      "action": "revealing tiny boat and bailing water",
+      "source": "Pirates of the Caribbean (2003) wide shot showing Jolly Mon and Jack bailing water"
+    },
+    {
+      "id": "B04",
+      "word_first": 48,
+      "word_last": 73,
+      "role": "context",
+      "claim": "The entire rowboat disappears under the waves as Jack stands atop the submerged mast approaching the dock.",
+      "subject": "submerged boat and mast",
+      "action": "sinking into ocean approaching dock",
+      "source": "Pirates of the Caribbean (2003) harbor entrance with boat hull submerged under water"
+    },
+    {
+      "id": "B05",
+      "word_first": 74,
+      "word_last": 98,
+      "role": "payoff",
+      "claim": "Jack steps smoothly off the sinking mast tip onto the dry dock at the exact moment of arrival without wetting his boots.",
+      "subject": "Jack stepping onto dock",
+      "action": "stepping dry off sinking mast onto pier",
+      "source": "Pirates of the Caribbean (2003) dock landing where boot steps dry onto wooden pier"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "asset": "A01",
+      "observation": "O01",
+      "start_frame": 0,
+      "end_frame": 115,
+      "source_in": 1.0,
+      "speed": 1.0,
+      "crop": [
+        950,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          980,
+          200,
+          380,
+          700
+        ],
+        [
+          1000,
+          210,
+          370,
+          690
+        ],
+        [
+          990,
+          205,
+          375,
+          695
+        ]
+      ],
+      "beat_ids": [
+        "B01"
+      ],
+      "purpose": "Establish grand heroic pirate captain silhouette atop mast",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S02",
+      "asset": "A01",
+      "observation": "O02",
+      "start_frame": 115,
+      "end_frame": 235,
+      "source_in": 11.2,
+      "speed": 1.0,
+      "crop": [
+        500,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          520,
+          160,
+          400,
+          720
+        ],
+        [
+          530,
+          170,
+          390,
+          710
+        ],
+        [
+          525,
+          165,
+          395,
+          715
+        ]
+      ],
+      "beat_ids": [
+        "B02"
+      ],
+      "purpose": "Close up on Jack Sparrow squinting with serious captain authority",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S03",
+      "asset": "A01",
+      "observation": "O03",
+      "start_frame": 235,
+      "end_frame": 485,
+      "source_in": 22.0,
+      "speed": 1.0,
+      "crop": [
+        730,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          750,
+          200,
+          390,
+          680
+        ],
+        [
+          770,
+          220,
+          380,
+          660
+        ],
+        [
+          760,
+          210,
+          385,
+          670
+        ]
+      ],
+      "beat_ids": [
+        "B03"
+      ],
+      "purpose": "Reveal tiny leaky dinghy and comedic bailing of water with bucket",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S04",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 485,
+      "end_frame": 755,
+      "source_in": 65.8,
+      "speed": 1.0,
+      "crop": [
+        980,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          1000,
+          180,
+          400,
+          700
+        ],
+        [
+          1020,
+          200,
+          380,
+          680
+        ],
+        [
+          1010,
+          190,
+          390,
+          690
+        ]
+      ],
+      "beat_ids": [
+        "B04"
+      ],
+      "purpose": "Show submerged mast gliding toward harbor with only mast tip visible",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S05",
+      "asset": "A01",
+      "observation": "O05",
+      "start_frame": 755,
+      "end_frame": 960,
+      "source_in": 74.8,
+      "speed": 1.0,
+      "crop": [
+        750,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          770,
+          200,
+          410,
+          690
+        ],
+        [
+          780,
+          210,
+          400,
+          680
+        ],
+        [
+          775,
+          205,
+          405,
+          685
+        ]
+      ],
+      "beat_ids": [
+        "B05"
+      ],
+      "purpose": "Deliver the iconic punchline: Jack steps dry off the mast onto the pier",
+      "production_gain_db": -96
+    }
+  ],
+  "captions": [
+    {
+      "word_first": 0,
+      "word_last": 3,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 4,
+      "word_last": 7,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 8,
+      "word_last": 9,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 10,
+      "word_last": 14,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 15,
+      "word_last": 18,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 19,
+      "word_last": 21,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 22,
+      "word_last": 26,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 27,
+      "word_last": 31,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 32,
+      "word_last": 36,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 37,
+      "word_last": 39,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 40,
+      "word_last": 42,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 43,
+      "word_last": 47,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 48,
+      "word_last": 51,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 52,
+      "word_last": 54,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 55,
+      "word_last": 58,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 59,
+      "word_last": 62,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 63,
+      "word_last": 65,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 66,
+      "word_last": 69,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 70,
+      "word_last": 73,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 74,
+      "word_last": 78,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 79,
+      "word_last": 82,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 83,
+      "word_last": 86,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 87,
+      "word_last": 91,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 92,
+      "word_last": 95,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    },
+    {
+      "word_first": 96,
+      "word_last": 98,
+      "x": 485,
+      "y": 1420,
+      "font_size": 40
+    }
+  ],
+  "audio": [
+    {
+      "asset": "A01",
+      "kind": "music",
+      "start_frame": 0,
+      "end_frame": 960,
+      "source_in": 0.0,
+      "gain_db": -18.0,
+      "motivation": "Official Pirates of the Caribbean orchestral theme ducked beneath commentary"
+    }
+  ],
+  "reviews": [
+    {
+      "criterion": "purpose",
+      "passed": true,
+      "reviewer": "editorial_inspection_agent",
+      "evidence": "Explains the comedic visual subversion of hero entrances in cinema history, deconstructing how Gore Verbinski and Johnny Depp contrast majestic pirate myth with slapstick survival to land on the legendary dry-dock punchline.",
+      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+    },
+    {
+      "criterion": "proof",
+      "passed": true,
+      "reviewer": "editorial_inspection_agent",
+      "evidence": "All 5 shots come from official 1080p source footage of Pirates of the Caribbean (2003) session_jack_entrance_01. S01-S05 correspond exactly to the mast top, face close-up, Jolly Mon bailing, submerged mast glide, and the dry-dock step without cuts to unrelated scenes.",
+      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+    },
+    {
+      "criterion": "voice",
+      "passed": true,
+      "reviewer": "editorial_inspection_agent",
+      "evidence": "Narration take voice/take_01.wav is a 31.72s single continuous take using Kokoro am_adam at 1.05x speed. Acoustic analysis confirms clean natural pauses at 3.46-3.92s, 7.44-7.94s, 12.38-12.76s, 15.96-16.46s, 22.88-23.32s, and 29.64-30.12s with no robotic cadence or clipped tokens.",
+      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+    },
+    {
+      "criterion": "framing",
+      "passed": true,
+      "reviewer": "editorial_inspection_agent",
+      "evidence": "450x800 crop at 9:16 aspect ratio placed at y=140 cleanly removes 2.39:1 letterbox bars while tracking Jack Sparrow horizontally across all shots: S01 (x=950), S02 (x=500), S03 (x=730), S04 (x=980), S05 (x=750). Subject action remains completely centered.",
+      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+    },
+    {
+      "criterion": "readability",
+      "passed": true,
+      "reviewer": "editorial_inspection_agent",
+      "evidence": "25 caption phrases rendered at (x=485, y=1420) font size 40. Maximum text width is under 750px (well within 820px safe area), maximum reading speed is 22.8 CPS (below 24.0 ceiling), and minimum duration is 0.52s (well above 0.35s floor).",
+      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+    },
+    {
+      "criterion": "payoff",
+      "passed": true,
+      "reviewer": "editorial_inspection_agent",
+      "evidence": "Opening hook poses the contrast between standard explosion hero entrances and Johnny Depp's entrance. The ending delivers the exact visual resolution in S05 where Jack steps calmly from the submerged mast tip onto the dry wooden dock without wetting his boots, hitting the punchline That is how you arrive in style.",
+      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+    }
+  ]
+}

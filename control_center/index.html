@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f4f2ed">
+  <meta name="description" content="Private operations dashboard for the Vidloom cinema breakdown production system.">
+  <title>Vidloom Control Center</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23171916'/%3E%3Cpath d='M11 9v14l11-7z' fill='%23c9f54a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to dashboard</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#overview" aria-label="Vidloom home">
+        <span class="brand-mark" aria-hidden="true"><span></span></span>
+        <span>vidloom</span>
+      </a>
+
+      <nav class="nav-list">
+        <a class="nav-item active" href="#overview" data-view="overview">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z"/></svg>
+          Overview
+        </a>
+        <a class="nav-item" href="#production" data-view="production">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></svg>
+          Production
+          <span class="nav-count" id="navQueueCount">1</span>
+        </a>
+        <a class="nav-item" href="#schedule" data-view="schedule">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></svg>
+          Schedule
+        </a>
+        <a class="nav-item" href="#system" data-view="system">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="m19 13.5 1.4 1.1-2 3.4-1.8-.7a8 8 0 0 1-2.1 1.2l-.3 1.9h-4l-.3-1.9a8 8 0 0 1-2.1-1.2L6 18l-2-3.4 1.4-1.1a8 8 0 0 1 0-2.5L4 9.9l2-3.4 1.8.7A8 8 0 0 1 10 6l.3-1.9h4l.3 1.9a8 8 0 0 1 2.1 1.2l1.8-.7 2 3.4-1.4 1.1a8 8 0 0 1 0 2.5Z"/></svg>
+          System
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="genre-lock">
+          <div class="eyebrow">Genre lock</div>
+          <strong id="genreShort">Cinema breakdowns</strong>
+          <span>1 format · enforced in CI</span>
+        </div>
+        <button class="identity-button" id="openConnection" type="button">
+          <span class="avatar">OM</span>
+          <span class="identity-copy"><strong>Owner console</strong><small id="connectionLabel">Connect GitHub</small></span>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <main id="main">
+      <header class="topbar">
+        <div>
+          <p class="page-kicker">AUTONOMOUS STUDIO</p>
+          <h1>Good evening, Omie.</h1>
+        </div>
+        <div class="topbar-actions">
+          <div class="live-state" id="liveState"><span></span><b>Setup required</b></div>
+          <button class="button button-secondary" id="refreshState" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 9A7 7 0 0 1 18 6l2 2M18 15a7 7 0 0 1-11.9 3L4 16"/></svg>
+            Refresh
+          </button>
+          <button class="button button-primary" id="runCycle" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"/></svg>
+            Run cycle
+          </button>
+        </div>
+      </header>
+
+      <section class="notice" id="setupNotice" aria-live="polite">
+        <div class="notice-icon"><span></span></div>
+        <div>
+          <strong>Connect the final two services</strong>
+          <p>The dashboard is built. Add the YouTube OAuth secrets and register this machine as the private production runner.</p>
+        </div>
+        <button class="text-button" id="setupButton" type="button">Open setup <span>→</span></button>
+      </section>
+
+      <section class="hero-grid" id="overview">
+        <article class="now-card panel">
+          <div class="panel-heading">
+            <div><p class="eyebrow">Production now</p><h2 id="currentStage">Waiting for connection</h2></div>
+            <span class="stage-number" id="stageNumber">00</span>
+          </div>
+          <div class="pipeline" aria-label="Production stages">
+            <div class="pipeline-track"><span id="pipelineProgress" style="width: 8%"></span></div>
+            <div class="pipeline-labels">
+              <span class="done">Evidence</span><span>Script</span><span>Voice</span><span>Edit</span><span>QC</span><span>Upload</span>
+            </div>
+          </div>
+          <div class="now-bottom">
+            <div class="video-placeholder" id="currentPoster">
+              <div class="poster-orbit"></div>
+              <span class="poster-play">▶</span>
+            </div>
+            <div class="now-copy">
+              <span class="status-pill ready" id="currentStatus">READY</span>
+              <h3 id="currentTitle">Why Jack Sparrow's Entrance Is Perfect</h3>
+              <p id="currentMeta">32 seconds · Cinema scene breakdown</p>
+            </div>
+            <button class="icon-button" id="openProduction" aria-label="Open production queue" type="button">↗</button>
+          </div>
+        </article>
+
+        <article class="next-card panel">
+          <p class="eyebrow">Next release</p>
+          <div class="date-lockup"><strong id="nextDay">—</strong><span id="nextMonth">—</span></div>
+          <h2 id="nextTime">7:30 PM</h2>
+          <p id="nextTimezone">Asia/Kolkata</p>
+          <div class="hairline"></div>
+          <div class="next-detail"><span>Cadence</span><strong id="cadence">Tue · Thu · Sat</strong></div>
+          <div class="next-detail"><span>Queue coverage</span><strong id="queueCoverage">1 release</strong></div>
+        </article>
+      </section>
+
+      <section class="metric-grid" aria-label="Channel metrics">
+        <article class="metric-card"><span>In queue</span><strong id="metricQueued">1</strong><small id="queueSignal">Needs 2 more</small></article>
+        <article class="metric-card"><span>Building now</span><strong id="metricBuilding">0</strong><small>One build at a time</small></article>
+        <article class="metric-card"><span>Scheduled</span><strong id="metricScheduled">0</strong><small>Private until release</small></article>
+        <article class="metric-card"><span>Published</span><strong id="metricPublished">0</strong><small>Tracked by video ID</small></article>
+      </section>
+
+      <section class="content-grid" id="production">
+        <article class="queue-panel panel">
+          <div class="panel-heading compact">
+            <div><p class="eyebrow">Production queue</p><h2>Next up</h2></div>
+            <button class="button button-secondary small" id="addQueueItem" type="button">+ Add project</button>
+          </div>
+          <div class="queue-list" id="queueList" aria-live="polite"></div>
+        </article>
+
+        <article class="activity-panel panel">
+          <div class="panel-heading compact">
+            <div><p class="eyebrow">System journal</p><h2>Activity</h2></div>
+            <span class="small-muted" id="lastUpdated">Not synced</span>
+          </div>
+          <div class="activity-list" id="activityList"></div>
+        </article>
+      </section>
+
+      <section class="lower-grid">
+        <article class="schedule-panel panel" id="schedule">
+          <div class="panel-heading compact">
+            <div><p class="eyebrow">Release rhythm</p><h2>Three deliberate drops</h2></div>
+            <span class="lock-chip"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5V11Z"/></svg> Locked</span>
+          </div>
+          <div class="week-strip" id="weekStrip"></div>
+          <p class="schedule-note">This is a starting hypothesis, not an algorithm trick. Revisit it after 28 days using the channel's Audience analytics.</p>
+        </article>
+
+        <article class="health-panel panel" id="system">
+          <div class="panel-heading compact"><div><p class="eyebrow">Infrastructure</p><h2>System health</h2></div></div>
+          <div class="health-list">
+            <div><span><i id="runnerDot"></i>Production runner</span><strong id="runnerHealth">Unknown</strong></div>
+            <div><span><i id="youtubeDot"></i>YouTube OAuth</span><strong id="youtubeHealth">Not connected</strong></div>
+            <div><span><i id="pipelineDot"></i>v3 quality gates</span><strong id="pipelineHealth">Ready</strong></div>
+            <div><span><i id="queueDot"></i>Queue depth</span><strong id="queueHealth">Low</strong></div>
+          </div>
+          <button class="button button-ghost full" id="pauseAutomation" type="button">Resume automation</button>
+        </article>
+      </section>
+
+      <footer>
+        <span>VIDLOOM CONTROL CENTER</span>
+        <span>Evidence → edit → QC → private upload → scheduled publish</span>
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="connectionDialog" class="modal">
+    <form method="dialog" class="modal-card" id="connectionForm">
+      <div class="modal-head"><div><p class="eyebrow">Owner connection</p><h2>Connect GitHub controls</h2></div><button value="cancel" aria-label="Close">×</button></div>
+      <p class="modal-copy">The dashboard never stores your token in the repository or local storage. A fine-grained token is kept only for this browser tab.</p>
+      <label>Repository owner<input id="repoOwner" name="owner" autocomplete="off" placeholder="your-github-name" required></label>
+      <label>Repository name<input id="repoName" name="repo" autocomplete="off" placeholder="vidloom" required></label>
+      <label>Default branch<input id="repoBranch" name="branch" autocomplete="off" value="main" required></label>
+      <label>Fine-grained token<input id="repoToken" name="token" type="password" autocomplete="off" placeholder="github_pat_…"><small>Actions: write and Contents: write. Leave blank for read-only mode.</small></label>
+      <div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="saveConnection" value="default">Connect</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="queueDialog" class="modal">
+    <form method="dialog" class="modal-card" id="queueForm">
+      <div class="modal-head"><div><p class="eyebrow">Add production</p><h2>Queue a validated project</h2></div><button value="cancel" aria-label="Close">×</button></div>
+      <div class="genre-banner"><span>LOCKED GENRE</span><strong>Cinema scene breakdown</strong></div>
+      <label>Project JSON path<input name="project_path" placeholder="premium_pipeline/projects/example/project.json" required></label>
+      <label>YouTube title<input name="title" maxlength="100" required></label>
+      <label>Description<textarea name="description" rows="4" maxlength="5000" required></textarea></label>
+      <label>Tags<input name="tags" placeholder="film analysis, visual storytelling"></label>
+      <label>Optional publish time<input name="requested_publish_at" type="datetime-local"><small>Leave blank to use the next Tue/Thu/Sat 7:30 PM IST slot.</small></label>
+      <div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="submitQueueItem" value="default">Commit to queue</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

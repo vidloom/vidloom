@@ -1,0 +1,118 @@
+name: Production cycle
+
+on:
+  schedule:
+    # 12:17 UTC = 17:47 IST. YouTube receives the private upload before 19:30 IST.
+    # Avoiding the top of the hour reduces GitHub schedule congestion.
+    - cron: "17 12 * * 2,4,6"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Work to perform
+        required: true
+        default: full
+        type: choice
+        options: [full, build, upload]
+      item_id:
+        description: Optional queue item ID; blank selects the next ready item
+        required: false
+        type: string
+      dry_run:
+        description: Validate, render if required, and QC without uploading
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: vidloom-control-plane
+  cancel-in-progress: false
+
+jobs:
+  produce:
+    # Keep this repository private. Movie assets, persistent models, and OAuth
+    # credentials must never be exposed to pull-request code on a public runner.
+    runs-on: [self-hosted, linux, x64, vidloom]
+    timeout-minutes: 120
+    env:
+      PYTHONUNBUFFERED: "1"
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      VIDLOOM_MEDIA_ROOT: ${{ vars.VIDLOOM_MEDIA_ROOT }}
+      VIDLOOM_RUNNER_ONLINE: "true"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check production host
+        run: |
+          python3 --version
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Attach persistent project media
+        if: ${{ env.VIDLOOM_MEDIA_ROOT != '' }}
+        run: |
+          test -d "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects"
+          rsync -a --ignore-existing "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects/" premium_pipeline/projects/
+
+      - name: Install isolated automation dependencies
+        run: |
+          python3 -m venv .venv-automation
+          .venv-automation/bin/python -m pip install --disable-pip-version-check -r automation/requirements.txt
+
+      - name: Run deterministic production gate
+        id: production
+        continue-on-error: true
+        env:
+          RUN_MODE: ${{ github.event_name == 'schedule' && 'full' || inputs.mode }}
+          ITEM_ID: ${{ inputs.item_id }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          args=(--mode "$RUN_MODE")
+          if [ -n "$ITEM_ID" ]; then args+=(--item-id "$ITEM_ID"); fi
+          if [ "$DRY_RUN" = "true" ]; then args+=(--dry-run); fi
+          .venv-automation/bin/python -m automation.production "${args[@]}"
+
+      - name: Refresh public dashboard state
+        if: always()
+        run: |
+          .venv-automation/bin/python -m automation.dashboard_state --output control_center/data/dashboard.json
+
+      - name: Persist queue and state
+        if: always()
+        run: |
+          git config user.name "vidloom-automation[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/queue.json automation/state/dashboard.json control_center/data/dashboard.json
+          git diff --cached --quiet || git commit -m "ops: update production state [skip ci]"
+          git push
+
+      - uses: actions/configure-pages@v5
+        if: always()
+      - uses: actions/upload-pages-artifact@v3
+        if: always()
+        with:
+          path: control_center
+
+      - name: Mark failed production
+        if: steps.production.outcome == 'failure'
+        run: exit 1
+
+  deploy-state:
+    if: always()
+    needs: produce
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy latest control center
+        id: deployment
+        uses: actions/deploy-pages@v4

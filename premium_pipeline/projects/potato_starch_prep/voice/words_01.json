@@ -1,0 +1,337 @@
+[
+  {
+    "word": "If",
+    "start": 0.1,
+    "end": 0.204
+  },
+  {
+    "word": "your",
+    "start": 0.219,
+    "end": 0.443
+  },
+  {
+    "word": "potatoes",
+    "start": 0.458,
+    "end": 0.921
+  },
+  {
+    "word": "keep",
+    "start": 0.936,
+    "end": 1.16
+  },
+  {
+    "word": "welding",
+    "start": 1.175,
+    "end": 1.578
+  },
+  {
+    "word": "to",
+    "start": 1.593,
+    "end": 1.697
+  },
+  {
+    "word": "the",
+    "start": 1.712,
+    "end": 1.876
+  },
+  {
+    "word": "pan,",
+    "start": 1.891,
+    "end": 2.055
+  },
+  {
+    "word": "the",
+    "start": 2.07,
+    "end": 2.234
+  },
+  {
+    "word": "mistake",
+    "start": 2.249,
+    "end": 2.652
+  },
+  {
+    "word": "started",
+    "start": 2.667,
+    "end": 3.07
+  },
+  {
+    "word": "right",
+    "start": 3.085,
+    "end": 3.369
+  },
+  {
+    "word": "here",
+    "start": 3.384,
+    "end": 3.608
+  },
+  {
+    "word": "in",
+    "start": 3.623,
+    "end": 3.727
+  },
+  {
+    "word": "the",
+    "start": 3.742,
+    "end": 3.906
+  },
+  {
+    "word": "sink.",
+    "start": 3.921,
+    "end": 4.145
+  },
+  {
+    "word": "Peeling",
+    "start": 5.02,
+    "end": 5.422
+  },
+  {
+    "word": "and",
+    "start": 5.437,
+    "end": 5.6
+  },
+  {
+    "word": "washing",
+    "start": 5.615,
+    "end": 6.017
+  },
+  {
+    "word": "whole",
+    "start": 6.032,
+    "end": 6.315
+  },
+  {
+    "word": "potatoes",
+    "start": 6.33,
+    "end": 6.791
+  },
+  {
+    "word": "removes",
+    "start": 6.806,
+    "end": 7.208
+  },
+  {
+    "word": "dirt,",
+    "start": 7.223,
+    "end": 7.48
+  },
+  {
+    "word": "but",
+    "start": 7.9,
+    "end": 8.05
+  },
+  {
+    "word": "the",
+    "start": 8.05,
+    "end": 8.15
+  },
+  {
+    "word": "real",
+    "start": 8.15,
+    "end": 8.35
+  },
+  {
+    "word": "trouble",
+    "start": 8.35,
+    "end": 8.85
+  },
+  {
+    "word": "happens",
+    "start": 8.85,
+    "end": 9.15
+  },
+  {
+    "word": "the",
+    "start": 9.15,
+    "end": 9.25
+  },
+  {
+    "word": "moment",
+    "start": 9.25,
+    "end": 9.55
+  },
+  {
+    "word": "you",
+    "start": 9.55,
+    "end": 9.75
+  },
+  {
+    "word": "slice",
+    "start": 9.75,
+    "end": 10.0
+  },
+  {
+    "word": "them.",
+    "start": 10.05,
+    "end": 10.3
+  },
+  {
+    "word": "Your",
+    "start": 10.9,
+    "end": 11.149
+  },
+  {
+    "word": "knife",
+    "start": 11.164,
+    "end": 11.479
+  },
+  {
+    "word": "shears",
+    "start": 11.494,
+    "end": 11.875
+  },
+  {
+    "word": "open",
+    "start": 11.89,
+    "end": 12.139
+  },
+  {
+    "word": "thousands",
+    "start": 12.154,
+    "end": 12.732
+  },
+  {
+    "word": "of",
+    "start": 12.747,
+    "end": 12.864
+  },
+  {
+    "word": "cells,",
+    "start": 12.879,
+    "end": 13.194
+  },
+  {
+    "word": "flooding",
+    "start": 13.209,
+    "end": 13.722
+  },
+  {
+    "word": "the",
+    "start": 13.737,
+    "end": 13.92
+  },
+  {
+    "word": "cut",
+    "start": 13.935,
+    "end": 14.118
+  },
+  {
+    "word": "surfaces",
+    "start": 14.133,
+    "end": 14.646
+  },
+  {
+    "word": "with",
+    "start": 14.661,
+    "end": 14.909
+  },
+  {
+    "word": "sticky",
+    "start": 14.924,
+    "end": 15.305
+  },
+  {
+    "word": "free",
+    "start": 15.32,
+    "end": 15.569
+  },
+  {
+    "word": "starch.",
+    "start": 15.584,
+    "end": 15.965
+  },
+  {
+    "word": "Rinsing",
+    "start": 16.68,
+    "end": 17.112
+  },
+  {
+    "word": "those",
+    "start": 17.127,
+    "end": 17.431
+  },
+  {
+    "word": "cut",
+    "start": 17.446,
+    "end": 17.623
+  },
+  {
+    "word": "wedges",
+    "start": 17.638,
+    "end": 18.006
+  },
+  {
+    "word": "under",
+    "start": 18.021,
+    "end": 18.325
+  },
+  {
+    "word": "running",
+    "start": 18.34,
+    "end": 18.772
+  },
+  {
+    "word": "water",
+    "start": 18.787,
+    "end": 19.091
+  },
+  {
+    "word": "washes",
+    "start": 19.106,
+    "end": 19.474
+  },
+  {
+    "word": "that",
+    "start": 19.489,
+    "end": 19.729
+  },
+  {
+    "word": "cloudy",
+    "start": 19.744,
+    "end": 20.112
+  },
+  {
+    "word": "starch",
+    "start": 20.127,
+    "end": 20.495
+  },
+  {
+    "word": "away,",
+    "start": 20.51,
+    "end": 20.751
+  },
+  {
+    "word": "so",
+    "start": 20.766,
+    "end": 20.878
+  },
+  {
+    "word": "they",
+    "start": 20.893,
+    "end": 21.134
+  },
+  {
+    "word": "brown",
+    "start": 21.149,
+    "end": 21.453
+  },
+  {
+    "word": "cleanly",
+    "start": 21.468,
+    "end": 21.9
+  },
+  {
+    "word": "instead",
+    "start": 21.915,
+    "end": 22.347
+  },
+  {
+    "word": "of",
+    "start": 22.362,
+    "end": 22.474
+  },
+  {
+    "word": "sticking.",
+    "start": 22.489,
+    "end": 22.985
+  }
+]

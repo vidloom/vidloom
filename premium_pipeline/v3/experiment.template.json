@@ -1,0 +1,18 @@
+{
+  "episode_id": null,
+  "project_fingerprint": null,
+  "video_sha256": null,
+  "published_url": null,
+  "hypothesis": null,
+  "one_variable_changed": null,
+  "comparison_cohort": {"topic": null, "language": null, "duration_band_seconds": null, "traffic_source": null},
+  "snapshots": [{"measured_at": null, "hours_since_upload": null, "raw_views": null,
+    "engaged_views": null, "shown_in_feed": null, "stayed_to_watch_percent": null,
+    "average_view_duration_seconds": null, "average_percentage_viewed": null,
+    "shares": null, "subscribers_gained": null, "retention_notes_with_timestamps": [],
+    "viewer_confusion_examples": [], "viewer_value_examples": []}],
+  "observed_result": null,
+  "alternative_explanations": [],
+  "next_test": null,
+  "caveat": "Observational comparison. Unknown values stay null; do not infer causation or guaranteed rankings."
+}

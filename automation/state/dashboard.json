@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "generated_at": "2026-10-21T11:19:17Z",
+  "system": {
+    "status": "ready",
+    "automation_enabled": false,
+    "current_stage": "Dry run passed; nothing uploaded",
+    "current_item_id": null,
+    "last_success_at": null,
+    "last_error": null
+  },
+  "channel": {
+    "name": "Vidloom Cinema",
+    "genre": "Cinema scene breakdowns",
+    "genre_id": "cinema_scene_breakdown",
+    "timezone": "Asia/Kolkata"
+  },
+  "schedule": {
+    "days": [
+      "Tuesday",
+      "Thursday",
+      "Saturday"
+    ],
+    "time": "19:30",
+    "timezone": "Asia/Kolkata",
+    "next_publish_at": "2026-10-22T19:30+05:30"
+  },
+  "health": {
+    "runner": "local",
+    "youtube": "not_connected",
+    "pipeline": "ready",
+    "queue": "low"
+  },
+  "metrics": {
+    "queued": 1,
+    "building": 0,
+    "scheduled": 0,
+    "published": 0,
+    "failed": 0
+  },
+  "queue": [
+    {
+      "id": "jack-sparrow-entrance-001",
+      "title": "Why Jack Sparrow's Entrance Is Perfect",
+      "genre": "cinema_scene_breakdown",
+      "status": "ready",
+      "scheduled_publish_at": null,
+      "youtube_url": null,
+      "attempts": 2,
+      "last_error": null
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-21T11:19:17Z",
+      "level": "success",
+      "message": "Dry run passed for Why Jack Sparrow's Entrance Is Perfect"
+    },
+    {
+      "at": "2026-10-21T11:18:53Z",
+      "level": "info",
+      "message": "Started Why Jack Sparrow's Entrance Is Perfect"
+    },
+    {
+      "at": "2026-10-21T11:17:49Z",
+      "level": "success",
+      "message": "Dry run passed for Why Jack Sparrow's Entrance Is Perfect"
+    },
+    {
+      "at": "2026-10-21T11:17:25Z",
+      "level": "info",
+      "message": "Started Why Jack Sparrow's Entrance Is Perfect"
+    },
+    {
+      "at": null,
+      "level": "info",
+      "message": "Control center created. Connect GitHub Actions and YouTube OAuth to go live."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+name: Sync YouTube status
+
+on:
+  schedule:
+    - cron: "23 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: vidloom-control-plane
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+      YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check -r automation/requirements.txt
+      - name: Read YouTube processing and privacy state
+        run: python -m automation.sync_youtube
+      - run: python -m automation.dashboard_state --output control_center/data/dashboard.json
+      - name: Persist status
+        run: |
+          git config user.name "vidloom-automation[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/queue.json automation/state/dashboard.json control_center/data/dashboard.json
+          git diff --cached --quiet || git commit -m "ops: sync YouTube status [skip ci]"
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: control_center
+      - name: Deploy updated dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4

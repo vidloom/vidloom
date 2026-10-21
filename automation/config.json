@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "channel": {
+    "name": "Vidloom Cinema",
+    "timezone": "Asia/Kolkata"
+  },
+  "genre": {
+    "id": "cinema_scene_breakdown",
+    "label": "Cinema scene breakdowns",
+    "locked": true,
+    "definition": "One specific film scene, one original observation about how it works, visual evidence for every claim, and a complete payoff.",
+    "disallowed": [
+      "plot recap",
+      "clip compilation",
+      "celebrity news",
+      "generic movie facts",
+      "uncommented copyrighted footage"
+    ]
+  },
+  "schedule": {
+    "publish_days": [
+      "tuesday",
+      "thursday",
+      "saturday"
+    ],
+    "publish_time": "19:30",
+    "workflow_cron_utc": "17 12 * * 2,4,6",
+    "lead_time_minutes": 103,
+    "rationale": "A sustainable three-release weekly baseline. The workflow starts off the top of the hour and uploads privately before YouTube publishes at the exact slot. Replace the time after 28 days with channel Audience analytics."
+  },
+  "youtube": {
+    "category_id": "24",
+    "default_language": "en",
+    "default_privacy": "private",
+    "self_declared_made_for_kids": false,
+    "contains_synthetic_media": false
+  },
+  "automation": {
+    "enabled": false,
+    "runner": "self-hosted",
+    "max_upload_retries": 5,
+    "minimum_queue_depth": 3,
+    "require_technical_qc": true,
+    "require_final_review_hash": true
+  }
+}

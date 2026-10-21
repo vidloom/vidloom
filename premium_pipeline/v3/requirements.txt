@@ -1,0 +1,3 @@
+jsonschema>=4.20,<5
+# Optional continuous local TTS: use repository's existing kokoro-onnx stack.
+# Optional forced alignment: install WhisperX in its own compatible environment.

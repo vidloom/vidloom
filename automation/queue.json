@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "jack-sparrow-entrance-001",
+      "project_path": "premium_pipeline/projects/jack_sparrow_entrance/project.json",
+      "genre": "cinema_scene_breakdown",
+      "title": "Why Jack Sparrow's Entrance Is Perfect",
+      "description": "The opening of Pirates of the Caribbean turns a heroic entrance into a visual joke—then lands the cleanest possible payoff. Original scene analysis and commentary.\n\n#Shorts #FilmAnalysis #PiratesOfTheCaribbean",
+      "tags": [
+        "film analysis",
+        "cinema breakdown",
+        "Jack Sparrow",
+        "Pirates of the Caribbean",
+        "visual storytelling"
+      ],
+      "status": "ready",
+      "requested_publish_at": null,
+      "scheduled_publish_at": null,
+      "youtube_id": null,
+      "youtube_url": null,
+      "attempts": 2,
+      "last_error": null
+    }
+  ]
+}

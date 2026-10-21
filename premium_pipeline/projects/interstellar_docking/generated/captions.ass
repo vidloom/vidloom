@@ -1,0 +1,38 @@
+[Script Info]
+Title: Interstellar — Relative Motion
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Montserrat ExtraBold,94,&H00FFFFFF,&H008CFF,&H00090909,&H70000000,-1,0,0,0,100,100,0.3,0,1,8,2,5,84,84,350,1
+Style: HUD,JetBrains Mono SemiBold,24,&H00FFF4DE,&H00000000,&H70000000,&H00000000,-1,0,0,0,100,100,1.0,0,1,2,0,7,50,50,90,1
+Style: HUDRight,JetBrains Mono Medium,22,&H00E4C89A,&H00000000,&H70000000,&H00000000,-1,0,0,0,100,100,0.8,0,1,2,0,9,50,50,90,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 10,0:00:00.00,0:00:00.96,Caption,,0,0,0,,{\an5\pos(540,1410)\fs108\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}HE DIDN'T STOP
+Dialogue: 10,0:00:00.96,0:00:01.60,Caption,,0,0,0,,{\an5\pos(540,1410)\fs108\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}THE SPIN
+Dialogue: 10,0:00:01.60,0:00:02.56,Caption,,0,0,0,,{\an5\pos(540,1410)\fs108\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}HE {\c&H008CFF&\blur0.45}COPIED{\c&HFFFFFF&} IT
+Dialogue: 10,0:00:02.64,0:00:04.14,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}ONE ROTATION
+Dialogue: 10,0:00:04.14,0:00:06.38,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}EVERY {\c&H008CFF&\blur0.45}0.88 SECONDS{\c&HFFFFFF&}
+Dialogue: 10,0:00:06.46,0:00:07.47,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}DOCK NORMALLY
+Dialogue: 10,0:00:07.47,0:00:08.98,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}BOTH SHIPS {\c&H008CFF&\blur0.45}SHRED{\c&HFFFFFF&}
+Dialogue: 10,0:00:09.06,0:00:10.37,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}SO COOPER FIRED
+Dialogue: 10,0:00:10.37,0:00:11.68,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}THE RANGER {\c&H008CFF&\blur0.45}SIDEWAYS{\c&HFFFFFF&}
+Dialogue: 10,0:00:11.76,0:00:13.41,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}UNTIL BOTH SHIPS
+Dialogue: 10,0:00:13.41,0:00:15.05,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}LOOKED {\c&H008CFF&\blur0.45}PERFECTLY STILL{\c&HFFFFFF&}
+Dialogue: 10,0:00:15.05,0:00:17.25,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}RELATIVE TO EACH OTHER
+Dialogue: 10,0:00:17.34,0:00:18.71,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}THEN {\c&H008CFF&\blur0.45}NINE Gs{\c&HFFFFFF&}
+Dialogue: 10,0:00:18.71,0:00:20.08,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}STOLE THEIR VISION
+Dialogue: 10,0:00:20.17,0:00:21.08,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}ONE MISSED LATCH
+Dialogue: 10,0:00:21.08,0:00:21.99,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}THEY WERE {\c&H008CFF&\blur0.45}DEAD{\c&HFFFFFF&}
+Dialogue: 10,0:00:22.08,0:00:22.61,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}HE HELD
+Dialogue: 10,0:00:22.61,0:00:23.14,Caption,,0,0,0,,{\an5\pos(540,1410)\fs94\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}THE LINE
+Dialogue: 10,0:00:23.23,0:00:24.03,Caption,,0,0,0,,{\an5\pos(540,1410)\fs132\fscx88\fscy88\t(0,90,\fscx106\fscy106)\t(90,210,\fscx100\fscy100)\fad(30,50)\blur0.3}{\c&H008CFF&\blur0.45}LOCK{\c&HFFFFFF&}
+Dialogue: 4,0:00:00.00,0:00:24.45,HUD,,0,0,0,,{\an7\pos(58,94)}VIDLOOM / RELATIVE MOTION
+Dialogue: 4,0:00:00.00,0:00:24.45,HUDRight,,0,0,0,,{\an9\pos(1020,94)}ENDURANCE / 68 RPM

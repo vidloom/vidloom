@@ -1,0 +1,98 @@
+{
+  "engine": "kokoro",
+  "duration": 24.03,
+  "beats": [
+    {
+      "text": "Cooper didn't stop the spin. He copied it.",
+      "captions": [
+        "HE DIDN'T STOP",
+        "THE SPIN",
+        "HE *COPIED* IT"
+      ],
+      "speed": 0.96,
+      "start": 0.0,
+      "end": 2.56
+    },
+    {
+      "text": "Endurance was rotating once every point eight eight seconds.",
+      "captions": [
+        "ONE ROTATION",
+        "EVERY *0.88 SECONDS*"
+      ],
+      "speed": 0.98,
+      "start": 2.645,
+      "end": 6.375
+    },
+    {
+      "text": "Dock normally, and both ships get shredded.",
+      "captions": [
+        "DOCK NORMALLY",
+        "BOTH SHIPS *SHRED*"
+      ],
+      "speed": 0.97,
+      "start": 6.46,
+      "end": 8.98
+    },
+    {
+      "text": "So Cooper fired the Ranger sideways...",
+      "captions": [
+        "SO COOPER FIRED",
+        "THE RANGER *SIDEWAYS*"
+      ],
+      "speed": 0.95,
+      "start": 9.065,
+      "end": 11.675
+    },
+    {
+      "text": "until a controlled ship and a dying station looked perfectly still, relative to each other.",
+      "captions": [
+        "UNTIL BOTH SHIPS",
+        "LOOKED *PERFECTLY STILL*",
+        "RELATIVE TO EACH OTHER"
+      ],
+      "speed": 1.02,
+      "start": 11.76,
+      "end": 17.25
+    },
+    {
+      "text": "Then nine Gs started stealing their vision.",
+      "captions": [
+        "THEN *NINE Gs*",
+        "STOLE THEIR VISION"
+      ],
+      "speed": 0.98,
+      "start": 17.335,
+      "end": 20.085
+    },
+    {
+      "text": "One missed latch, and they were dead.",
+      "captions": [
+        "ONE MISSED LATCH",
+        "THEY WERE *DEAD*"
+      ],
+      "speed": 0.95,
+      "start": 20.17,
+      "end": 21.99
+    },
+    {
+      "text": "He held the line.",
+      "captions": [
+        "HE HELD",
+        "THE LINE"
+      ],
+      "speed": 0.92,
+      "start": 22.075,
+      "end": 23.145
+    },
+    {
+      "text": "Lock.",
+      "captions": [
+        "*LOCK*"
+      ],
+      "caption_size": 132,
+      "speed": 0.88,
+      "start": 23.23,
+      "end": 24.03
+    }
+  ]
+}

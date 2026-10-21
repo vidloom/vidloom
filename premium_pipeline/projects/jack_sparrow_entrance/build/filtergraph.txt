@@ -1,0 +1,12 @@
+[0:v]trim=start=1.0:duration=3.8333333333333335,setpts=(PTS-STARTPTS)/1.0,crop=450:800:950:140,scale=1080:1920:flags=lanczos,setsar=1,fps=30,tpad=stop_mode=clone:stop_duration=0.03333333333333333,trim=end_frame=115,setpts=N/(30*TB),format=yuv420p[v0];
+[0:v]trim=start=11.2:duration=4.0,setpts=(PTS-STARTPTS)/1.0,crop=450:800:500:140,scale=1080:1920:flags=lanczos,setsar=1,fps=30,tpad=stop_mode=clone:stop_duration=0.03333333333333333,trim=end_frame=120,setpts=N/(30*TB),format=yuv420p[v1];
+[0:v]trim=start=22.0:duration=8.333333333333334,setpts=(PTS-STARTPTS)/1.0,crop=450:800:730:140,scale=1080:1920:flags=lanczos,setsar=1,fps=30,tpad=stop_mode=clone:stop_duration=0.03333333333333333,trim=end_frame=250,setpts=N/(30*TB),format=yuv420p[v2];
+[0:v]trim=start=65.8:duration=9.0,setpts=(PTS-STARTPTS)/1.0,crop=450:800:980:140,scale=1080:1920:flags=lanczos,setsar=1,fps=30,tpad=stop_mode=clone:stop_duration=0.03333333333333333,trim=end_frame=270,setpts=N/(30*TB),format=yuv420p[v3];
+[0:v]trim=start=74.8:duration=6.833333333333333,setpts=(PTS-STARTPTS)/1.0,crop=450:800:750:140,scale=1080:1920:flags=lanczos,setsar=1,fps=30,tpad=stop_mode=clone:stop_duration=0.03333333333333333,trim=end_frame=205,setpts=N/(30*TB),format=yuv420p[v4];
+[v0][v1][v2][v3][v4]concat=n=5:v=1:a=0,ass=captions.ass[video];
+[0:a]atrim=start=0.0:duration=32.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=channel_layouts=stereo,volume=-18.0dB,afade=t=in:d=0.12,afade=t=out:st=31.88:d=0.12,adelay=0:all=1[a0];
+anullsrc=r=48000:cl=stereo,atrim=duration=32.0[silence];
+[a0][silence]amix=inputs=2:normalize=0[bed];
+[1:a]aresample=48000,aformat=channel_layouts=stereo,apad=whole_dur=32.0,atrim=duration=32.0,asplit=2[voice][key];
+[bed][key]sidechaincompress=threshold=0.035:ratio=4:attack=12:release=180[ducked];
+[ducked][voice]amix=inputs=2:normalize=0,atrim=duration=32.0,loudnorm=I=-16:TP=-1.5:LRA=9,aresample=48000[audio]

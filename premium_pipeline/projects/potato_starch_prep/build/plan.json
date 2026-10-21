@@ -1,0 +1,257 @@
+{
+  "fingerprint": "962b0ea5a5e0a3b0ca34d7b18cc4031c8bca692c60eddab0e503a682c3be724c",
+  "command": [
+    "ffmpeg",
+    "-n",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-filter_complex_threads",
+    "2",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/potato_starch_prep/assets/prep_39564557.mp4",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/potato_starch_prep/assets/prep_39564559.mp4",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/potato_starch_prep/assets/prep_39564563.mp4",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/potato_starch_prep/assets/prep_39564572.mp4",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/potato_starch_prep/assets/music.mp3",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/potato_starch_prep/voice/take_01.wav",
+    "-filter_complex_script",
+    "filtergraph.txt",
+    "-map",
+    "[video]",
+    "-map",
+    "[audio]",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p6",
+    "-rc",
+    "vbr",
+    "-cq",
+    "18",
+    "-b:v",
+    "10M",
+    "-pix_fmt",
+    "yuv420p",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "192k",
+    "-ar",
+    "48000",
+    "-ac",
+    "2",
+    "-t",
+    "24.0",
+    "-movflags",
+    "+faststart",
+    "draft.mp4"
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "asset": "A01",
+      "observation": "O01",
+      "start_frame": 0,
+      "end_frame": 145,
+      "source_in": 0.5,
+      "speed": 1.0,
+      "crop": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "subject_boxes": [
+        [
+          300,
+          100,
+          450,
+          600
+        ],
+        [
+          320,
+          250,
+          480,
+          650
+        ],
+        [
+          200,
+          800,
+          700,
+          600
+        ]
+      ],
+      "beat_ids": [
+        "B01"
+      ],
+      "purpose": "Establish raw unpeeled starting state in sink",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S02",
+      "asset": "A02",
+      "observation": "O02",
+      "start_frame": 145,
+      "end_frame": 225,
+      "source_in": 1.0,
+      "speed": 1.0,
+      "crop": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "subject_boxes": [
+        [
+          250,
+          150,
+          580,
+          650
+        ],
+        [
+          280,
+          180,
+          550,
+          680
+        ],
+        [
+          260,
+          200,
+          560,
+          660
+        ]
+      ],
+      "beat_ids": [
+        "B02"
+      ],
+      "purpose": "Demonstrate peeling skin with knife",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S03",
+      "asset": "A03",
+      "observation": "O03",
+      "start_frame": 225,
+      "end_frame": 315,
+      "source_in": 2.0,
+      "speed": 1.0,
+      "crop": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "subject_boxes": [
+        [
+          100,
+          150,
+          850,
+          800
+        ],
+        [
+          120,
+          180,
+          820,
+          780
+        ],
+        [
+          110,
+          160,
+          840,
+          790
+        ]
+      ],
+      "beat_ids": [
+        "B03"
+      ],
+      "purpose": "Demonstrate washing whole peeled potatoes in colander before cutting",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S04",
+      "asset": "A04",
+      "observation": "O04",
+      "start_frame": 315,
+      "end_frame": 488,
+      "source_in": 1.0,
+      "speed": 1.0,
+      "crop": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "subject_boxes": [
+        [
+          80,
+          100,
+          920,
+          950
+        ],
+        [
+          100,
+          120,
+          880,
+          900
+        ],
+        [
+          80,
+          110,
+          910,
+          920
+        ]
+      ],
+      "beat_ids": [
+        "B04"
+      ],
+      "purpose": "Show cut potato chunks in colander showing cloudy starch on sliced surfaces",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S05",
+      "asset": "A04",
+      "observation": "O04",
+      "start_frame": 488,
+      "end_frame": 720,
+      "source_in": 7.0,
+      "speed": 1.0,
+      "crop": [
+        0,
+        0,
+        1080,
+        1920
+      ],
+      "subject_boxes": [
+        [
+          80,
+          100,
+          920,
+          950
+        ],
+        [
+          100,
+          120,
+          880,
+          900
+        ],
+        [
+          80,
+          110,
+          910,
+          920
+        ]
+      ],
+      "beat_ids": [
+        "B05"
+      ],
+      "purpose": "Demonstrate thorough running water rinse washing cloudy surface starch clean away",
+      "production_gain_db": -96
+    }
+  ]
+}

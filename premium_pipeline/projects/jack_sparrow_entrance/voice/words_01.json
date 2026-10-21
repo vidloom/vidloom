@@ -1,0 +1,497 @@
+[
+  {
+    "word": "Most",
+    "start": 0.12,
+    "end": 0.381
+  },
+  {
+    "word": "movie",
+    "start": 0.381,
+    "end": 0.694
+  },
+  {
+    "word": "heroes",
+    "start": 0.694,
+    "end": 1.059
+  },
+  {
+    "word": "enter",
+    "start": 1.059,
+    "end": 1.373
+  },
+  {
+    "word": "with",
+    "start": 1.373,
+    "end": 1.633
+  },
+  {
+    "word": "explosions",
+    "start": 1.633,
+    "end": 2.208
+  },
+  {
+    "word": "and",
+    "start": 2.208,
+    "end": 2.416
+  },
+  {
+    "word": "a",
+    "start": 2.416,
+    "end": 2.521
+  },
+  {
+    "word": "superhero",
+    "start": 2.521,
+    "end": 3.042
+  },
+  {
+    "word": "landing.",
+    "start": 3.042,
+    "end": 3.46
+  },
+  {
+    "word": "But",
+    "start": 3.92,
+    "end": 4.118
+  },
+  {
+    "word": "Johnny",
+    "start": 4.118,
+    "end": 4.465
+  },
+  {
+    "word": "Depp",
+    "start": 4.465,
+    "end": 4.713
+  },
+  {
+    "word": "gave",
+    "start": 4.713,
+    "end": 4.961
+  },
+  {
+    "word": "us",
+    "start": 4.961,
+    "end": 5.11
+  },
+  {
+    "word": "the",
+    "start": 5.11,
+    "end": 5.308
+  },
+  {
+    "word": "most",
+    "start": 5.308,
+    "end": 5.556
+  },
+  {
+    "word": "ridiculous",
+    "start": 5.556,
+    "end": 6.101
+  },
+  {
+    "word": "entrance",
+    "start": 6.101,
+    "end": 6.548
+  },
+  {
+    "word": "in",
+    "start": 6.548,
+    "end": 6.696
+  },
+  {
+    "word": "cinema",
+    "start": 6.696,
+    "end": 7.043
+  },
+  {
+    "word": "history.",
+    "start": 7.043,
+    "end": 7.44
+  },
+  {
+    "word": "He",
+    "start": 7.94,
+    "end": 8.107
+  },
+  {
+    "word": "stands",
+    "start": 8.107,
+    "end": 8.495
+  },
+  {
+    "word": "atop",
+    "start": 8.495,
+    "end": 8.773
+  },
+  {
+    "word": "the",
+    "start": 8.773,
+    "end": 8.995
+  },
+  {
+    "word": "mast",
+    "start": 8.995,
+    "end": 9.272
+  },
+  {
+    "word": "like",
+    "start": 9.272,
+    "end": 9.55
+  },
+  {
+    "word": "a",
+    "start": 9.55,
+    "end": 9.661
+  },
+  {
+    "word": "legendary",
+    "start": 9.661,
+    "end": 10.216
+  },
+  {
+    "word": "pirate",
+    "start": 10.216,
+    "end": 10.604
+  },
+  {
+    "word": "king,",
+    "start": 10.604,
+    "end": 10.882
+  },
+  {
+    "word": "until",
+    "start": 10.882,
+    "end": 11.215
+  },
+  {
+    "word": "the",
+    "start": 11.215,
+    "end": 11.437
+  },
+  {
+    "word": "camera",
+    "start": 11.437,
+    "end": 11.825
+  },
+  {
+    "word": "pans",
+    "start": 11.825,
+    "end": 12.103
+  },
+  {
+    "word": "down.",
+    "start": 12.103,
+    "end": 12.38
+  },
+  {
+    "word": "It",
+    "start": 12.76,
+    "end": 12.94
+  },
+  {
+    "word": "is",
+    "start": 12.94,
+    "end": 13.12
+  },
+  {
+    "word": "a",
+    "start": 13.12,
+    "end": 13.24
+  },
+  {
+    "word": "tiny,",
+    "start": 13.24,
+    "end": 13.54
+  },
+  {
+    "word": "leaky",
+    "start": 13.54,
+    "end": 13.9
+  },
+  {
+    "word": "rowboat.",
+    "start": 13.9,
+    "end": 14.38
+  },
+  {
+    "word": "And",
+    "start": 14.66,
+    "end": 14.853
+  },
+  {
+    "word": "it",
+    "start": 14.853,
+    "end": 14.997
+  },
+  {
+    "word": "is",
+    "start": 14.997,
+    "end": 15.141
+  },
+  {
+    "word": "actively",
+    "start": 15.141,
+    "end": 15.575
+  },
+  {
+    "word": "sinking.",
+    "start": 15.575,
+    "end": 15.96
+  },
+  {
+    "word": "By",
+    "start": 16.46,
+    "end": 16.605
+  },
+  {
+    "word": "the",
+    "start": 16.605,
+    "end": 16.799
+  },
+  {
+    "word": "time",
+    "start": 16.799,
+    "end": 17.041
+  },
+  {
+    "word": "he",
+    "start": 17.041,
+    "end": 17.186
+  },
+  {
+    "word": "reaches",
+    "start": 17.186,
+    "end": 17.573
+  },
+  {
+    "word": "the",
+    "start": 17.573,
+    "end": 17.767
+  },
+  {
+    "word": "harbor,",
+    "start": 17.767,
+    "end": 18.105
+  },
+  {
+    "word": "the",
+    "start": 18.105,
+    "end": 18.299
+  },
+  {
+    "word": "entire",
+    "start": 18.299,
+    "end": 18.638
+  },
+  {
+    "word": "boat",
+    "start": 18.638,
+    "end": 18.88
+  },
+  {
+    "word": "has",
+    "start": 18.88,
+    "end": 19.073
+  },
+  {
+    "word": "vanished",
+    "start": 19.073,
+    "end": 19.509
+  },
+  {
+    "word": "beneath",
+    "start": 19.509,
+    "end": 19.896
+  },
+  {
+    "word": "the",
+    "start": 19.896,
+    "end": 20.09
+  },
+  {
+    "word": "waves.",
+    "start": 20.09,
+    "end": 20.38
+  },
+  {
+    "word": "Any",
+    "start": 20.7,
+    "end": 20.924
+  },
+  {
+    "word": "normal",
+    "start": 20.924,
+    "end": 21.315
+  },
+  {
+    "word": "pirate",
+    "start": 21.315,
+    "end": 21.706
+  },
+  {
+    "word": "would",
+    "start": 21.706,
+    "end": 22.042
+  },
+  {
+    "word": "panic",
+    "start": 22.042,
+    "end": 22.377
+  },
+  {
+    "word": "and",
+    "start": 22.377,
+    "end": 22.601
+  },
+  {
+    "word": "swim.",
+    "start": 22.601,
+    "end": 22.88
+  },
+  {
+    "word": "Not",
+    "start": 23.32,
+    "end": 23.557
+  },
+  {
+    "word": "Captain",
+    "start": 23.557,
+    "end": 24.03
+  },
+  {
+    "word": "Jack",
+    "start": 24.03,
+    "end": 24.326
+  },
+  {
+    "word": "Sparrow.",
+    "start": 24.326,
+    "end": 24.8
+  },
+  {
+    "word": "At",
+    "start": 25.2,
+    "end": 25.346
+  },
+  {
+    "word": "the",
+    "start": 25.346,
+    "end": 25.542
+  },
+  {
+    "word": "exact",
+    "start": 25.542,
+    "end": 25.834
+  },
+  {
+    "word": "second",
+    "start": 25.834,
+    "end": 26.176
+  },
+  {
+    "word": "the",
+    "start": 26.176,
+    "end": 26.371
+  },
+  {
+    "word": "mast",
+    "start": 26.371,
+    "end": 26.615
+  },
+  {
+    "word": "hits",
+    "start": 26.615,
+    "end": 26.859
+  },
+  {
+    "word": "the",
+    "start": 26.859,
+    "end": 27.054
+  },
+  {
+    "word": "pier,",
+    "start": 27.054,
+    "end": 27.298
+  },
+  {
+    "word": "he",
+    "start": 27.298,
+    "end": 27.444
+  },
+  {
+    "word": "steps",
+    "start": 27.444,
+    "end": 27.737
+  },
+  {
+    "word": "off",
+    "start": 27.737,
+    "end": 27.932
+  },
+  {
+    "word": "without",
+    "start": 27.932,
+    "end": 28.323
+  },
+  {
+    "word": "even",
+    "start": 28.323,
+    "end": 28.567
+  },
+  {
+    "word": "getting",
+    "start": 28.567,
+    "end": 28.957
+  },
+  {
+    "word": "his",
+    "start": 28.957,
+    "end": 29.152
+  },
+  {
+    "word": "boots",
+    "start": 29.152,
+    "end": 29.445
+  },
+  {
+    "word": "wet.",
+    "start": 29.445,
+    "end": 29.64
+  },
+  {
+    "word": "That",
+    "start": 30.12,
+    "end": 30.351
+  },
+  {
+    "word": "is",
+    "start": 30.351,
+    "end": 30.49
+  },
+  {
+    "word": "how",
+    "start": 30.49,
+    "end": 30.675
+  },
+  {
+    "word": "you",
+    "start": 30.675,
+    "end": 30.86
+  },
+  {
+    "word": "arrive",
+    "start": 30.86,
+    "end": 31.184
+  },
+  {
+    "word": "in",
+    "start": 31.184,
+    "end": 31.323
+  },
+  {
+    "word": "style.",
+    "start": 31.323,
+    "end": 31.6
+  }
+]

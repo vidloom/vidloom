@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "title": "Interstellar — Relative Motion",
+  "output": "interstellar_relative_motion_premium.mp4",
+  "source": "assets/source.mkv",
+  "tail_seconds": 0.42,
+  "narration": {
+    "engine": "kokoro",
+    "model": "models/kokoro/kokoro-v0_19.onnx",
+    "voices": "models/kokoro/voices.bin",
+    "voice": "am_michael",
+    "speed": 0.98,
+    "language": "en-us",
+    "pause_seconds": 0.085,
+    "fallback_voice": "en-US-AndrewMultilingualNeural",
+    "fallback_rate": "+2%",
+    "fallback_pitch": "-2Hz",
+    "beats": [
+      {
+        "text": "Cooper didn't stop the spin. He copied it.",
+        "captions": ["HE DIDN'T STOP", "THE SPIN", "HE *COPIED* IT"],
+        "speed": 0.96
+      },
+      {
+        "text": "Endurance was rotating once every point eight eight seconds.",
+        "captions": ["ONE ROTATION", "EVERY *0.88 SECONDS*"],
+        "speed": 0.98
+      },
+      {
+        "text": "Dock normally, and both ships get shredded.",
+        "captions": ["DOCK NORMALLY", "BOTH SHIPS *SHRED*"],
+        "speed": 0.97
+      },
+      {
+        "text": "So Cooper fired the Ranger sideways...",
+        "captions": ["SO COOPER FIRED", "THE RANGER *SIDEWAYS*"],
+        "speed": 0.95
+      },
+      {
+        "text": "until a controlled ship and a dying station looked perfectly still, relative to each other.",
+        "captions": ["UNTIL BOTH SHIPS", "LOOKED *PERFECTLY STILL*", "RELATIVE TO EACH OTHER"],
+        "speed": 1.02
+      },
+      {
+        "text": "Then nine Gs started stealing their vision.",
+        "captions": ["THEN *NINE Gs*", "STOLE THEIR VISION"],
+        "speed": 0.98
+      },
+      {
+        "text": "One missed latch, and they were dead.",
+        "captions": ["ONE MISSED LATCH", "THEY WERE *DEAD*"],
+        "speed": 0.95
+      },
+      {
+        "text": "He held the line.",
+        "captions": ["HE HELD", "THE LINE"],
+        "speed": 0.92
+      },
+      {
+        "text": "Lock.",
+        "captions": ["*LOCK*"],
+        "caption_size": 132,
+        "speed": 0.88
+      }
+    ]
+  },
+  "edit": {
+    "active_crop": "1920:800:0:140",
+    "shots": [
+      {"start": 92.0, "weight": 0.72, "crop_start": 0.72, "crop_end": 0.68},
+      {"start": 180.0, "weight": 0.72, "crop_start": 0.48, "crop_end": 0.52},
+      {"start": 96.0, "weight": 0.78, "crop_start": 0.70, "crop_end": 0.74},
+      {"start": 100.0, "weight": 0.74, "crop_start": 0.50, "crop_end": 0.55},
+      {"start": 92.5, "weight": 0.80, "crop_start": 0.73, "crop_end": 0.70},
+      {"start": 127.5, "weight": 0.74, "crop_start": 0.47, "crop_end": 0.50},
+      {"start": 83.0, "weight": 0.68, "crop_start": 0.50, "crop_end": 0.46},
+      {"start": 84.5, "weight": 0.70, "crop_start": 0.48, "crop_end": 0.54},
+      {"start": 130.0, "weight": 0.70, "crop_start": 0.51, "crop_end": 0.48},
+      {"start": 258.0, "weight": 0.76, "crop_start": 0.50, "crop_end": 0.55},
+      {"start": 260.0, "weight": 0.78, "crop_start": 0.50, "crop_end": 0.50},
+      {"start": 262.0, "weight": 0.72, "crop_start": 0.53, "crop_end": 0.47},
+      {"start": 270.0, "weight": 0.84, "crop_start": 0.55, "crop_end": 0.50},
+      {"start": 272.0, "weight": 0.78, "crop_start": 0.50, "crop_end": 0.54},
+      {"start": 274.0, "weight": 0.82, "crop_start": 0.52, "crop_end": 0.48},
+      {"start": 197.0, "weight": 0.68, "crop_start": 0.44, "crop_end": 0.48},
+      {"start": 199.0, "weight": 0.78, "crop_start": 0.46, "crop_end": 0.50},
+      {"start": 201.0, "weight": 0.74, "crop_start": 0.50, "crop_end": 0.54},
+      {"start": 280.0, "weight": 0.78, "crop_start": 0.46, "crop_end": 0.50},
+      {"start": 282.0, "weight": 0.82, "crop_start": 0.44, "crop_end": 0.48},
+      {"start": 284.0, "weight": 0.76, "crop_start": 0.48, "crop_end": 0.52},
+      {"start": 296.0, "weight": 0.84, "crop_start": 0.50, "crop_end": 0.50},
+      {"start": 310.0, "weight": 0.90, "crop_start": 0.50, "crop_end": 0.54},
+      {"start": 312.0, "weight": 0.94, "crop_start": 0.50, "crop_end": 0.50}
+    ]
+  },
+  "audio": {
+    "production_volume": 0.3,
+    "music": [
+      {"file": "assets/tension.mp3", "source_start": 4.0, "timeline_start": 0.0, "volume": 0.08, "fade_in": 0.15, "fade_out": 1.5},
+      {"file": "assets/score.webm", "source_start": 7.0, "timeline_start": 4.0, "volume": 0.24, "fade_in": 1.2, "fade_out": 0.45}
+    ],
+    "sfx": [
+      {"file": "assets/impact.mp3", "at_fraction": 0.0, "duration": 1.6, "volume": 0.48},
+      {"file": "assets/whoosh.mp3", "at_fraction": 0.28, "duration": 1.0, "volume": 0.46},
+      {"file": "assets/whoosh.mp3", "at_fraction": 0.53, "duration": 1.0, "volume": 0.38},
+      {"file": "assets/impact.mp3", "at_fraction": 0.73, "duration": 1.4, "volume": 0.34},
+      {"file": "assets/metal_lock.wav", "at_fraction": 0.955, "duration": 2.0, "volume": 0.82}
+    ]
+  },
+  "branding": {
+    "accent_ass": "008CFF",
+    "hud_left": "VIDLOOM / RELATIVE MOTION",
+    "hud_right": "ENDURANCE / 68 RPM"
+  },
+  "rights_note": "Private prototype only. Clear movie and score rights before publishing."
+}

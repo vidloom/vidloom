@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "title": "Shatter-Crisp Garlic Potatoes",
+  "output": "crispy_garlic_potatoes_viral_recipe.mp4",
+  "sources": [
+    "assets/finished_a.mp4", "assets/pan_crisp.mp4", "assets/prep_39564557.mp4",
+    "assets/prep_39564559.mp4", "assets/prep_39564563.mp4", "assets/boil_and_cut.mp4",
+    "assets/hot_oil.mp4", "assets/garlic_prep.mp4", "assets/garlic_sizzle.mp4", "assets/finished_b.mp4"
+  ],
+  "tail_seconds": 0.38,
+  "narration": {
+    "engine": "kokoro", "voice": "af_sarah", "speed": 1.04, "language": "en-us", "pause_seconds": 0.065,
+    "model": "models/kokoro/kokoro-v0_19.onnx", "voices": "models/kokoro/voices.bin",
+    "fallback_voice": "en-US-AriaNeural", "fallback_rate": "+4%", "fallback_pitch": "-1Hz",
+    "beats": [
+      {"text":"These potatoes sound like glass, and your oven isn't invited.","captions":["THESE POTATOES","SOUND LIKE *GLASS*","NO OVEN"]},
+      {"text":"Boil one pound of baby potatoes in heavily salted water until knife tender.","captions":["1 LB BABY POTATOES","HEAVILY SALTED WATER","UNTIL *KNIFE-TENDER*"]},
+      {"text":"Drain, then shake them hard.","captions":["DRAIN","SHAKE THEM *HARD*"]},
+      {"text":"Those ragged edges become the crunch.","captions":["RAGGED EDGES","BECOME THE *CRUNCH*"]},
+      {"text":"Drop them into hot oil, and don't touch them until deeply golden.","captions":["INTO HOT OIL","DON'T TOUCH","UNTIL *DEEP GOLD*"]},
+      {"text":"Garlic and butter go in for the final minute.","captions":["GARLIC + BUTTER","FINAL *60 SECONDS*"]},
+      {"text":"Parmesan. Parsley. Flaky salt.","captions":["PARMESAN","PARSLEY","FLAKY SALT"]},
+      {"text":"Creamy center. Shatter crisp shell. Save this before dinner.","captions":["CREAMY CENTER","*SHATTER-CRISP* SHELL","SAVE THIS"],"caption_size":104}
+    ]
+  },
+  "edit": {
+    "shots": [
+      {"source_index":1,"start":0.2,"weight":1.1,"speed":1.25,"crop_start":0.48,"crop_end":0.53},
+      {"source_index":0,"start":0.0,"weight":0.9,"speed":0.8,"crop_start":0.45,"crop_end":0.55},
+      {"source_index":2,"start":1.0,"weight":0.9,"speed":1.35,"crop_start":0.5,"crop_end":0.47},
+      {"source_index":3,"start":0.5,"weight":0.9,"speed":1.3,"crop_start":0.48,"crop_end":0.52},
+      {"source_index":5,"start":1.0,"weight":1.0,"speed":1.3,"crop_start":0.5,"crop_end":0.46},
+      {"source_index":5,"start":7.0,"weight":0.9,"speed":1.4,"crop_start":0.47,"crop_end":0.53},
+      {"source_index":4,"start":1.0,"weight":0.9,"speed":1.25,"crop_start":0.5,"crop_end":0.48},
+      {"source_index":4,"start":8.0,"weight":0.9,"speed":1.35,"crop_start":0.48,"crop_end":0.52},
+      {"source_index":6,"start":2.0,"weight":0.85,"speed":1.6,"crop_start":0.48,"crop_end":0.53},
+      {"source_index":6,"start":7.0,"weight":0.85,"speed":1.7,"crop_start":0.52,"crop_end":0.47},
+      {"source_index":1,"start":1.0,"weight":0.95,"speed":1.2,"crop_start":0.48,"crop_end":0.52},
+      {"source_index":1,"start":3.0,"weight":0.95,"speed":1.15,"crop_start":0.52,"crop_end":0.47},
+      {"source_index":7,"start":0.4,"weight":0.9,"speed":1.35,"crop_start":0.46,"crop_end":0.52},
+      {"source_index":7,"start":4.0,"weight":0.9,"speed":1.4,"crop_start":0.52,"crop_end":0.47},
+      {"source_index":8,"start":0.3,"weight":0.9,"speed":1.25,"crop_start":0.48,"crop_end":0.52},
+      {"source_index":8,"start":3.0,"weight":0.85,"speed":1.35,"crop_start":0.52,"crop_end":0.48},
+      {"source_index":1,"start":4.0,"weight":0.95,"speed":1.15,"crop_start":0.48,"crop_end":0.52},
+      {"source_index":9,"start":0.0,"weight":0.9,"speed":0.85,"crop_start":0.46,"crop_end":0.54},
+      {"source_index":0,"start":1.0,"weight":1.0,"speed":0.8,"crop_start":0.52,"crop_end":0.47},
+      {"source_index":1,"start":5.0,"weight":1.15,"speed":0.75,"crop_start":0.47,"crop_end":0.53}
+    ]
+  },
+  "audio": {
+    "include_production": false, "production_volume": 0,
+    "music": [{"file":"assets/music.mp3","source_start":18.0,"timeline_start":0,"volume":0.14,"fade_in":0.12,"fade_out":0.65}],
+    "sfx": [
+      {"file":"assets/impact.mp3","at_fraction":0.0,"duration":1.2,"volume":0.38},
+      {"file":"assets/whoosh.mp3","at_fraction":0.08,"duration":0.8,"volume":0.34},
+      {"file":"assets/chop.wav","at_fraction":0.22,"duration":0.18,"volume":0.7},
+      {"file":"assets/chop.wav","at_fraction":0.27,"duration":0.18,"volume":0.62},
+      {"file":"assets/sizzle.wav","at_fraction":0.48,"duration":10.0,"volume":0.32},
+      {"file":"assets/whoosh.mp3","at_fraction":0.66,"duration":0.8,"volume":0.28},
+      {"file":"assets/crunch.wav","at_fraction":0.87,"duration":0.55,"volume":0.62}
+    ]
+  },
+  "branding": {"accent_ass":"00C8FF","hud_left":"VIDLOOM / 15-MINUTE CRUNCH","hud_right":"SAVEABLE RECIPE"},
+  "rights_note":"Pexels source clips; original synthetic foley; clear music license before publication."
+}

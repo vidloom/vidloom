@@ -1,0 +1,249 @@
+{
+  "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5",
+  "command": [
+    "ffmpeg",
+    "-n",
+    "-hide_banner",
+    "-loglevel",
+    "warning",
+    "-filter_complex_threads",
+    "2",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/jack_sparrow_entrance/assets/source.mp4",
+    "-i",
+    "/home/omie/MyShits/Youtube Automation - Vidloom/premium_pipeline/projects/jack_sparrow_entrance/voice/take_01.wav",
+    "-filter_complex_script",
+    "filtergraph.txt",
+    "-map",
+    "[video]",
+    "-map",
+    "[audio]",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p6",
+    "-rc",
+    "vbr",
+    "-cq",
+    "18",
+    "-b:v",
+    "10M",
+    "-pix_fmt",
+    "yuv420p",
+    "-c:a",
+    "aac",
+    "-b:a",
+    "192k",
+    "-ar",
+    "48000",
+    "-ac",
+    "2",
+    "-t",
+    "32.0",
+    "-movflags",
+    "+faststart",
+    "draft.mp4"
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "asset": "A01",
+      "observation": "O01",
+      "start_frame": 0,
+      "end_frame": 115,
+      "source_in": 1.0,
+      "speed": 1.0,
+      "crop": [
+        950,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          980,
+          200,
+          380,
+          700
+        ],
+        [
+          1000,
+          210,
+          370,
+          690
+        ],
+        [
+          990,
+          205,
+          375,
+          695
+        ]
+      ],
+      "beat_ids": [
+        "B01"
+      ],
+      "purpose": "Establish grand heroic pirate captain silhouette atop mast",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S02",
+      "asset": "A01",
+      "observation": "O02",
+      "start_frame": 115,
+      "end_frame": 235,
+      "source_in": 11.2,
+      "speed": 1.0,
+      "crop": [
+        500,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          520,
+          160,
+          400,
+          720
+        ],
+        [
+          530,
+          170,
+          390,
+          710
+        ],
+        [
+          525,
+          165,
+          395,
+          715
+        ]
+      ],
+      "beat_ids": [
+        "B02"
+      ],
+      "purpose": "Close up on Jack Sparrow squinting with serious captain authority",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S03",
+      "asset": "A01",
+      "observation": "O03",
+      "start_frame": 235,
+      "end_frame": 485,
+      "source_in": 22.0,
+      "speed": 1.0,
+      "crop": [
+        730,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          750,
+          200,
+          390,
+          680
+        ],
+        [
+          770,
+          220,
+          380,
+          660
+        ],
+        [
+          760,
+          210,
+          385,
+          670
+        ]
+      ],
+      "beat_ids": [
+        "B03"
+      ],
+      "purpose": "Reveal tiny leaky dinghy and comedic bailing of water with bucket",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S04",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 485,
+      "end_frame": 755,
+      "source_in": 65.8,
+      "speed": 1.0,
+      "crop": [
+        980,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          1000,
+          180,
+          400,
+          700
+        ],
+        [
+          1020,
+          200,
+          380,
+          680
+        ],
+        [
+          1010,
+          190,
+          390,
+          690
+        ]
+      ],
+      "beat_ids": [
+        "B04"
+      ],
+      "purpose": "Show submerged mast gliding toward harbor with only mast tip visible",
+      "production_gain_db": -96
+    },
+    {
+      "id": "S05",
+      "asset": "A01",
+      "observation": "O05",
+      "start_frame": 755,
+      "end_frame": 960,
+      "source_in": 74.8,
+      "speed": 1.0,
+      "crop": [
+        750,
+        140,
+        450,
+        800
+      ],
+      "subject_boxes": [
+        [
+          770,
+          200,
+          410,
+          690
+        ],
+        [
+          780,
+          210,
+          400,
+          680
+        ],
+        [
+          775,
+          205,
+          405,
+          685
+        ]
+      ],
+      "beat_ids": [
+        "B05"
+      ],
+      "purpose": "Deliver the iconic punchline: Jack steps dry off the mast onto the pier",
+      "production_gain_db": -96
+    }
+  ]
+}

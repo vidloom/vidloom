@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv*/
+
+# Local secrets and OAuth material
+.env
+.env.*
+!.env.example
+client_secret*.json
+token*.json
+credentials*.json
+
+# Local AI models and caches
+models/
+.cache/
+.gemini/
+gha-creds-*.json
+
+# Generated renders and large scratch media stay on the private production host.
+output/
+scratch/
+*.mp4
+*.mkv
+*.mov
+*.webm
+*.wav
+*.mp3
+*.m4a
+**/build/*.mp4
+**/output/*.mp4
+**/generated/*.wav
+*.part
+automation/state/*.lock
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

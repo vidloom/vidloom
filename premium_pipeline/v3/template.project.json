@@ -1,0 +1,28 @@
+{
+  "version": 3,
+  "title": "REPLACE after selecting a provable idea",
+  "fps": 30,
+  "total_frames": 1,
+  "brief": {
+    "audience": "REPLACE: a specific viewer",
+    "viewer_problem": "REPLACE: the problem or desire",
+    "promise": "REPLACE: one observable benefit",
+    "original_contribution": "REPLACE: what this video adds",
+    "payoff": "REPLACE: visible resolution of the opening",
+    "format": "demonstration"
+  },
+  "assets": [],
+  "narration": {
+    "path": "voice/take_01.wav",
+    "script": "REPLACE: connected spoken prose supported by inspected footage",
+    "delivery": "Calm, curious, connected explanation to a friend",
+    "generation": "continuous_take",
+    "alignment_path": "voice/words_01.json",
+    "alignment_method": "forced_alignment"
+  },
+  "beats": [],
+  "shots": [],
+  "captions": [],
+  "audio": [],
+  "reviews": []
+}

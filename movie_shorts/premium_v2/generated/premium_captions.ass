@@ -1,0 +1,42 @@
+[Script Info]
+Title: Vidloom Premium Reference Edit
+ScriptType: v4.00+
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+YCbCr Matrix: TV.709
+PlayResX: 1080
+PlayResY: 1920
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Caption,Montserrat ExtraBold,96,&H00FFFFFF,&H00006FFF,&H000A0A0A,&H70000000,-1,0,0,0,100,100,0.4,0,1,8,2,5,80,80,360,1
+Style: HUD,JetBrains Mono SemiBold,25,&H00FFF4DE,&H00000000,&H70000000,&H00000000,-1,0,0,0,100,100,1.1,0,1,2,0,7,50,50,90,1
+Style: HUDRight,JetBrains Mono Medium,23,&H009BEAFF,&H00000000,&H70000000,&H00000000,-1,0,0,0,100,100,1.0,0,1,2,0,9,50,50,90,1
+Style: ColdOpen,Montserrat Black,66,&H00FFFFFF,&H00000000,&H00202020,&H00000000,-1,0,0,0,100,100,1.0,0,1,7,2,5,70,70,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 10,0:00:00.00,0:00:02.17,Caption,,0,0,0,,{\an5\pos(540,1390)\fs116\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}BUILT TO BE
+Dialogue: 10,0:00:02.17,0:00:02.90,Caption,,0,0,0,,{\an5\pos(540,1390)\fs116\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}{\c&H006FFF&\blur0.5}IMPOSSIBLE{\c&HFFFFFF&}
+Dialogue: 10,0:00:02.98,0:00:04.54,Caption,,0,0,0,,{\an5\pos(540,1420)\fs116\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}{\c&H006FFF&\blur0.5}660 KNOTS{\c&HFFFFFF&}
+Dialogue: 10,0:00:04.54,0:00:06.09,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}CANYON WALLS
+Dialogue: 10,0:00:06.09,0:00:07.64,Caption,,0,0,0,,{\an5\pos(540,1420)\fs116\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}3-METER TARGET
+Dialogue: 10,0:00:07.73,0:00:09.52,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}THE CLOCK
+Dialogue: 10,0:00:09.52,0:00:10.41,Caption,,0,0,0,,{\an5\pos(540,1420)\fs116\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}{\c&H006FFF&\blur0.5}02:15{\c&HFFFFFF&}
+Dialogue: 10,0:00:10.50,0:00:11.79,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}EVERY PILOT SAID
+Dialogue: 10,0:00:11.79,0:00:12.22,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}{\c&H006FFF&\blur0.5}IMPOSSIBLE{\c&HFFFFFF&}
+Dialogue: 10,0:00:12.31,0:00:13.02,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}MAVERICK TOOK
+Dialogue: 10,0:00:13.02,0:00:14.08,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}THE JET HIMSELF
+Dialogue: 10,0:00:14.16,0:00:15.05,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}{\c&H006FFF&\blur0.5}NINE Gs{\c&HFFFFFF&}
+Dialogue: 10,0:00:15.05,0:00:15.93,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}ONE BOMB
+Dialogue: 10,0:00:15.93,0:00:16.82,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}NO MARGIN
+Dialogue: 10,0:00:16.90,0:00:17.37,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}HE HIT
+Dialogue: 10,0:00:17.37,0:00:17.84,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}THE TARGET
+Dialogue: 10,0:00:17.92,0:00:19.50,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}ONE SECOND
+Dialogue: 10,0:00:19.50,0:00:20.28,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}{\c&H006FFF&\blur0.5}LEFT{\c&HFFFFFF&}
+Dialogue: 10,0:00:20.37,0:00:21.08,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}THAT'S NOT
+Dialogue: 10,0:00:21.08,0:00:21.43,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}FLYING
+Dialogue: 10,0:00:21.52,0:00:22.29,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}HE REWROTE
+Dialogue: 10,0:00:22.29,0:00:23.06,Caption,,0,0,0,,{\an5\pos(540,1420)\fs96\fscx88\fscy88\t(0,95,\fscx105\fscy105)\t(95,220,\fscx100\fscy100)\fad(35,55)\blur0.35}{\c&H006FFF&\blur0.5}THE LIMIT{\c&HFFFFFF&}
+Dialogue: 5,0:00:00.00,0:00:23.40,HUD,,0,0,0,,{\an7\pos(58,94)}VIDLOOM  /  FLIGHT FILE 014
+Dialogue: 5,0:00:00.00,0:00:23.40,HUDRight,,0,0,0,,{\an9\pos(1020,94)}MISSION CLOCK  /  02:15
