@@ -45,7 +45,7 @@ jobs:
           current=$(curl --silent --show-error \
             --url "$subdomain_url" \
             --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN")
-          if printf '%s' "$current" | grep -q '"subdomain":"vidloom-omkar"'; then
+          if printf '%s' "$current" | grep -Eq '"subdomain"[[:space:]]*:[[:space:]]*"vidloom-omkar"'; then
             echo "workers.dev subdomain already configured"
           else
             curl --fail-with-body --silent --show-error \
