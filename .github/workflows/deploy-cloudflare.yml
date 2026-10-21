@@ -38,6 +38,15 @@ jobs:
       - name: Verify control plane
         working-directory: cloudflare-control
         run: npm run check
+      - name: Ensure account workers.dev domain
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
+        run: |
+          curl --fail-with-body --silent --show-error \
+            --request PUT \
+            --url "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data '{"subdomain":"vidloom-omkar"}'
       - name: Configure encrypted Worker runtime secrets
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' && env.WORKER_CONTROL_PASSWORD != '' }}
         working-directory: cloudflare-control
