@@ -225,7 +225,18 @@ main { min-width: 0; padding: 26px clamp(24px, 4vw, 60px) 36px; }
 .control-stack { display: grid; gap: 8px; margin-top: 17px; }
 .control-stack .button.full { margin-top: 0; }
 .identity-button.authenticated .avatar { box-shadow: 0 0 0 3px rgba(201,245,74,.18); }
-footer { margin-top: 20px; padding-top: 16px; display: flex; justify-content: space-between; border-top: 1px solid var(--line); color: var(--faint); font-size: 8px; letter-spacing: .08em; }
+footer { margin-top: 20px; padding-top: 16px; display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid var(--line); color: var(--faint); font-size: 8px; letter-spacing: .08em; }
+.footer-links { display: flex; gap: 12px; }
+.footer-links a:hover { color: var(--ink); }
+.policy-page { min-height: 100vh; padding: clamp(30px, 6vw, 90px) 20px; }
+.policy-shell { width: min(760px, 100%); margin: 0 auto; }
+.policy-brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 56px; font-weight: 760; }
+.policy-content { padding: clamp(24px, 5vw, 56px); border: 1px solid var(--line); border-radius: 20px; background: var(--surface); }
+.policy-content h1 { margin: 8px 0 14px; font-size: clamp(32px, 6vw, 58px); line-height: .96; letter-spacing: -.055em; }
+.policy-content h2 { margin: 30px 0 8px; font-size: 16px; }
+.policy-content p, .policy-content li { color: var(--muted); font-size: 13px; line-height: 1.75; }
+.policy-content ul { padding-left: 18px; }
+.policy-nav { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
 
 .modal { width: min(520px, calc(100vw - 30px)); padding: 0; border: 0; border-radius: 16px; background: transparent; box-shadow: var(--shadow); }
 .modal::backdrop { background: rgba(14,15,13,.55); backdrop-filter: blur(5px); }
