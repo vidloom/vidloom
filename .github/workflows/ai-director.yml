@@ -35,18 +35,17 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.12"
       - name: Install editorial dependencies
-        run: python -m pip install --disable-pip-version-check -r automation/requirements.txt
+        run: |
+          python3 -m venv .venv-automation
+          .venv-automation/bin/python -m pip install --disable-pip-version-check -r automation/requirements.txt
       - name: Run evidence-bound Groq audit
         run: |
           args=("${{ inputs.project_path }}")
           if [ "${{ inputs.refresh }}" = "true" ]; then args+=(--refresh); fi
-          python -m automation.groq_editorial "${args[@]}"
+          .venv-automation/bin/python -m automation.groq_editorial "${args[@]}"
       - name: Refresh public state
-        run: python -m automation.dashboard_state --output control_center/data/dashboard.json
+        run: .venv-automation/bin/python -m automation.dashboard_state --output control_center/data/dashboard.json
       - name: Persist audit
         run: |
           git config user.name "vidloom-automation[bot]"
