@@ -5,6 +5,7 @@ import fcntl
 import hashlib
 import subprocess
 import sys
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -74,6 +75,18 @@ def verify_output(project_file: Path, config: dict) -> Path:
 def prepare_project(item: dict, config: dict, state: dict, *, allow_render: bool) -> Path:
     project_file = resolve_project_path(item["project_path"])
     pipeline = ROOT / "premium_pipeline" / "v3" / "pipeline.py"
+    ai_config = config.get("ai", {})
+    if ai_config.get("enabled") and os.environ.get("GROQ_API_KEY"):
+        state["system"]["current_stage"] = "Groq editorial audit"
+        state["system"]["status"] = "building"
+        atomic_write_json(STATE_PATH, state)
+        command = [
+            sys.executable, "-m", "automation.groq_editorial", item["project_path"],
+            "--model", ai_config.get("model", "openai/gpt-oss-120b"),
+        ]
+        if ai_config.get("require_audit_before_upload") and "block" in ai_config.get("block_verdicts", []):
+            command.append("--fail-on-block")
+        run(command)
     state["system"]["current_stage"] = "Validating evidence and editorial reviews"
     state["system"]["status"] = "building"
     atomic_write_json(STATE_PATH, state)

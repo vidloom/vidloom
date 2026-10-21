@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "provider": "Groq",
+  "model": "openai/gpt-oss-120b",
+  "status": "not_run",
+  "project_id": null,
+  "project_path": null,
+  "project_digest": null,
+  "generated_at": null,
+  "verdict": "pending",
+  "summary": "AI Director is connected and waiting for its first evidence-bound audit.",
+  "hook_score": null,
+  "clarity_score": null,
+  "payoff_score": null,
+  "evidence_score": null,
+  "voice_score": null,
+  "claim_checks": [],
+  "risks": [],
+  "recommended_edits": []
+}

@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "automation" / "config.json"
 QUEUE_PATH = ROOT / "automation" / "queue.json"
 STATE_PATH = ROOT / "automation" / "state" / "dashboard.json"
+AI_STATE_PATH = ROOT / "automation" / "state" / "ai.json"
 
 
 def utc_now() -> datetime:

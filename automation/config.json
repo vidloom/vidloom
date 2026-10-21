@@ -35,6 +35,15 @@
     "self_declared_made_for_kids": false,
     "contains_synthetic_media": false
   },
+  "ai": {
+    "enabled": true,
+    "provider": "Groq",
+    "model": "openai/gpt-oss-120b",
+    "require_audit_before_upload": true,
+    "block_verdicts": [
+      "block"
+    ]
+  },
   "automation": {
     "enabled": false,
     "runner": "self-hosted",

@@ -1,0 +1,63 @@
+name: AI Director audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_path:
+        description: Repository-relative project.json path
+        required: true
+        default: premium_pipeline/projects/jack_sparrow_entrance/project.json
+        type: string
+      refresh:
+        description: Ignore cached audit and call Groq again
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: vidloom-control-plane
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: [self-hosted, linux, x64, vidloom]
+    timeout-minutes: 20
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+      VIDLOOM_RUNNER_ONLINE: "true"
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install editorial dependencies
+        run: python -m pip install --disable-pip-version-check -r automation/requirements.txt
+      - name: Run evidence-bound Groq audit
+        run: |
+          args=("${{ inputs.project_path }}")
+          if [ "${{ inputs.refresh }}" = "true" ]; then args+=(--refresh); fi
+          python -m automation.groq_editorial "${args[@]}"
+      - name: Refresh public state
+        run: python -m automation.dashboard_state --output control_center/data/dashboard.json
+      - name: Persist audit
+        run: |
+          git config user.name "vidloom-automation[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/state/ai.json automation/state/dashboard.json control_center/data/dashboard.json
+          git diff --cached --quiet || git commit -m "ops: update Groq editorial audit [skip ci]"
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: control_center
+      - name: Deploy updated dashboard
+        id: deployment
+        uses: actions/deploy-pages@v4

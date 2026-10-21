@@ -5,7 +5,7 @@ import os
 from collections import Counter
 from datetime import datetime, timezone
 
-from automation.common import CONFIG_PATH, QUEUE_PATH, STATE_PATH, atomic_write_json, iso_z, load_json
+from automation.common import AI_STATE_PATH, CONFIG_PATH, QUEUE_PATH, STATE_PATH, atomic_write_json, iso_z, load_json
 from automation.schedule import next_publish_slot
 
 
@@ -27,6 +27,7 @@ def build_public_state() -> dict:
             status = "failed"
         queue.append({
             "id": item["id"],
+            "project_path": item.get("project_path"),
             "title": item["title"],
             "genre": item["genre"],
             "status": status,
@@ -59,6 +60,22 @@ def build_public_state() -> dict:
         "failed": counts["failed"],
     }
     previous["queue"] = queue
+    ai = load_json(AI_STATE_PATH) if AI_STATE_PATH.is_file() else {}
+    previous["ai"] = {
+        "provider": ai.get("provider", config.get("ai", {}).get("provider", "Groq")),
+        "model": ai.get("model", config.get("ai", {}).get("model", "unknown")),
+        "status": ai.get("status", "not_run"),
+        "verdict": ai.get("verdict", "pending"),
+        "project_id": ai.get("project_id"),
+        "generated_at": ai.get("generated_at"),
+        "summary": ai.get("summary", "AI Director has not run yet."),
+        "scores": {
+            key.removesuffix("_score"): ai.get(key)
+            for key in ("hook_score", "clarity_score", "payoff_score", "evidence_score", "voice_score")
+        },
+        "risks": ai.get("risks", [])[:5],
+        "recommended_edits": ai.get("recommended_edits", [])[:5],
+    }
     health = previous.setdefault("health", {})
     if os.environ.get("YOUTUBE_REFRESH_TOKEN"):
         health["youtube"] = "connected"
@@ -69,6 +86,7 @@ def build_public_state() -> dict:
     else:
         health.setdefault("runner", "local" if not os.environ.get("GITHUB_ACTIONS") else "unknown")
     health["pipeline"] = "ready"
+    health["ai"] = "connected" if os.environ.get("GROQ_API_KEY") else ai.get("status", "configured")
     health["queue"] = "low" if previous["metrics"]["queued"] < config["automation"]["minimum_queue_depth"] else "ready"
     return previous
 

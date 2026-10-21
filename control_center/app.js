@@ -6,6 +6,7 @@ const workflowFiles = {
   production: "production-cycle.yml",
   control: "control.yml",
   deploy: "deploy-dashboard.yml",
+  ai: "ai-director.yml",
 };
 
 let dashboard = null;
@@ -72,7 +73,7 @@ function setText(id, value) {
 function setHealth(id, dotId, value) {
   setText(id, humanStatus(value));
   const dot = document.getElementById(dotId);
-  dot.className = ["ready", "connected", "online", "healthy", "local"].includes(value) ? "good" :
+  dot.className = ["ready", "connected", "configured", "complete", "pass", "online", "healthy", "local"].includes(value) ? "good" :
     ["failed", "offline", "not_connected"].includes(value) ? "bad" : "";
 }
 
@@ -160,6 +161,7 @@ function render(data) {
   const metrics = data.metrics || {};
   const queue = data.queue || [];
   const schedule = data.schedule || {};
+  const ai = data.ai || {};
   const current = queue.find(item => item.id === system.current_item_id) || queue.find(item => ["building", "qc", "uploading"].includes(item.status)) || queue[0];
 
   const live = $("#liveState");
@@ -195,12 +197,96 @@ function render(data) {
   setHealth("runnerHealth", "runnerDot", health.runner);
   setHealth("youtubeHealth", "youtubeDot", health.youtube);
   setHealth("pipelineHealth", "pipelineDot", health.pipeline);
+  setHealth("aiHealth", "aiDot", health.ai);
   setHealth("queueHealth", "queueDot", health.queue);
   setText("pauseAutomation", system.automation_enabled ? "Pause automation" : "Resume automation");
   $("#setupNotice").classList.toggle("hidden", system.status !== "setup_required" && health.youtube === "connected");
   renderQueue(queue);
   renderEvents(data.events);
   renderWeek(schedule.days);
+  renderAi(ai);
+}
+
+function renderAi(ai) {
+  const verdict = String(ai.verdict || "pending").toLowerCase();
+  setText("aiModel", ai.model || "Not configured");
+  setText("aiVerdict", verdict.toUpperCase());
+  setText("aiSummary", ai.summary || "Waiting for the first evidence-bound audit.");
+  const orb = $("#aiVerdictOrb");
+  orb.className = `verdict-orb ${verdict}`;
+  const risk = ai.risks?.[0] || ai.recommended_edits?.[0] || "No material risk reported.";
+  setText("aiRisk", risk);
+  const scores = ai.scores || {};
+  ["hook", "clarity", "payoff", "evidence", "voice"].forEach(name => {
+    const value = Number(scores[name]);
+    const display = Number.isFinite(value) ? `${value}/10` : "—";
+    setText(`score${name[0].toUpperCase()}${name.slice(1)}`, display);
+    const bar = document.getElementById(`bar${name[0].toUpperCase()}${name.slice(1)}`);
+    if (bar) bar.style.width = Number.isFinite(value) ? `${Math.max(0, Math.min(10, value)) * 10}%` : "0%";
+  });
+}
+
+function runIcon(run) {
+  if (run.status !== "completed") return "live";
+  return run.conclusion === "success" ? "success" : run.conclusion === "cancelled" ? "muted" : "failed";
+}
+
+function renderRuns(runs) {
+  const list = $("#runList");
+  list.replaceChildren();
+  if (!runs.length) {
+    const empty = document.createElement("p");
+    empty.className = "runs-empty";
+    empty.textContent = "No workflow activity yet.";
+    list.append(empty);
+    return;
+  }
+  runs.slice(0, 5).forEach(run => {
+    const row = document.createElement("a");
+    row.className = "run-row";
+    row.href = run.html_url;
+    row.target = "_blank";
+    row.rel = "noreferrer";
+    const dot = document.createElement("i");
+    dot.className = runIcon(run);
+    const copy = document.createElement("span");
+    const title = document.createElement("strong");
+    title.textContent = run.name;
+    const meta = document.createElement("small");
+    meta.textContent = `${humanStatus(run.status === "completed" ? run.conclusion : run.status)} · ${relativeTime(run.created_at)}`;
+    copy.append(title, meta);
+    const arrow = document.createElement("b");
+    arrow.textContent = "↗";
+    row.append(dot, copy, arrow);
+    list.append(row);
+  });
+}
+
+async function loadRuns() {
+  if (!connection.owner || !connection.repo) return;
+  try {
+    const headers = { Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28" };
+    if (connection.token) headers.Authorization = `Bearer ${connection.token}`;
+    const response = await fetch(`https://api.github.com/repos/${encodeURIComponent(connection.owner)}/${encodeURIComponent(connection.repo)}/actions/runs?per_page=8`, { headers, cache: "no-store" });
+    if (!response.ok) throw new Error(`GitHub runs returned ${response.status}`);
+    renderRuns((await response.json()).workflow_runs || []);
+  } catch (error) {
+    renderRuns([]);
+  }
+}
+
+function updateClock() {
+  const now = new Date();
+  setText("liveClock", new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false,
+  }).format(now));
+  const next = dashboard?.schedule?.next_publish_at ? new Date(dashboard.schedule.next_publish_at) : null;
+  if (!next || Number.isNaN(next.valueOf())) return setText("nextCountdown", "Awaiting slot");
+  const remaining = Math.max(0, next - now);
+  const days = Math.floor(remaining / 86_400_000);
+  const hours = Math.floor((remaining % 86_400_000) / 3_600_000);
+  const minutes = Math.floor((remaining % 3_600_000) / 60_000);
+  setText("nextCountdown", `${days ? `${days}d ` : ""}${hours}h ${minutes}m`);
 }
 
 async function loadState() {
@@ -330,8 +416,17 @@ function bindEvents() {
     } catch (error) { toast(error.message, "error"); }
   });
   $("#runCycle").addEventListener("click", async () => {
-    try { await dispatch(workflowFiles.production, { mode: "full", item_id: "", dry_run: "false" }); }
+    try {
+      const dryRun = dashboard?.system?.automation_enabled ? "false" : "true";
+      await dispatch(workflowFiles.production, { mode: "full", item_id: "", dry_run: dryRun });
+    }
     catch (error) { toast(error.message, "error"); }
+  });
+  $("#runAiAudit").addEventListener("click", async () => {
+    try {
+      const project = dashboard?.queue?.[0]?.project_path || "premium_pipeline/projects/jack_sparrow_entrance/project.json";
+      await dispatch(workflowFiles.ai, { project_path: project, refresh: "true" });
+    } catch (error) { toast(error.message, "error"); }
   });
   $("#pauseAutomation").addEventListener("click", async () => {
     try {
@@ -348,4 +443,8 @@ function bindEvents() {
 renderConnection();
 bindEvents();
 loadState();
+loadRuns();
+updateClock();
 setInterval(loadState, 60_000);
+setInterval(loadRuns, 15_000);
+setInterval(updateClock, 1_000);

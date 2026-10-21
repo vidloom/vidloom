@@ -60,6 +60,7 @@
           <h1>Good evening, Omie.</h1>
         </div>
         <div class="topbar-actions">
+          <div class="studio-clock"><span id="liveClock">--:--:--</span><small>IST</small></div>
           <div class="live-state" id="liveState"><span></span><b>Setup required</b></div>
           <button class="button button-secondary" id="refreshState" type="button">
             <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 9A7 7 0 0 1 18 6l2 2M18 15a7 7 0 0 1-11.9 3L4 16"/></svg>
@@ -115,6 +116,7 @@
           <div class="hairline"></div>
           <div class="next-detail"><span>Cadence</span><strong id="cadence">Tue · Thu · Sat</strong></div>
           <div class="next-detail"><span>Queue coverage</span><strong id="queueCoverage">1 release</strong></div>
+          <div class="release-countdown"><span>Release in</span><strong id="nextCountdown">--h --m</strong></div>
         </article>
       </section>
 
@@ -123,6 +125,42 @@
         <article class="metric-card"><span>Building now</span><strong id="metricBuilding">0</strong><small>One build at a time</small></article>
         <article class="metric-card"><span>Scheduled</span><strong id="metricScheduled">0</strong><small>Private until release</small></article>
         <article class="metric-card"><span>Published</span><strong id="metricPublished">0</strong><small>Tracked by video ID</small></article>
+      </section>
+
+      <section class="command-grid" aria-label="Autonomous studio intelligence">
+        <article class="ai-panel panel">
+          <div class="ai-aura" aria-hidden="true"></div>
+          <div class="panel-heading compact ai-heading">
+            <div><p class="eyebrow">AI Director · Groq</p><h2>Editorial intelligence</h2></div>
+            <div class="model-chip"><i></i><span id="aiModel">Loading model</span></div>
+          </div>
+          <div class="ai-verdict-row">
+            <div class="verdict-orb" id="aiVerdictOrb"><span></span></div>
+            <div><span class="ai-verdict" id="aiVerdict">PENDING</span><p id="aiSummary">Waiting for the first evidence-bound audit.</p></div>
+          </div>
+          <div class="score-grid" id="scoreGrid">
+            <div><span>Hook</span><strong id="scoreHook">—</strong><i><b id="barHook"></b></i></div>
+            <div><span>Clarity</span><strong id="scoreClarity">—</strong><i><b id="barClarity"></b></i></div>
+            <div><span>Payoff</span><strong id="scorePayoff">—</strong><i><b id="barPayoff"></b></i></div>
+            <div><span>Evidence</span><strong id="scoreEvidence">—</strong><i><b id="barEvidence"></b></i></div>
+            <div><span>Voice</span><strong id="scoreVoice">—</strong><i><b id="barVoice"></b></i></div>
+          </div>
+          <div class="ai-bottom">
+            <div><span class="micro-label">Current risk</span><p id="aiRisk">No audit result yet.</p></div>
+            <button class="button button-neon" id="runAiAudit" type="button">Run AI audit <span>↗</span></button>
+          </div>
+        </article>
+
+        <article class="runs-panel panel">
+          <div class="panel-heading compact">
+            <div><p class="eyebrow">Live orchestration</p><h2>Action stream</h2></div>
+            <span class="signal-chip"><i></i> LIVE</span>
+          </div>
+          <div class="run-list" id="runList">
+            <div class="run-skeleton"></div><div class="run-skeleton short"></div><div class="run-skeleton"></div>
+          </div>
+          <a class="all-runs" id="allRuns" href="https://github.com/vidloom/vidloom/actions" target="_blank" rel="noreferrer">Open all workflows <span>↗</span></a>
+        </article>
       </section>
 
       <section class="content-grid" id="production">
@@ -159,6 +197,7 @@
             <div><span><i id="runnerDot"></i>Production runner</span><strong id="runnerHealth">Unknown</strong></div>
             <div><span><i id="youtubeDot"></i>YouTube OAuth</span><strong id="youtubeHealth">Not connected</strong></div>
             <div><span><i id="pipelineDot"></i>v3 quality gates</span><strong id="pipelineHealth">Ready</strong></div>
+            <div><span><i id="aiDot"></i>Groq AI Director</span><strong id="aiHealth">Configured</strong></div>
             <div><span><i id="queueDot"></i>Queue depth</span><strong id="queueHealth">Low</strong></div>
           </div>
           <button class="button button-ghost full" id="pauseAutomation" type="button">Resume automation</button>
@@ -167,7 +206,7 @@
 
       <footer>
         <span>VIDLOOM CONTROL CENTER</span>
-        <span>Evidence → edit → QC → private upload → scheduled publish</span>
+        <span>Groq audit → evidence gate → edit → QC → private upload → scheduled publish</span>
       </footer>
     </main>
   </div>
