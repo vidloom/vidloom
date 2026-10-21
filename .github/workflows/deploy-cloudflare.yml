@@ -41,12 +41,20 @@ jobs:
       - name: Ensure account workers.dev domain
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' }}
         run: |
-          curl --fail-with-body --silent --show-error \
-            --request PUT \
-            --url "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" \
-            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            --header "Content-Type: application/json" \
-            --data '{"subdomain":"vidloom-omkar"}'
+          subdomain_url="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain"
+          current=$(curl --silent --show-error \
+            --url "$subdomain_url" \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN")
+          if printf '%s' "$current" | grep -q '"subdomain":"vidloom-omkar"'; then
+            echo "workers.dev subdomain already configured"
+          else
+            curl --fail-with-body --silent --show-error \
+              --request PUT \
+              --url "$subdomain_url" \
+              --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              --header "Content-Type: application/json" \
+              --data '{"subdomain":"vidloom-omkar"}'
+          fi
       - name: Configure encrypted Worker runtime secrets
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' && env.WORKER_CONTROL_PASSWORD != '' }}
         working-directory: cloudflare-control
