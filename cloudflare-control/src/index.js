@@ -9,6 +9,7 @@ const JSON_HEADERS = {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname.startsWith("/data/")) return json({ error: "Not found" }, 404);
     if (!url.pathname.startsWith("/api/")) return env.ASSETS.fetch(request);
 
     try {

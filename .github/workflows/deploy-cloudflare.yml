@@ -58,6 +58,27 @@ jobs:
         if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' && env.WORKER_CONTROL_PASSWORD != '' }}
         working-directory: cloudflare-control
         run: npx wrangler deploy
+      - name: Verify live control plane
+        if: ${{ env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != '' && env.WORKER_CONTROL_PASSWORD != '' }}
+        env:
+          CONTROL_URL: https://vidloom-control.vidloom-omkar.workers.dev
+        run: |
+          ready=false
+          for attempt in $(seq 1 18); do
+            if curl --fail --silent --show-error --max-time 15 "$CONTROL_URL/api/health" | grep -q '"ok":true'; then
+              ready=true
+              break
+            fi
+            echo "Waiting for the deployed Worker (attempt $attempt/18)"
+            sleep 5
+          done
+          test "$ready" = true
+
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 15 "$CONTROL_URL/api/state")" = "401"
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' --max-time 15 "$CONTROL_URL/data/dashboard.json")" = "404"
+          for page in / /about/ /privacy/ /terms/; do
+            test "$(curl --location --silent --output /dev/null --write-out '%{http_code}' --max-time 15 "$CONTROL_URL$page")" = "200"
+          done
       - name: Explain missing deployment credential
         if: ${{ env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == '' || env.WORKER_CONTROL_PASSWORD == '' }}
         run: echo "Verification passed. Cloudflare API token, account ID, and CONTROL_PASSWORD must all be configured before deployment."
