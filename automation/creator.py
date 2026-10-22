@@ -190,8 +190,10 @@ Every sentence must be supported by its selected observation; never use movie me
 explanation, not a plot recap or list of facts. The final beat must answer the opening with the most
 visually decisive observation. Natural connected speech only: no chopped fragments, fake urgency,
 engagement bait, unsupported superlatives, exact timing, or broad claims about other films. Select
-observation indexes in chronological order. Roles must include hook first and payoff last. Return
-only the schema-constrained object."""
+observation indexes in chronological order. Do not mention overlays, graphics, arrows, freeze frames,
+slow motion, measurements, or editing that is not literally present in the supplied observations.
+Treat the commission's script_direction as an editorial question, never as evidence. Roles must
+include hook first and payoff last. Return only the schema-constrained object."""
     client = Groq(api_key=os.environ["GROQ_API_KEY"])
     package = None
     last_error = None
@@ -237,6 +239,14 @@ def synthesize(script: str, target: Path) -> None:
     sf.write(target, samples, rate)
 
 
+def media_duration(path: Path) -> float:
+    result = run([
+        "ffprobe", "-v", "error", "-show_entries", "format=duration",
+        "-of", "default=noprint_wrappers=1:nokey=1", str(path),
+    ], capture=True)
+    return float(result.stdout.strip())
+
+
 def align_voice(audio_path: Path, expected_script: str) -> tuple[str, list[dict]]:
     from groq import Groq
 
@@ -278,29 +288,37 @@ def crop_for(width: int, height: int, center_x: float) -> list[int]:
 
 
 def caption_ranges(aligned: list[dict]) -> list[dict]:
-    captions = []
-    start = 0
-    while start < len(aligned):
-        best = None
-        for end in range(start, min(len(aligned), start + 6)):
+    # Work backwards with dynamic programming so the last fast word can never
+    # become an unreadable orphan. Every chosen range satisfies the v3 gate.
+    count = len(aligned)
+    plans: list[list[tuple[int, int]] | None] = [None] * (count + 1)
+    scores = [float("inf")] * (count + 1)
+    plans[count], scores[count] = [], 0
+    for start in range(count - 1, -1, -1):
+        for end in range(start, min(count, start + 12)):
             text = " ".join(row["word"] for row in aligned[start:end + 1])
-            duration = aligned[end]["end"] - aligned[start]["start"]
-            if len(text) <= 19 and duration >= 0.35 and len(text) / max(duration, 0.01) <= 24:
-                best = end
-            if len(text) > 19:
-                break
-        if best is None:
-            best = start
-            while best + 1 < len(aligned) and aligned[best]["end"] - aligned[start]["start"] < 0.35:
-                best += 1
-        captions.append({"word_first": start, "word_last": best, "x": 540, "y": 1380, "font_size": 60})
-        start = best + 1
+            duration = float(aligned[end]["end"]) - float(aligned[start]["start"])
+            if len(text) > 29 or duration < 0.35 or len(text) / max(duration, 0.01) > 24 or plans[end + 1] is None:
+                continue
+            score = abs((end - start + 1) - 4) + scores[end + 1]
+            if score < scores[start]:
+                scores[start] = score
+                plans[start] = [(start, end), *plans[end + 1]]
+    if plans[0] is None:
+        raise RuntimeError("Accepted narration cannot be partitioned into readable captions")
+    captions = []
+    for start, end in plans[0]:
+        text = " ".join(row["word"] for row in aligned[start:end + 1])
+        # Use the largest even size that fits the conservative 70..900 region.
+        size = min(56, int(816 / max(1, len(text)) / 0.66))
+        size = max(42, size - size % 2)
+        captions.append({"word_first": start, "word_last": end, "x": 484, "y": 1380, "font_size": size})
     return captions
 
 
-def make_project(idea: dict, source: dict, observations: list[dict], package: dict, project_dir: Path, width: int, height: int, script: str, aligned: list[dict]) -> dict:
+def make_project(idea: dict, source: dict, observations: list[dict], package: dict, project_dir: Path, width: int, height: int, script: str, aligned: list[dict], voice_duration: float) -> dict:
     fps = 30
-    total_frames = int(math.ceil((aligned[-1]["end"] + 0.45) * fps))
+    total_frames = int(math.ceil(max(float(aligned[-1]["end"]), voice_duration) * fps))
     beats_out, shots, cursor = [], [], 0
     original_counts = [max(1, len(words(beat["narration"]))) for beat in package["beats"]]
     total_original = sum(original_counts)
@@ -336,7 +354,7 @@ def make_project(idea: dict, source: dict, observations: list[dict], package: di
             "action": observation["action"],
             "source": f"Inspected frame sequence from {source['movie']}: {source['scene']}",
         })
-        end_frame = total_frames if index == len(package["beats"]) - 1 else max(cursor + 1, int(math.ceil(aligned[word_starts[index + 1]]["start"] * fps)))
+        end_frame = total_frames if index == len(package["beats"]) - 1 else max(cursor + 1, int(math.floor(float(aligned[word_starts[index + 1]]["start"]) * fps)))
         duration = (end_frame - cursor) / fps
         crop = crop_for(width, height, observations[obs_index]["center_x"])
         needed = duration * 0.5
@@ -455,7 +473,7 @@ def create(idea_id: str) -> str:
         # The v3 contract stores a bare array for alignment rather than an envelope.
         (project_dir / "voice" / "words_01.json").write_text(json.dumps(aligned, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         set_idea_state(idea_id, "editing", "Compiling project timeline", 52)
-        project = make_project(idea, source, observations, package, project_dir, width, height, final_script, aligned)
+        project = make_project(idea, source, observations, package, project_dir, width, height, final_script, aligned, media_duration(voice_path))
         project_path = project_dir / "project.json"
         atomic_write_json(project_path, project)
         add_reviews(project_path)

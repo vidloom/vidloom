@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from automation.schedule import next_publish_slot, requested_or_next
 from automation.production import select_item
 from automation.autopilot import autopilot_mode, recoverable_idea
+from automation.creator import caption_ranges
 
 
 CONFIG = {
@@ -70,6 +71,18 @@ class AutopilotTests(unittest.TestCase):
         self.assertEqual(recoverable_idea(config, ideas)["id"], "retry")
         ideas["items"][0]["attempts"] = 3
         self.assertIsNone(recoverable_idea(config, ideas))
+
+    def test_caption_partition_absorbs_fast_final_word(self):
+        aligned = [
+            {"word": "frame", "start": 0.0, "end": 0.5},
+            {"word": "making", "start": 0.5, "end": 0.96},
+            {"word": "the", "start": 0.96, "end": 1.2},
+            {"word": "dock", "start": 1.2, "end": 1.34},
+            {"word": "clear", "start": 1.34, "end": 1.36},
+        ]
+        captions = caption_ranges(aligned)
+        self.assertEqual(captions[-1]["word_last"], 4)
+        self.assertLessEqual(captions[-1]["font_size"], 56)
 
 
 if __name__ == "__main__":
