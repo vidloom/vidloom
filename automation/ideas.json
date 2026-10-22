@@ -30,9 +30,9 @@
       "stage": "Needs attention",
       "progress": 0,
       "created_at": "2026-10-22T02:32:43Z",
-      "updated_at": "2026-10-22T02:38:45Z",
-      "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/premium_pipeline/v3/pipeline.py', 'validate', '/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/premium_pipeline/projects/how_interstellar_s_docking_uses_relative_motion_50a1125a_r01/project.json']' returned non-zero exit status 2.",
-      "attempts": 1
+      "updated_at": "2026-10-22T02:45:10Z",
+      "last_error": "Error code: 429 - {'error': {'message': \"Request too large for model `qwen/qwen3.8-27b` in organization `org_01m5f42gf2eqf9k88d296hkb5p` service tier `on_demand` on output tokens per minute (OTPM): Limit 1000, Requested 1477. The request's expected output tokens exceed the enforced limit; reduce max_tokens (or the request's expected output) and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\", 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+      "attempts": 2
     }
   ]
 }
