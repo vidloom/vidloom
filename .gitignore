@@ -36,6 +36,7 @@ scratch/
 **/build/*.mp4
 **/output/*.mp4
 **/generated/*.wav
+**/analysis/*.jpg
 *.part
 automation/state/*.lock
 

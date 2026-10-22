@@ -1,0 +1,77 @@
+name: Autonomous creator
+
+on:
+  schedule:
+    # Every two hours, offset from the top of the hour to avoid scheduler congestion.
+    - cron: "23 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      request:
+        description: Optional natural-language owner request; blank lets Vidloom choose
+        required: false
+        type: string
+      force:
+        description: Create an extra video even when the finished buffer is full
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: vidloom-autonomous-creator
+  cancel-in-progress: false
+
+jobs:
+  replenish:
+    runs-on: [self-hosted, linux, x64, vidloom]
+    timeout-minutes: 120
+    env:
+      PYTHONUNBUFFERED: "1"
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      VIDLOOM_MEDIA_ROOT: ${{ vars.VIDLOOM_MEDIA_ROOT }}
+      VIDLOOM_RUNNER_ONLINE: "true"
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Attach persistent source and generated media
+        if: ${{ env.VIDLOOM_MEDIA_ROOT != '' }}
+        run: |
+          test -d "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects"
+          rsync -a --ignore-existing "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects/" premium_pipeline/projects/
+          if [ -d "$VIDLOOM_MEDIA_ROOT/movie_shorts" ]; then
+            rsync -a --ignore-existing "$VIDLOOM_MEDIA_ROOT/movie_shorts/" movie_shorts/
+          fi
+          if [ -d "$VIDLOOM_MEDIA_ROOT/models" ]; then
+            rsync -a --ignore-existing "$VIDLOOM_MEDIA_ROOT/models/" models/
+          fi
+      - name: Install isolated creator dependencies
+        run: |
+          python3 -m venv .venv-automation
+          .venv-automation/bin/python -m pip install --disable-pip-version-check -r automation/requirements.txt
+      - name: Replenish finished-video buffer
+        env:
+          OWNER_REQUEST: ${{ inputs.request }}
+          FORCE_EXTRA: ${{ inputs.force }}
+        run: |
+          args=(--execute)
+          if [ -n "$OWNER_REQUEST" ]; then args+=(--request "$OWNER_REQUEST" --force); fi
+          if [ "$FORCE_EXTRA" = "true" ]; then args+=(--force); fi
+          .venv-automation/bin/python -m automation.autopilot "${args[@]}"
+      - name: Refresh private dashboard state
+        if: always()
+        run: .venv-automation/bin/python -m automation.dashboard_state --output control_center/data/dashboard.json
+      - name: Persist generated media on the production host
+        if: always() && env.VIDLOOM_MEDIA_ROOT != ''
+        run: rsync -a premium_pipeline/projects/ "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects/"
+      - name: Persist autonomous state
+        if: always()
+        run: |
+          git config user.name "vidloom-automation[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add automation/ideas.json automation/queue.json automation/state/ai.json automation/state/dashboard.json control_center/data/dashboard.json premium_pipeline/projects
+          git diff --cached --quiet || git commit -m "ops: replenish finished-video buffer [skip ci]"
+          git pull --rebase origin main
+          git push origin main

@@ -59,6 +59,8 @@ def sync() -> int:
 def main() -> None:
     try:
         print(f"Updated {sync()} YouTube item(s)")
+        from automation.analytics import sync_analytics
+        sync_analytics()
     except Exception as error:
         state = load_json(STATE_PATH)
         message = redact_error(error)

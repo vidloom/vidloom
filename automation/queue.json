@@ -4,6 +4,8 @@
     {
       "id": "jack-sparrow-entrance-001",
       "project_path": "premium_pipeline/projects/jack_sparrow_entrance/project.json",
+      "source_id": "jack-sparrow-entrance-source",
+      "origin": "legacy",
       "genre": "cinema_scene_breakdown",
       "title": "Why Jack Sparrow's Entrance Is Perfect",
       "description": "The opening of Pirates of the Caribbean turns a heroic entrance into a visual joke—then lands the cleanest possible payoff. Original scene analysis and commentary.\n\n#Shorts #FilmAnalysis #PiratesOfTheCaribbean",
@@ -15,12 +17,16 @@
         "visual storytelling"
       ],
       "status": "failed",
+      "stage": "Needs attention",
+      "progress": 0,
       "requested_publish_at": null,
       "scheduled_publish_at": null,
       "youtube_id": null,
       "youtube_url": null,
       "attempts": 4,
-      "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2"
+      "created_at": "2026-10-21T11:17:25Z",
+      "updated_at": "2026-10-22T02:13:47Z",
+      "last_error": "Editorial audit did not pass; the legacy video was stopped before upload"
     }
   ]
 }

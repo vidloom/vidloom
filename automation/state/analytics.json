@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "generated_at": null,
+  "channel": {
+    "subscribers": null,
+    "views": null,
+    "videos": null
+  },
+  "weekly": {
+    "views": null,
+    "subscribers_gained": null,
+    "average_view_duration_seconds": null,
+    "average_percentage_viewed": null
+  },
+  "videos": [],
+  "retention_scope_connected": false,
+  "message": "YouTube statistics will appear after the first published video. Retention requires YouTube Analytics OAuth scope."
+}

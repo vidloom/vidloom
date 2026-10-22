@@ -12,6 +12,7 @@ CONFIG = {
     "schedule": {
         "publish_days": ["tuesday", "thursday", "saturday"],
         "publish_time": "19:30",
+        "videos_per_day": 1,
     },
 }
 
@@ -39,8 +40,18 @@ class ScheduleTests(unittest.TestCase):
 
     def test_explicit_held_item_cannot_run(self):
         queue = {"items": [{"id": "held-one", "status": "held"}]}
-        with self.assertRaisesRegex(RuntimeError, "not 'ready'"):
+        with self.assertRaisesRegex(RuntimeError, "expected one of"):
             select_item(queue, "held-one")
+
+    def test_multiple_daily_slots_are_spread_evenly(self):
+        config = {
+            "channel": {"timezone": "Asia/Kolkata"},
+            "schedule": {"publish_days": ["tuesday"], "publish_time": "20:00", "videos_per_day": 2},
+        }
+        # Tuesday 07:00 IST -> first chronological slot is 08:00, then 20:00.
+        now = datetime(2026, 10, 20, 1, 30, tzinfo=timezone.utc)
+        first = next_publish_slot(config, now)
+        self.assertEqual(first.isoformat(), "2026-10-20T08:00:00+05:30")
 
 
 if __name__ == "__main__":

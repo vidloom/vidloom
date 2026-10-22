@@ -2,9 +2,9 @@ name: Production cycle
 
 on:
   schedule:
-    # 12:17 UTC = 17:47 IST. YouTube receives the private upload before 19:30 IST.
-    # Avoiding the top of the hour reduces GitHub schedule congestion.
-    - cron: "17 12 * * 2,4,6"
+    # The release manager wakes hourly, schedules at most one finished video,
+    # and exits cleanly when publishing is paused or the vault is empty.
+    - cron: "17 * * * *"
   workflow_dispatch:
     inputs:
       mode:
@@ -62,6 +62,9 @@ jobs:
         run: |
           test -d "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects"
           rsync -a --ignore-existing "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects/" premium_pipeline/projects/
+          if [ -d "$VIDLOOM_MEDIA_ROOT/movie_shorts" ]; then
+            rsync -a --ignore-existing "$VIDLOOM_MEDIA_ROOT/movie_shorts/" movie_shorts/
+          fi
 
       - name: Install isolated automation dependencies
         run: |
@@ -76,6 +79,10 @@ jobs:
           ITEM_ID: ${{ inputs.item_id }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            .venv-automation/bin/python -m automation.release_manager
+            exit 0
+          fi
           args=(--mode "$RUN_MODE")
           if [ -n "$ITEM_ID" ]; then args+=(--item-id "$ITEM_ID"); fi
           # A dry run is explicitly safe: it validates/renders/QCs and cannot
@@ -90,12 +97,16 @@ jobs:
         run: |
           .venv-automation/bin/python -m automation.dashboard_state --output control_center/data/dashboard.json
 
+      - name: Persist generated media on the production host
+        if: always() && env.VIDLOOM_MEDIA_ROOT != ''
+        run: rsync -a premium_pipeline/projects/ "$VIDLOOM_MEDIA_ROOT/premium_pipeline/projects/"
+
       - name: Persist queue and state
         if: always()
         run: |
           git config user.name "vidloom-automation[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add automation/queue.json automation/state/dashboard.json control_center/data/dashboard.json
+          git add automation/ideas.json automation/queue.json automation/state/ai.json automation/state/analytics.json automation/state/dashboard.json control_center/data/dashboard.json premium_pipeline/projects
           git diff --cached --quiet || git commit -m "ops: update production state [skip ci]"
           git push
 

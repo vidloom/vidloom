@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "vidloom-automation[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add automation/queue.json automation/state/dashboard.json control_center/data/dashboard.json
+          git add automation/queue.json automation/state/analytics.json automation/state/dashboard.json control_center/data/dashboard.json
           git diff --cached --quiet || git commit -m "ops: sync YouTube status [skip ci]"
           git push
       - uses: actions/configure-pages@v6

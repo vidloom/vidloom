@@ -11,8 +11,11 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "automation" / "config.json"
 QUEUE_PATH = ROOT / "automation" / "queue.json"
+IDEAS_PATH = ROOT / "automation" / "ideas.json"
+SOURCES_PATH = ROOT / "automation" / "sources.json"
 STATE_PATH = ROOT / "automation" / "state" / "dashboard.json"
 AI_STATE_PATH = ROOT / "automation" / "state" / "ai.json"
+ANALYTICS_STATE_PATH = ROOT / "automation" / "state" / "analytics.json"
 
 
 def utc_now() -> datetime:

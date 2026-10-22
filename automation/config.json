@@ -19,14 +19,19 @@
   },
   "schedule": {
     "publish_days": [
+      "monday",
       "tuesday",
+      "wednesday",
       "thursday",
-      "saturday"
+      "friday",
+      "saturday",
+      "sunday"
     ],
-    "publish_time": "19:30",
-    "workflow_cron_utc": "17 12 * * 2,4,6",
+    "publish_time": "20:00",
+    "videos_per_day": 1,
+    "workflow_cron_utc": "17 * * * *",
     "lead_time_minutes": 103,
-    "rationale": "A sustainable three-release weekly baseline. The workflow starts off the top of the hour and uploads privately before YouTube publishes at the exact slot. Replace the time after 28 days with channel Audience analytics."
+    "rationale": "One daily release is the initial operating setting. Review it after 28 days against comparable uploads and channel Audience analytics."
   },
   "youtube": {
     "category_id": "24",
@@ -44,10 +49,52 @@
   },
   "automation": {
     "enabled": true,
+    "creator_enabled": true,
+    "publishing_enabled": true,
     "runner": "self-hosted",
     "max_upload_retries": 5,
     "minimum_queue_depth": 3,
+    "finished_buffer_target": 6,
+    "max_creations_per_cycle": 1,
+    "autopilot_interval_hours": 2,
+    "publishing_mode": "fully_automatic",
+    "automatic_retries": true,
+    "maximum_job_retries": 3,
+    "monthly_modal_budget_usd": 10,
+    "estimated_cost_per_short_usd": 0.35,
+    "budget_safety_margin_usd": 1,
     "require_technical_qc": true,
     "require_final_review_hash": true
+  },
+  "content_brain": {
+    "movie_preferences": [
+      "visually legible action",
+      "character introductions",
+      "practical filmmaking choices",
+      "editing and visual storytelling"
+    ],
+    "excluded_movies": [],
+    "avoid_recent_movie_count": 12,
+    "prevent_duplicate_scenes": true,
+    "prevent_duplicate_hooks": true,
+    "research_language": "en"
+  },
+  "production_rules": {
+    "duration_min_seconds": 24,
+    "duration_max_seconds": 34,
+    "narration_style": "Connected, confident, curious; one continuous performance",
+    "voice": "am_michael",
+    "subtitle_preset": "Clean kinetic",
+    "music_mix": "Cinematic source-aware ducking",
+    "crop_tracking": "Subject tracked 9:16",
+    "delivery_resolution": "1080x1920",
+    "delivery_fps": 30
+  },
+  "notifications": {
+    "weekly_summary": true,
+    "upload_failures": true,
+    "copyright_claims": true,
+    "credit_warnings": true,
+    "email": ""
   }
 }

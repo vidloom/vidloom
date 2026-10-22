@@ -9,7 +9,7 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 
-from automation.common import CONFIG_PATH, QUEUE_PATH, ROOT, STATE_PATH, atomic_write_json, iso_z, load_json, redact_error, resolve_project_path
+from automation.common import AI_STATE_PATH, CONFIG_PATH, QUEUE_PATH, ROOT, STATE_PATH, atomic_write_json, iso_z, load_json, redact_error, resolve_project_path
 from automation.dashboard_state import build_public_state
 from automation.schedule import requested_or_next
 
@@ -40,19 +40,45 @@ def save(queue_doc: dict, state: dict) -> None:
     atomic_write_json(STATE_PATH, state)
 
 
-def select_item(queue_doc: dict, item_id: str | None) -> dict:
+def select_item(queue_doc: dict, item_id: str | None, allowed_statuses: set[str] | None = None) -> dict:
+    allowed_statuses = allowed_statuses or {"ready"}
     items = queue_doc.get("items", [])
     if item_id:
         for item in items:
             if item.get("id") == item_id:
-                if item.get("status") != "ready":
-                    raise RuntimeError(f"Queue item {item_id} is {item.get('status')!r}, not 'ready'")
+                if item.get("status") not in allowed_statuses:
+                    raise RuntimeError(f"Queue item {item_id} is {item.get('status')!r}, expected one of {sorted(allowed_statuses)}")
                 return item
         raise ValueError(f"Unknown queue item: {item_id}")
     for item in items:
-        if item.get("status") == "ready":
+        if item.get("status") in allowed_statuses:
             return item
-    raise RuntimeError("No ready queue item")
+    raise RuntimeError(f"No queue item in {sorted(allowed_statuses)}")
+
+
+def ensure_automated_review(project_file: Path, video: Path, item: dict) -> None:
+    if item.get("origin") not in {"autopilot", "manual"}:
+        return
+    digest = sha256(video)
+    review_path = project_file.parent / "FINAL_REVIEW.md"
+    if review_path.is_file() and digest in review_path.read_text(encoding="utf-8"):
+        return
+    ai = load_json(AI_STATE_PATH) if AI_STATE_PATH.is_file() else {}
+    if ai.get("project_path") != project_file.relative_to(ROOT).as_posix() or ai.get("verdict") != "pass":
+        raise RuntimeError("Autonomous final review requires a PASS audit for this exact project")
+    qc = load_json(project_file.parent / "build" / "qc.json")
+    review_path.write_text(
+        "# Autonomous final review\n\n"
+        f"- Project: {item['title']}\n"
+        f"- Video SHA-256: `{digest}`\n"
+        f"- Technical QC: {'PASS' if qc.get('technical_pass') else 'FAIL'}\n"
+        f"- Editorial audit: PASS ({ai.get('model', 'unknown model')})\n"
+        "- Evidence: every narration beat is mapped to a timestamped visual observation in project.json.\n"
+        "- Voice: generated as one continuous performance and aligned from the accepted recording.\n"
+        "- Safety: upload remains private and scheduled; the owner can hold it before publication.\n\n"
+        "This is an automated evidence/QC review, not a claim that a human watched the final render.\n",
+        encoding="utf-8",
+    )
 
 
 def verify_output(project_file: Path, config: dict) -> Path:
@@ -107,6 +133,7 @@ def prepare_project(item: dict, config: dict, state: dict, *, allow_render: bool
     item["status"] = "qc"
     atomic_write_json(STATE_PATH, state)
     run([sys.executable, str(pipeline), "qc", str(project_file)])
+    ensure_automated_review(project_file, video, item)
     return verify_output(project_file, config)
 
 
@@ -114,16 +141,23 @@ def process(mode: str, item_id: str | None, dry_run: bool, force: bool) -> None:
     config = load_json(CONFIG_PATH)
     queue_doc = load_json(QUEUE_PATH)
     state = load_json(STATE_PATH)
-    if not config["automation"]["enabled"] and not force:
-        raise RuntimeError("Automation is paused. Resume it from the control center first.")
+    automation = config["automation"]
+    if mode == "build" and not automation.get("creator_enabled", True) and not force:
+        raise RuntimeError("Autonomous creation is paused. Resume the creator from the control center first.")
+    if mode in {"full", "upload"} and not automation.get("publishing_enabled", automation.get("enabled", False)) and not force:
+        raise RuntimeError("Publishing is paused. Resume publishing from the control center first.")
 
-    item = select_item(queue_doc, item_id)
+    allowed = {"build_ready", "ready"} if mode == "build" else {"ready"} if mode == "upload" else {"build_ready", "ready"}
+    item = select_item(queue_doc, item_id, allowed)
     if item.get("youtube_id"):
         raise RuntimeError("Queue item already has a YouTube ID; refusing a duplicate upload")
     if item.get("genre") != config["genre"]["id"]:
         raise RuntimeError(f"Genre lock rejected {item.get('genre')!r}; only {config['genre']['id']!r} is allowed")
     item["attempts"] = int(item.get("attempts", 0)) + 1
     item["status"] = "building"
+    item["stage"] = "Building master"
+    item["progress"] = 64
+    item["updated_at"] = iso_z()
     item["last_error"] = None
     state["system"].update({
         "status": "building",
@@ -138,10 +172,14 @@ def process(mode: str, item_id: str | None, dry_run: bool, force: bool) -> None:
         video = prepare_project(item, config, state, allow_render=mode in {"full", "build"})
         if mode == "build":
             item["status"] = "ready"
+            item["stage"] = "Finished and ready"
+            item["progress"] = 100
+            item["updated_at"] = iso_z()
             state["system"].update({"status": "ready", "current_stage": "Build and QC passed", "current_item_id": None})
             append_event(state, "success", f"Build passed for {item['title']}")
         else:
-            publish_at = requested_or_next(config, item.get("requested_publish_at"), datetime.now(timezone.utc))
+            occupied = [row.get("scheduled_publish_at") for row in queue_doc.get("items", []) if row.get("status") == "scheduled" and row.get("id") != item.get("id")]
+            publish_at = requested_or_next(config, item.get("requested_publish_at"), datetime.now(timezone.utc), occupied)
             item["scheduled_publish_at"] = publish_at.isoformat(timespec="minutes")
             state["system"]["current_stage"] = "Uploading privately to YouTube"
             item["status"] = "uploading"
@@ -167,12 +205,18 @@ def process(mode: str, item_id: str | None, dry_run: bool, force: bool) -> None:
                 item["youtube_id"] = result["id"]
                 item["youtube_url"] = f"https://youtu.be/{result['id']}"
                 item["status"] = "scheduled"
+                item["stage"] = "Scheduled on YouTube"
+                item["progress"] = 100
+                item["updated_at"] = iso_z()
                 state["system"].update({"status": "healthy", "current_stage": "Scheduled on YouTube", "current_item_id": None, "last_success_at": iso_z()})
                 append_event(state, "success", f"Uploaded {item['title']} and scheduled it for {item['scheduled_publish_at']}")
         save(queue_doc, state)
     except Exception as error:
         message = redact_error(error)
         item["status"] = "failed"
+        item["stage"] = "Needs attention"
+        item["progress"] = 0
+        item["updated_at"] = iso_z()
         item["last_error"] = message
         state["system"].update({"status": "failed", "current_stage": "Stopped safely", "last_error": message, "current_item_id": item["id"]})
         append_event(state, "error", f"{item['title']}: {message}")

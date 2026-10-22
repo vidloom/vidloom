@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#f4f2ed">
-  <meta name="description" content="Private operations dashboard for the Vidloom cinema breakdown production system.">
-  <title>Vidloom Control Center</title>
+  <meta name="description" content="Private command center for the autonomous Vidloom YouTube channel.">
+  <title>Vidloom — Autonomous Channel Manager</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23171916'/%3E%3Cpath d='M11 9v14l11-7z' fill='%23c9f54a'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,230 +14,87 @@
   <a class="skip-link" href="#main">Skip to dashboard</a>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Primary navigation">
-      <a class="brand" href="#overview" aria-label="Vidloom home">
-        <span class="brand-mark" aria-hidden="true"><span></span></span>
-        <span>vidloom</span>
-      </a>
-
+      <a class="brand" href="#overview" data-page-link="overview" aria-label="Vidloom overview"><span class="brand-mark" aria-hidden="true"><span></span></span><span>vidloom</span></a>
       <nav class="nav-list">
-        <a class="nav-item active" href="#overview" data-view="overview">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z"/></svg>
-          Overview
-        </a>
-        <a class="nav-item" href="#production" data-view="production">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z"/></svg>
-          Production
-          <span class="nav-count" id="navQueueCount">—</span>
-        </a>
-        <a class="nav-item" href="#schedule" data-view="schedule">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1Z"/></svg>
-          Schedule
-        </a>
-        <a class="nav-item" href="#system" data-view="system">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="m19 13.5 1.4 1.1-2 3.4-1.8-.7a8 8 0 0 1-2.1 1.2l-.3 1.9h-4l-.3-1.9a8 8 0 0 1-2.1-1.2L6 18l-2-3.4 1.4-1.1a8 8 0 0 1 0-2.5L4 9.9l2-3.4 1.8.7A8 8 0 0 1 10 6l.3-1.9h4l.3 1.9a8 8 0 0 1 2.1 1.2l1.8-.7 2 3.4-1.4 1.1a8 8 0 0 1 0 2.5Z"/></svg>
-          System
-        </a>
+        <a class="nav-item active" href="#overview" data-page-link="overview"><span class="nav-glyph">⌂</span>Overview</a>
+        <a class="nav-item" href="#autopilot" data-page-link="autopilot"><span class="nav-glyph">◉</span>Autopilot</a>
+        <a class="nav-item" href="#queue" data-page-link="queue"><span class="nav-glyph">▤</span>Queue &amp; Schedule<span class="nav-count" id="navQueueCount">—</span></a>
+        <a class="nav-item" href="#analytics" data-page-link="analytics"><span class="nav-glyph">↗</span>Analytics</a>
+        <a class="nav-item" href="#activity" data-page-link="activity"><span class="nav-glyph">⌁</span>Activity &amp; Costs</a>
+        <a class="nav-item" href="#settings" data-page-link="settings"><span class="nav-glyph">⚙</span>Settings</a>
       </nav>
-
       <div class="sidebar-foot">
-        <div class="genre-lock">
-          <div class="eyebrow">Genre lock</div>
-          <strong id="genreShort">Cinema breakdowns</strong>
-          <span>1 format · enforced in CI</span>
-        </div>
-        <button class="identity-button" id="openConnection" type="button">
-          <span class="avatar">OM</span>
-          <span class="identity-copy"><strong>Owner console</strong><small id="connectionLabel">Sign in</small></span>
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
+        <div class="genre-lock"><div class="eyebrow">Channel lock</div><strong id="genreShort">Cinema breakdowns</strong><span>One format · enforced in production</span></div>
+        <button class="identity-button" id="openConnection" type="button"><span class="avatar">OM</span><span class="identity-copy"><strong>Owner console</strong><small id="connectionLabel">Sign in</small></span><span>›</span></button>
       </div>
     </aside>
 
     <main id="main">
       <header class="topbar">
-        <div>
-          <p class="page-kicker">AUTONOMOUS STUDIO</p>
-          <h1>Good evening.</h1>
-        </div>
-        <div class="topbar-actions">
-          <div class="studio-clock"><span id="liveClock">--:--:--</span><small>IST</small></div>
-          <div class="live-state" id="liveState"><span></span><b>Setup required</b></div>
-          <button class="button button-secondary" id="refreshState" type="button">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M6.1 9A7 7 0 0 1 18 6l2 2M18 15a7 7 0 0 1-11.9 3L4 16"/></svg>
-            Refresh
-          </button>
-          <button class="button button-primary" id="runCycle" type="button">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6V6Z"/></svg>
-            Safe run
-          </button>
-        </div>
+        <div><p class="page-kicker" id="pageKicker">COMMAND CENTER</p><h1 id="pageTitle">Your channel, on autopilot.</h1><p class="page-subtitle" id="pageDescription">A five-minute view of production, releases, performance, and risk.</p></div>
+        <div class="topbar-actions"><div class="studio-clock"><span id="liveClock">--:--:--</span><small>IST</small></div><button class="button button-secondary" id="refreshState" type="button">Refresh</button><button class="button button-primary" id="masterToggle" type="button">Pause autopilot</button></div>
       </header>
 
-      <section class="notice" id="setupNotice" aria-live="polite">
-        <div class="notice-icon"><span></span></div>
-        <div>
-          <strong id="noticeTitle">Owner sign-in required</strong>
-          <p id="noticeCopy">Sign in to load private studio state and use production controls.</p>
-        </div>
-        <button class="text-button" id="setupButton" type="button">Open setup <span>→</span></button>
+      <section class="notice" id="setupNotice" aria-live="polite"><div class="notice-icon"><span></span></div><div><strong id="noticeTitle">Owner sign-in required</strong><p id="noticeCopy">Sign in to load private channel state and use controls.</p></div><button class="text-button" id="setupButton" type="button">Open owner console <span>→</span></button></section>
+
+      <section class="page-view active" data-page="overview">
+        <div class="system-banner panel"><div class="system-state"><span class="pulse-dot"></span><div><p class="eyebrow">Vidloom automation</p><h2 id="automationHeadline">Waiting for connection</h2><p id="automationDetail">Private runtime state is locked.</p></div></div><div class="system-meta"><span>Creator <strong id="creatorStateLabel">—</strong></span><span>Publishing <strong id="publishingStateLabel">—</strong></span><span>Last sync <strong id="lastUpdated">—</strong></span></div></div>
+        <section class="metric-grid command-metrics" aria-label="Channel summary"><article class="metric-card"><span>Published</span><strong id="metricPublished">—</strong><small>Total tracked Shorts</small></article><article class="metric-card"><span>Scheduled</span><strong id="metricScheduled">—</strong><small>Private on YouTube</small></article><article class="metric-card"><span>Failures</span><strong id="metricFailures">—</strong><small id="failureSignal">No open failures</small></article><article class="metric-card accent-metric"><span>Finished buffer</span><strong id="metricFinished">—</strong><small id="bufferSignal">Target: — videos</small></article></section>
+        <section class="overview-command-grid">
+          <article class="now-card panel"><div class="panel-heading"><div><p class="eyebrow">Automation pipeline</p><h2 id="currentStage">Creator standing by</h2></div><span class="status-pill" id="currentStatus">LOCKED</span></div><div class="pipeline"><div class="pipeline-track"><span id="pipelineProgress" style="width:0%"></span></div><div class="pipeline-labels"><span>Idea</span><span>Evidence</span><span>Script</span><span>Voice</span><span>Edit</span><span>QC</span><span>Ready</span></div></div><div class="current-work"><div class="work-index" id="stageNumber">00</div><div><strong id="currentTitle">No active creation</strong><p id="currentMeta">Vidloom starts work when the release vault has room.</p></div></div></article>
+          <article class="next-card panel"><p class="eyebrow">Next scheduled publication</p><div class="date-lockup"><strong id="nextDay">—</strong><span id="nextMonth">—</span></div><h2 id="nextTime">—</h2><p id="nextTimezone">Asia/Kolkata</p><div class="hairline"></div><div class="next-detail"><span>Video</span><strong id="nextVideoTitle">No video scheduled</strong></div><div class="release-countdown"><span>Release in</span><strong id="nextCountdown">Awaiting slot</strong></div></article>
+        </section>
+        <section class="overview-command-grid compact-grid">
+          <article class="panel insight-panel"><div class="panel-heading compact"><div><p class="eyebrow">Last 7 days</p><h2>Channel performance</h2></div><a href="#analytics" data-page-link="analytics" class="inline-link">Open analytics →</a></div><div class="insight-metrics"><div><span>Views</span><strong id="weeklyViews">—</strong></div><div><span>Subscribers</span><strong id="weeklySubscribers">—</strong></div><div><span>Avg. viewed</span><strong id="weeklyViewed">—</strong></div></div><p class="panel-note" id="analyticsMessage">Analytics will appear after channel sync.</p></article>
+          <article class="panel alert-panel"><div class="panel-heading compact"><div><p class="eyebrow">Requires attention</p><h2 id="attentionTitle">No urgent problems</h2></div><span class="attention-count" id="attentionCount">0</span></div><div id="attentionList" class="attention-list"><p>Vidloom will surface failed builds, upload errors, copyright warnings, and budget stops here.</p></div></article>
+        </section>
+        <section class="release-vault panel"><div class="panel-heading compact"><div><p class="eyebrow">Release vault</p><h2>Finished and scheduled</h2></div><a href="#queue" data-page-link="queue" class="inline-link" id="vaultSummary">Open queue →</a></div><div class="release-grid" id="releasePreview"></div></section>
       </section>
 
-      <section class="hero-grid" id="overview">
-        <article class="now-card panel">
-          <div class="panel-heading">
-            <div><p class="eyebrow">Production now</p><h2 id="currentStage">Waiting for connection</h2></div>
-            <span class="stage-number" id="stageNumber">00</span>
-          </div>
-          <div class="pipeline" aria-label="Production stages">
-            <div class="pipeline-track"><span id="pipelineProgress" style="width: 8%"></span></div>
-            <div class="pipeline-labels">
-              <span class="done">Evidence</span><span>Script</span><span>Voice</span><span>Edit</span><span>QC</span><span>Upload</span>
-            </div>
-          </div>
-          <div class="now-bottom">
-            <div class="video-placeholder" id="currentPoster">
-              <div class="poster-orbit"></div>
-              <span class="poster-play">▶</span>
-            </div>
-            <div class="now-copy">
-              <span class="status-pill held" id="currentStatus">LOCKED</span>
-              <h3 id="currentTitle">Private studio state locked</h3>
-              <p id="currentMeta">Owner authentication required</p>
-            </div>
-            <button class="icon-button" id="openProduction" aria-label="Open production queue" type="button">↗</button>
-          </div>
-        </article>
-
-        <article class="next-card panel">
-          <p class="eyebrow">Next release</p>
-          <div class="date-lockup"><strong id="nextDay">—</strong><span id="nextMonth">—</span></div>
-          <h2 id="nextTime">7:30 PM</h2>
-          <p id="nextTimezone">Asia/Kolkata</p>
-          <div class="hairline"></div>
-          <div class="next-detail"><span>Cadence</span><strong id="cadence">Tue · Thu · Sat</strong></div>
-          <div class="next-detail"><span>Queue coverage</span><strong id="queueCoverage">Sign in</strong></div>
-          <div class="release-countdown"><span>Release in</span><strong id="nextCountdown">--h --m</strong></div>
-        </article>
+      <section class="page-view" data-page="autopilot">
+        <form id="autopilotForm" class="settings-stack">
+          <article class="panel settings-hero"><div><p class="eyebrow">Master control</p><h2>Continuous production</h2><p>Vidloom maintains a finished backlog, then stands down until a release creates room.</p></div><label class="switch-control"><input id="creatorEnabled" type="checkbox"><span></span><b>Creator enabled</b></label></article>
+          <div class="settings-grid">
+            <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Release rhythm</p><h2>Publishing cadence</h2></div></div><div class="field-grid"><label>Shorts per day<select id="videosPerDay"><option>1</option><option>2</option><option>3</option><option>5</option></select></label><label>First publishing time<input id="firstPublishTime" type="time" required></label><label>Timezone<input id="timezone" value="Asia/Kolkata" required></label><label>Finished-video target<input id="bufferTarget" type="number" min="3" max="14" required></label></div><p class="panel-note">Additional uploads are spread evenly across the day. Every slot is checked against existing scheduled videos.</p></article>
+            <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Release policy</p><h2>How publishing behaves</h2></div></div><label class="radio-card"><input type="radio" name="publishing_mode" value="fully_automatic"><span><strong>Fully automatic</strong><small>Upload finished videos privately and schedule them without approval.</small></span></label><label class="radio-card"><input type="radio" name="publishing_mode" value="review_required"><span><strong>Review required</strong><small>Keep finished videos in the vault until you approve them.</small></span></label><label class="check-row"><input id="publishingEnabled" type="checkbox"><span><strong>Automatic publishing enabled</strong><small>Creation can continue even when publishing is paused.</small></span></label><label class="check-row"><input id="automaticRetries" type="checkbox"><span><strong>Automatically retry failed jobs</strong><small>Retries stop at the configured limit and never duplicate a YouTube ID.</small></span></label></article>
+            <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Cost protection</p><h2>Monthly creation budget</h2></div></div><label>Modal budget limit (USD)<input id="monthlyBudget" type="number" min="1" max="500" step="1" required></label><div class="budget-readout"><span>Estimated this month</span><strong id="autopilotSpend">$0.00</strong></div><div class="cost-track"><span id="autopilotBudgetBar"></span></div><p class="panel-note">New jobs stop before the safety margin is consumed. Existing jobs are allowed to finish.</p></article>
+            <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Backlog intelligence</p><h2>What happens next</h2></div></div><div class="decision-card"><span>Current decision</span><strong id="autopilotDecision">Waiting for state</strong><p id="autopilotReason">The creator evaluates inventory every two hours.</p></div><div class="mini-stats"><span>Finished <b id="autoFinished">—</b></span><span>Creating <b id="autoActive">—</b></span><span>Open slots <b id="autoGap">—</b></span></div></article>
+          </div><div class="form-actions"><span id="autopilotSaveState">Changes are not saved yet.</span><button class="button button-primary" id="saveAutopilot" type="submit">Save autopilot settings</button></div>
+        </form>
       </section>
 
-      <section class="metric-grid" aria-label="Channel metrics">
-        <article class="metric-card"><span>In queue</span><strong id="metricQueued">—</strong><small id="queueSignal">Sign in to inspect</small></article>
-        <article class="metric-card"><span>Building now</span><strong id="metricBuilding">0</strong><small>One build at a time</small></article>
-        <article class="metric-card"><span>Scheduled</span><strong id="metricScheduled">0</strong><small>Private until release</small></article>
-        <article class="metric-card"><span>Published</span><strong id="metricPublished">0</strong><small>Tracked by video ID</small></article>
+      <section class="page-view" data-page="queue">
+        <section class="queue-summary metric-grid"><article class="metric-card"><span>Creating</span><strong id="metricBuilding">—</strong><small>Active production jobs</small></article><article class="metric-card"><span>Ready</span><strong id="metricReady">—</strong><small>Finished, not uploaded</small></article><article class="metric-card"><span>Scheduled</span><strong id="queueScheduled">—</strong><small>Assigned release slots</small></article><article class="metric-card"><span>Attention</span><strong id="queueAttention">—</strong><small>Stopped safely</small></article></section>
+        <section class="release-vault panel"><div class="panel-heading compact"><div><p class="eyebrow">Finished inventory</p><h2>Release vault</h2></div><span class="vault-summary" id="fullVaultSummary">—</span></div><div class="release-grid" id="releaseGrid"></div></section>
+        <div class="content-grid"><article class="queue-panel panel"><div class="panel-heading compact"><div><p class="eyebrow">Autonomous production</p><h2>Ideas becoming videos</h2></div><button class="button button-secondary small" id="requestVideo" type="button">Request a specific video</button></div><div class="queue-list" id="queueList"></div></article><article class="schedule-panel panel"><div class="panel-heading compact"><div><p class="eyebrow">Publishing calendar</p><h2 id="scheduleHeading">Automatic release rhythm</h2></div><span class="lock-chip">AUTOMATIC</span></div><div class="week-strip" id="weekStrip"></div><div class="schedule-list" id="scheduleList"></div><p class="schedule-note">The release manager wakes hourly and only acts when a finished video and a free slot both exist.</p></article></div>
       </section>
 
-      <section class="command-grid" aria-label="Autonomous studio intelligence">
-        <article class="ai-panel panel">
-          <div class="ai-aura" aria-hidden="true"></div>
-          <div class="panel-heading compact ai-heading">
-            <div><p class="eyebrow">AI Director · Groq</p><h2>Editorial intelligence</h2></div>
-            <div class="model-chip"><i></i><span id="aiModel">Loading model</span></div>
-          </div>
-          <div class="ai-verdict-row">
-            <div class="verdict-orb" id="aiVerdictOrb"><span></span></div>
-            <div><span class="ai-verdict" id="aiVerdict">PENDING</span><p id="aiSummary">Waiting for the first evidence-bound audit.</p></div>
-          </div>
-          <div class="score-grid" id="scoreGrid">
-            <div><span>Hook</span><strong id="scoreHook">—</strong><i><b id="barHook"></b></i></div>
-            <div><span>Clarity</span><strong id="scoreClarity">—</strong><i><b id="barClarity"></b></i></div>
-            <div><span>Payoff</span><strong id="scorePayoff">—</strong><i><b id="barPayoff"></b></i></div>
-            <div><span>Evidence</span><strong id="scoreEvidence">—</strong><i><b id="barEvidence"></b></i></div>
-            <div><span>Voice</span><strong id="scoreVoice">—</strong><i><b id="barVoice"></b></i></div>
-          </div>
-          <div class="ai-bottom">
-            <div><span class="micro-label">Current risk</span><p id="aiRisk">No audit result yet.</p></div>
-            <button class="button button-neon" id="runAiAudit" type="button">Run AI audit <span>↗</span></button>
-          </div>
-        </article>
-
-        <article class="runs-panel panel">
-          <div class="panel-heading compact">
-            <div><p class="eyebrow">Live orchestration</p><h2>Action stream</h2></div>
-            <span class="signal-chip"><i></i> LIVE</span>
-          </div>
-          <div class="run-list" id="runList">
-            <div class="run-skeleton"></div><div class="run-skeleton short"></div><div class="run-skeleton"></div>
-          </div>
-          <a class="all-runs" id="allRuns" href="https://github.com/vidloom/vidloom/actions" target="_blank" rel="noreferrer">Open all workflows <span>↗</span></a>
-        </article>
+      <section class="page-view" data-page="analytics">
+        <section class="metric-grid"><article class="metric-card accent-metric"><span>Total views</span><strong id="analyticsViews">—</strong><small>Channel lifetime</small></article><article class="metric-card"><span>Subscribers</span><strong id="analyticsSubscribers">—</strong><small>Current total</small></article><article class="metric-card"><span>7-day views</span><strong id="analyticsWeeklyViews">—</strong><small>Compared at sync time</small></article><article class="metric-card"><span>Avg. percentage viewed</span><strong id="analyticsApv">—</strong><small>Requires Analytics scope</small></article></section>
+        <div class="content-grid analytics-grid"><article class="panel"><div class="panel-heading compact"><div><p class="eyebrow">Video performance</p><h2>Published Shorts</h2></div><span class="small-muted" id="analyticsGenerated">Not synced</span></div><div class="data-table" id="videoAnalytics"></div></article><article class="panel"><div class="panel-heading compact"><div><p class="eyebrow">Learning loop</p><h2>Evidence before changes</h2></div></div><div class="learning-copy"><p>Vidloom compares similar topic, length, language, upload age, and traffic source before recommending production changes.</p><ul><li>Stayed-to-watch diagnoses promise clarity.</li><li>Early drop diagnoses delivery or mismatch.</li><li>Shares and subscriptions identify useful formats.</li><li>A single viral outlier never rewrites the channel.</li></ul></div><div class="analytics-callout" id="retentionStatus">Retention scope is not connected yet.</div></article></div>
       </section>
 
-      <section class="content-grid" id="production">
-        <article class="queue-panel panel">
-          <div class="panel-heading compact">
-            <div><p class="eyebrow">Production queue</p><h2>Next up</h2></div>
-            <button class="button button-secondary small" id="addQueueItem" type="button">+ Add project</button>
-          </div>
-          <div class="queue-list" id="queueList" aria-live="polite"></div>
-        </article>
-
-        <article class="activity-panel panel">
-          <div class="panel-heading compact">
-            <div><p class="eyebrow">System journal</p><h2>Activity</h2></div>
-            <span class="small-muted" id="lastUpdated">Not synced</span>
-          </div>
-          <div class="activity-list" id="activityList"></div>
-        </article>
+      <section class="page-view" data-page="activity">
+        <section class="cost-hero panel"><div><p class="eyebrow">Monthly operating envelope</p><h2><span id="costSpent">$0.00</span> estimated of <span id="costLimit">$0.00</span></h2><p id="costSource">Waiting for cost state.</p></div><div class="budget-ring" id="budgetRing"><strong id="costRemaining">—</strong><span>remaining</span></div></section>
+        <div class="content-grid"><article class="runs-panel panel"><div class="panel-heading compact"><div><p class="eyebrow">GitHub Actions</p><h2>Execution history</h2></div><a class="inline-link" href="https://github.com/vidloom/vidloom/actions" target="_blank" rel="noreferrer">Open GitHub →</a></div><div class="run-list" id="runList"></div></article><article class="activity-panel panel"><div class="panel-heading compact"><div><p class="eyebrow">System journal</p><h2>Events and errors</h2></div></div><div class="activity-list" id="activityList"></div></article></div>
+        <article class="panel infrastructure-panel"><div class="panel-heading compact"><div><p class="eyebrow">Infrastructure</p><h2>Service health</h2></div></div><div class="health-list"><div><span><i id="creatorDot"></i>Autonomous creator</span><strong id="creatorHealth">Unknown</strong></div><div><span><i id="runnerDot"></i>Production runner</span><strong id="runnerHealth">Unknown</strong></div><div><span><i id="youtubeDot"></i>YouTube OAuth</span><strong id="youtubeHealth">Unknown</strong></div><div><span><i id="pipelineDot"></i>Quality gates</span><strong id="pipelineHealth">Unknown</strong></div><div><span><i id="aiDot"></i>Groq editorial</span><strong id="aiHealth">Unknown</strong></div><div><span><i id="queueDot"></i>Release buffer</span><strong id="queueHealth">Unknown</strong></div></div></article>
       </section>
 
-      <section class="lower-grid">
-        <article class="schedule-panel panel" id="schedule">
-          <div class="panel-heading compact">
-            <div><p class="eyebrow">Release rhythm</p><h2>Three deliberate drops</h2></div>
-            <span class="lock-chip"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5V11Z"/></svg> Locked</span>
-          </div>
-          <div class="week-strip" id="weekStrip"></div>
-          <p class="schedule-note">This is a starting hypothesis, not an algorithm trick. Revisit it after 28 days using the channel's Audience analytics.</p>
-        </article>
-
-        <article class="health-panel panel" id="system">
-          <div class="panel-heading compact"><div><p class="eyebrow">Infrastructure</p><h2>System health</h2></div></div>
-          <div class="health-list">
-            <div><span><i id="runnerDot"></i>Production runner</span><strong id="runnerHealth">Unknown</strong></div>
-            <div><span><i id="youtubeDot"></i>YouTube OAuth</span><strong id="youtubeHealth">Not connected</strong></div>
-            <div><span><i id="pipelineDot"></i>v3 quality gates</span><strong id="pipelineHealth">Ready</strong></div>
-            <div><span><i id="aiDot"></i>Groq AI Director</span><strong id="aiHealth">Configured</strong></div>
-            <div><span><i id="queueDot"></i>Queue depth</span><strong id="queueHealth">Low</strong></div>
-          </div>
-            <div class="control-stack">
-              <button class="button button-ghost full" id="pauseAutomation" type="button">Resume automation</button>
-              <button class="button button-secondary full" id="buildOnly" type="button">Build + QC only</button>
-              <button class="button button-danger full" id="uploadNow" type="button">Upload approved item</button>
-            </div>
-        </article>
+      <section class="page-view" data-page="settings">
+        <form id="settingsForm" class="settings-stack"><div class="settings-grid">
+          <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Content brain</p><h2>Discovery and memory</h2></div></div><label>Preferred angles<textarea id="moviePreferences" rows="6" placeholder="One preference per line"></textarea></label><label>Excluded movies<textarea id="excludedMovies" rows="4" placeholder="One movie per line"></textarea></label><label class="check-row"><input id="preventDuplicateScenes" type="checkbox"><span><strong>Prevent duplicate scenes</strong><small>Tracks prior source IDs and published work.</small></span></label><label class="check-row"><input id="preventDuplicateHooks" type="checkbox"><span><strong>Prevent duplicate hooks</strong><small>Rejects repeated opening mechanisms.</small></span></label></article>
+          <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Production rules</p><h2>Premium house style</h2></div></div><div class="field-grid"><label>Minimum duration<input id="durationMin" type="number" min="15" max="59"></label><label>Maximum duration<input id="durationMax" type="number" min="16" max="60"></label></div><label>Narration direction<textarea id="narrationStyle" rows="3"></textarea></label><label>Subtitle preset<input id="subtitlePreset"></label><label>Music and sound mix<input id="musicMix"></label><label>Crop tracking<input id="cropTracking"></label></article>
+          <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Notifications</p><h2>Only when it matters</h2></div></div><label class="check-row"><input id="notifyWeekly" type="checkbox"><span><strong>Weekly operating summary</strong><small>Performance, costs, failures, and upcoming releases.</small></span></label><label class="check-row"><input id="notifyFailures" type="checkbox"><span><strong>Upload failures</strong><small>Immediate alert after safe retries are exhausted.</small></span></label><label class="check-row"><input id="notifyCopyright" type="checkbox"><span><strong>Copyright claims</strong><small>Surface YouTube restrictions; this cannot guarantee reuse rights.</small></span></label><label class="check-row"><input id="notifyCredits" type="checkbox"><span><strong>Credit and budget warnings</strong><small>Warn before creator shutdown.</small></span></label><label>Summary email<input id="notificationEmail" type="email" placeholder="Optional"></label></article>
+          <article class="panel form-panel"><div class="panel-heading compact"><div><p class="eyebrow">Integrations</p><h2>Connected services</h2></div></div><div class="integration-list"><div><span>YouTube</span><strong id="settingsYoutube">Checking…</strong></div><div><span>Groq</span><strong id="settingsGroq">Checking…</strong></div><div><span>GitHub Actions</span><strong id="settingsRunner">Checking…</strong></div><div><span>Modal</span><strong>Cost estimate configured</strong></div></div><div class="integration-note">Secrets remain in GitHub and Cloudflare. They are never returned to this browser.</div></article>
+        </div><div class="form-actions"><span id="settingsSaveState">Changes are not saved yet.</span><button class="button button-primary" id="saveSettings" type="submit">Save channel rules</button></div></form>
       </section>
 
-      <footer>
-        <span>VIDLOOM CONTROL CENTER</span>
-        <span>Groq audit → evidence gate → edit → QC → private upload → scheduled publish</span>
-        <span class="footer-links"><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span>
-      </footer>
+      <footer><span>VIDLOOM AUTONOMOUS CHANNEL MANAGER</span><span>Research → evidence → production → QC → scheduled release → learning</span><span class="footer-links"><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></span></footer>
     </main>
   </div>
 
-  <dialog id="connectionDialog" class="modal">
-    <form method="dialog" class="modal-card" id="connectionForm">
-      <div class="modal-head"><div><p class="eyebrow">Private control plane</p><h2>Unlock Vidloom</h2></div><button value="cancel" aria-label="Close">×</button></div>
-      <p class="modal-copy">Your GitHub credential stays encrypted on Cloudflare. This browser receives only a signed, HttpOnly owner session.</p>
-      <label>Control password<input id="controlPassword" name="password" type="password" autocomplete="current-password" placeholder="Your private password" required></label>
-      <div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="saveConnection" value="default">Unlock dashboard</button></div>
-    </form>
-  </dialog>
-
-  <dialog id="queueDialog" class="modal">
-    <form method="dialog" class="modal-card" id="queueForm">
-      <div class="modal-head"><div><p class="eyebrow">Add production</p><h2>Queue a validated project</h2></div><button value="cancel" aria-label="Close">×</button></div>
-      <div class="genre-banner"><span>LOCKED GENRE</span><strong>Cinema scene breakdown</strong></div>
-      <label>Project JSON path<input name="project_path" placeholder="premium_pipeline/projects/example/project.json" required></label>
-      <label>YouTube title<input name="title" maxlength="100" required></label>
-      <label>Description<textarea name="description" rows="4" maxlength="5000" required></textarea></label>
-      <label>Tags<input name="tags" placeholder="film analysis, visual storytelling"></label>
-      <label>Optional publish time<input name="requested_publish_at" type="datetime-local"><small>Leave blank to use the next Tue/Thu/Sat 7:30 PM IST slot.</small></label>
-      <div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="submitQueueItem" value="default">Commit to queue</button></div>
-    </form>
-  </dialog>
-
+  <dialog id="connectionDialog" class="modal"><form method="dialog" class="modal-card" id="connectionForm"><div class="modal-head"><div><p class="eyebrow">Private control plane</p><h2>Unlock Vidloom</h2></div><button value="cancel" aria-label="Close">×</button></div><p class="modal-copy">This browser receives only a signed, HttpOnly owner session.</p><label>Control password<input id="controlPassword" type="password" autocomplete="current-password" required></label><div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="saveConnection" value="default">Unlock dashboard</button></div></form></dialog>
+  <dialog id="creativeDialog" class="modal"><form method="dialog" class="modal-card" id="creativeForm"><div class="modal-head"><div><p class="eyebrow">Optional owner request</p><h2>Request a specific video</h2></div><button value="cancel" aria-label="Close">×</button></div><p class="modal-copy">This is an exception, not the normal workflow. Describe a movie, scene, or question; Vidloom still chooses the evidence-bound angle, script, edit, and metadata.</p><label>Your request<textarea name="prompt" rows="5" maxlength="1200" required placeholder="Example: Explain why the Interstellar docking sequence remains readable while the frame spins."></textarea></label><div class="modal-actions"><button class="button button-secondary" value="cancel">Cancel</button><button class="button button-primary" id="submitCreativeRequest" value="default">Add request</button></div></form></dialog>
   <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
   <script src="app.js" defer></script>
 </body>

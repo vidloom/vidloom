@@ -41,6 +41,32 @@ export default {
         });
         return json({ ok: true, message: spec.message }, 202);
       }
+      if (url.pathname === "/api/create" && request.method === "POST") {
+        assertSameOrigin(request);
+        const body = await readBody(request);
+        const prompt = String(body.prompt || "").trim();
+        if (!prompt) throw new HttpError(400, "Describe the video you want Vidloom to create");
+        if (prompt.length > 1200) throw new HttpError(400, "Creative request must be 1200 characters or fewer");
+        const spec = actionSpec("create", { prompt });
+        await github(env, `/actions/workflows/${spec.workflow}/dispatches`, {
+          method: "POST",
+          body: { ref: env.GITHUB_BRANCH || "main", inputs: spec.inputs },
+        });
+        return json({ ok: true, message: spec.message }, 202);
+      }
+      if (url.pathname === "/api/settings" && request.method === "PATCH") {
+        assertSameOrigin(request);
+        const body = await readBody(request);
+        const current = await readRepoDocument(env, "automation/config.json");
+        const updated = applySettings(current.value, body);
+        await writeRepoJson(env, "automation/config.json", updated, current.sha, "settings: update Vidloom autopilot");
+        const refresh = actionSpec("refresh");
+        await github(env, `/actions/workflows/${refresh.workflow}/dispatches`, {
+          method: "POST",
+          body: { ref: env.GITHUB_BRANCH || "main", inputs: refresh.inputs },
+        });
+        return json({ ok: true, settings: publicSettings(updated), message: "Autopilot settings saved" });
+      }
       if (url.pathname === "/api/queue" && request.method === "POST") {
         assertSameOrigin(request);
         const body = await readBody(request);
@@ -75,8 +101,24 @@ export default {
 };
 
 export function actionSpec(action, body = {}) {
-  if (action === "pause" || action === "resume" || action === "refresh") {
+  if (["pause", "resume", "refresh", "creator_pause", "creator_resume", "publishing_pause", "publishing_resume"].includes(action)) {
     return { workflow: "control.yml", inputs: { action }, message: `${action} accepted` };
+  }
+  if (action === "create") {
+    const prompt = String(body.prompt || "").trim();
+    if (!prompt) throw new HttpError(400, "A creative request is required");
+    return {
+      workflow: "autopilot.yml",
+      inputs: { request: prompt, force: "true" },
+      message: "Creative request accepted. Vidloom will choose the title, script, footage plan, and metadata.",
+    };
+  }
+  if (action === "autopilot") {
+    return {
+      workflow: "autopilot.yml",
+      inputs: { request: "", force: "true" },
+      message: "Autonomous creator started. It will choose the idea and produce the next video.",
+    };
   }
   if (action === "audit") {
     return {
@@ -226,6 +268,81 @@ export function validateQueueItem(body, now = Date.now()) {
     youtube_url: null,
     attempts: 0,
     last_error: null,
+  };
+}
+
+export function applySettings(config, body) {
+  const incoming = body?.autopilot || {};
+  const videosPerDay = Number(incoming.videos_per_day);
+  const bufferTarget = Number(incoming.finished_buffer_target);
+  const budget = Number(incoming.monthly_modal_budget_usd);
+  const time = String(incoming.first_publish_time || "");
+  const timezone = String(incoming.timezone || "");
+  if (![1, 2, 3, 5].includes(videosPerDay)) throw new HttpError(400, "Videos per day must be 1, 2, 3, or 5");
+  if (!Number.isInteger(bufferTarget) || bufferTarget < 3 || bufferTarget > 14) throw new HttpError(400, "Finished buffer target must be between 3 and 14");
+  if (!Number.isFinite(budget) || budget < 1 || budget > 500) throw new HttpError(400, "Monthly budget must be between $1 and $500");
+  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(time)) throw new HttpError(400, "Publishing time must use HH:MM");
+  if (!/^[A-Za-z_+-]+\/[A-Za-z_+/-]+$/.test(timezone)) throw new HttpError(400, "Timezone must be an IANA timezone");
+  const publishingMode = String(incoming.publishing_mode || "");
+  if (!["fully_automatic", "review_required"].includes(publishingMode)) throw new HttpError(400, "Unknown publishing mode");
+
+  const copy = structuredClone(config);
+  copy.channel.timezone = timezone;
+  copy.schedule.videos_per_day = videosPerDay;
+  copy.schedule.publish_time = time;
+  copy.automation.creator_enabled = Boolean(incoming.creator_enabled);
+  copy.automation.publishing_enabled = Boolean(incoming.publishing_enabled);
+  copy.automation.enabled = Boolean(incoming.publishing_enabled);
+  copy.automation.publishing_mode = publishingMode;
+  copy.automation.automatic_retries = Boolean(incoming.automatic_retries);
+  copy.automation.finished_buffer_target = bufferTarget;
+  copy.automation.monthly_modal_budget_usd = budget;
+
+  if (body.content_brain) {
+    const preferences = Array.isArray(body.content_brain.movie_preferences) ? body.content_brain.movie_preferences : [];
+    const exclusions = Array.isArray(body.content_brain.excluded_movies) ? body.content_brain.excluded_movies : [];
+    copy.content_brain.movie_preferences = preferences.map(value => String(value).trim()).filter(Boolean).slice(0, 30);
+    copy.content_brain.excluded_movies = exclusions.map(value => String(value).trim()).filter(Boolean).slice(0, 100);
+    copy.content_brain.prevent_duplicate_scenes = Boolean(body.content_brain.prevent_duplicate_scenes);
+    copy.content_brain.prevent_duplicate_hooks = Boolean(body.content_brain.prevent_duplicate_hooks);
+  }
+  if (body.production_rules) {
+    const durationMin = Number(body.production_rules.duration_min_seconds);
+    const durationMax = Number(body.production_rules.duration_max_seconds);
+    if (!Number.isFinite(durationMin) || !Number.isFinite(durationMax) || durationMin < 15 || durationMax > 60 || durationMin >= durationMax) {
+      throw new HttpError(400, "Duration range must be between 15 and 60 seconds");
+    }
+    copy.production_rules.duration_min_seconds = durationMin;
+    copy.production_rules.duration_max_seconds = durationMax;
+    for (const key of ["narration_style", "subtitle_preset", "music_mix", "crop_tracking"]) {
+      if (body.production_rules[key] !== undefined) copy.production_rules[key] = String(body.production_rules[key]).trim().slice(0, 240);
+    }
+  }
+  if (body.notifications) {
+    for (const key of ["weekly_summary", "upload_failures", "copyright_claims", "credit_warnings"]) {
+      copy.notifications[key] = Boolean(body.notifications[key]);
+    }
+    copy.notifications.email = String(body.notifications.email || "").trim().slice(0, 254);
+  }
+  return copy;
+}
+
+function publicSettings(config) {
+  return {
+    autopilot: {
+      creator_enabled: config.automation.creator_enabled,
+      publishing_enabled: config.automation.publishing_enabled,
+      videos_per_day: config.schedule.videos_per_day,
+      first_publish_time: config.schedule.publish_time,
+      timezone: config.channel.timezone,
+      publishing_mode: config.automation.publishing_mode,
+      automatic_retries: config.automation.automatic_retries,
+      finished_buffer_target: config.automation.finished_buffer_target,
+      monthly_modal_budget_usd: config.automation.monthly_modal_budget_usd,
+    },
+    content_brain: config.content_brain,
+    production_rules: config.production_rules,
+    notifications: config.notifications,
   };
 }
 

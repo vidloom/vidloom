@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "interstellar-docking-source",
+      "movie": "Interstellar",
+      "scene": "Endurance docking sequence",
+      "path": "premium_pipeline/projects/interstellar_docking/assets/source.mkv",
+      "start": 78.0,
+      "end": 320.0,
+      "rights": "User-provided analysis source; publishing requires the owner's rights review.",
+      "angles": [
+        "Why matching the station's rotation makes the impossible docking readable",
+        "How relative motion turns chaos into a visually stable target",
+        "Why the final latch is the real payoff of the entire sequence"
+      ],
+      "max_uses": 3,
+      "enabled": true
+    },
+    {
+      "id": "topgun-canyon-source",
+      "movie": "Top Gun: Maverick",
+      "scene": "Canyon training run",
+      "path": "movie_shorts/premium_v2/assets/topgun_source.mp4",
+      "start": 0.0,
+      "end": 188.0,
+      "rights": "User-provided analysis source; publishing requires the owner's rights review.",
+      "angles": [
+        "How the edit makes speed feel dangerous before the jet reaches the target",
+        "Why the canyon walls communicate the mission better than dialogue",
+        "How the run converts an abstract deadline into a visible race"
+      ],
+      "max_uses": 3,
+      "enabled": true
+    },
+    {
+      "id": "jack-sparrow-entrance-source",
+      "movie": "Pirates of the Caribbean",
+      "scene": "Jack Sparrow's harbor entrance",
+      "path": "premium_pipeline/projects/jack_sparrow_entrance/assets/source.mp4",
+      "start": 0.0,
+      "end": 88.0,
+      "rights": "User-provided analysis source; publishing requires the owner's rights review.",
+      "angles": [
+        "How the reveal turns a heroic entrance into a visual joke",
+        "Why the dry step onto the pier completes the character introduction"
+      ],
+      "max_uses": 2,
+      "enabled": true
+    }
+  ]
+}
