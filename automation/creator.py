@@ -333,6 +333,13 @@ def make_project(idea: dict, source: dict, observations: list[dict], package: di
     # Clamp that tail and quantize only beat junctions to the delivery timebase,
     # so two contiguous evidence shots cover adjacent spoken beats exactly.
     aligned[-1]["end"] = round(min(float(aligned[-1]["end"]), voice_duration), 6)
+    for index in range(1, len(aligned)):
+        previous, current = aligned[index - 1], aligned[index]
+        if float(current["start"]) < float(previous["end"]):
+            junction = (float(current["start"]) + float(previous["end"])) / 2
+            junction = max(float(previous["start"]) + 0.001, min(junction, float(current["end"]) - 0.001))
+            previous["end"] = round(junction, 6)
+            current["start"] = round(junction, 6)
     for first in word_starts[1:]:
         junction = round(((float(aligned[first - 1]["end"]) + float(aligned[first]["start"])) / 2) * fps) / fps
         aligned[first - 1]["end"] = round(junction, 6)

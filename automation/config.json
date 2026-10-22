@@ -59,7 +59,7 @@
     "autopilot_interval_hours": 2,
     "publishing_mode": "fully_automatic",
     "automatic_retries": true,
-    "maximum_job_retries": 7,
+    "maximum_job_retries": 9,
     "monthly_modal_budget_usd": 10,
     "estimated_cost_per_short_usd": 0.35,
     "budget_safety_margin_usd": 1,
