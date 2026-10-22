@@ -28,7 +28,7 @@
       "sunday"
     ],
     "publish_time": "20:00",
-    "videos_per_day": 1,
+    "videos_per_day": 5,
     "workflow_cron_utc": "17 * * * *",
     "lead_time_minutes": 103,
     "rationale": "One daily release is the initial operating setting. Review it after 28 days against comparable uploads and channel Audience analytics."
