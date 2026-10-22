@@ -1,0 +1,583 @@
+{
+  "version": 3,
+  "title": "Interstellar Docking Visual Breakdown",
+  "fps": 30,
+  "total_frames": 914,
+  "brief": {
+    "audience": "cinema-analysis enthusiasts",
+    "viewer_problem": "struggling to see why the docking feels readable",
+    "promise": "we’ll reveal the visual principle that turns chaos into clarity",
+    "original_contribution": "a concise, observation-driven breakdown",
+    "payoff": "Thus the matched spin gives a frame, making the dock clear.",
+    "format": "explanation"
+  },
+  "assets": [
+    {
+      "id": "A01",
+      "path": "../interstellar_docking/assets/source.mkv",
+      "kind": "video",
+      "source_url": "local://registered-source",
+      "rights": "User-provided analysis source; publishing requires the owner's rights review.",
+      "observations": [
+        {
+          "id": "O01",
+          "start": 111.42857142857143,
+          "end": 120.42857142857143,
+          "subject": "small spacecraft",
+          "action": "A small spacecraft with a bright rear light sits in open space beneath the angled hull of a larger craft, with scattered dark debris particles around it and a pale curved planet limb along the bottom edge.",
+          "continuity": "interstellar-docking-source",
+          "detail": "Large spacecraft hull, small approaching craft, planet limb Evidence note: The top half is filled by a ribbed metal hull with windows; the middle is black space containing a tiny body with an intense white flare at ~x0.6; thin white arc of a planet runs across the bottom.",
+          "inspected": true
+        },
+        {
+          "id": "O02",
+          "start": 144.85714285714286,
+          "end": 153.85714285714286,
+          "subject": "silhouetted hull",
+          "action": "A dark, silhouetted mechanical spacecraft structure occupies the left and center foreground against a brightly lit cloudy surface at the upper right, with a single star-like glint on one rotated module.",
+          "continuity": "interstellar-docking-source",
+          "detail": "Dark hull silhouette, bright surface, star glint Evidence note: Near-black angular components with a circular port and a boxy section dominate the left two-thirds; a bright off-white textured surface fills the upper-right corner; a small cross-shaped bright flare sits on the upper module.",
+          "inspected": true
+        },
+        {
+          "id": "O03",
+          "start": 178.28571428571428,
+          "end": 187.28571428571428,
+          "subject": "man in suit",
+          "action": "A man in a pressure suit is shown from the chest up with his head tilted back and mouth open, his face glistening, in a dimly lit interior with blurred soft shapes behind him.",
+          "continuity": "interstellar-docking-source",
+          "detail": "Man in suit, open mouth, tilted head, dim interior Evidence note: A human face with short dark hair and a suit collar occupies the center-right; the background is out of focus with pale rounded forms on the right and a dark mass on the left.",
+          "inspected": true
+        },
+        {
+          "id": "O04",
+          "start": 211.71428571428572,
+          "end": 220.71428571428572,
+          "subject": "Endurance module hull",
+          "action": "A dark spacecraft hull with a circular docking‑port ring, angular metallic panels, and a bright star glint on the upper right, filling the frame against a pale backdrop.",
+          "continuity": "interstellar-docking-source",
+          "detail": "The circular dock ring sits slightly left of frame center; a secondary ring and panel segments extend to the right. Evidence note: Visible concentric docking ring, flat angular hull plates, and a single lens‑flare star on the right.",
+          "inspected": true
+        },
+        {
+          "id": "O05",
+          "start": 245.14285714285714,
+          "end": 254.14285714285714,
+          "subject": "Control joystick",
+          "action": "A black control lever/joystick with two round top buttons is mounted upright on a square metallic pedestal, with a green‑text display above it and a blue panel bearing two red valve handles to the right.",
+          "continuity": "interstellar-docking-source",
+          "detail": "The lever head with a red and a white round cap faces the camera; the pedestal base has two recessed slots and corner markings. Evidence note: Foreground joystick on a brushed‑metal mount; wall screen with green readouts behind; blue window/panel with red handles on the right.",
+          "inspected": true
+        },
+        {
+          "id": "O06",
+          "start": 278.57142857142856,
+          "end": 287.57142857142856,
+          "subject": "Suited astronaut",
+          "action": "A man in a white spacesuit with a polished metal neck ring is shown in close three‑quarter profile, head turned to the right, with reddish machinery blurred in the background.",
+          "continuity": "interstellar-docking-source",
+          "detail": "His face is lit from the upper left; the suit's metal collar and shoulder padding are visible in the lower left. Evidence note: Close‑up of head and neck ring; out‑of‑focus red equipment panel behind him on the right.",
+          "inspected": true
+        }
+      ]
+    }
+  ],
+  "narration": {
+    "path": "voice/take_01.wav",
+    "script": "What visual trick lets us follow the Endurance as it docks with the spinning station without getting lost in the chaos? The camera opens on the rotating hub, its bright rim framing the void and setting a stable horizon. Matching the Endurance’s spin to the hub’s rate lets the camera follow the station, turning chaos into a single arc. A graphic overlays spin arrows, showing equal speeds. Thus the matched spin gives a frame, making the dock clear.",
+    "delivery": "One continuous, warm, confident explanation with natural phrasing and no artificial line breaks",
+    "generation": "continuous_take",
+    "alignment_path": "voice/words_01.json",
+    "alignment_method": "forced_alignment"
+  },
+  "beats": [
+    {
+      "id": "B01",
+      "word_first": 0,
+      "word_last": 20,
+      "role": "hook",
+      "claim": "The opening question frames the visual puzzle.",
+      "subject": "small spacecraft",
+      "action": "A small spacecraft with a bright rear light sits in open space beneath the angled hull of a larger craft, with scattered dark debris particles around it and a pale curved planet limb along the bottom edge.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B02",
+      "word_first": 21,
+      "word_last": 38,
+      "role": "context",
+      "claim": "Establishes a clear reference point for the spin.",
+      "subject": "silhouetted hull",
+      "action": "A dark, silhouetted mechanical spacecraft structure occupies the left and center foreground against a brightly lit cloudy surface at the upper right, with a single star-like glint on one rotated module.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B03",
+      "word_first": 39,
+      "word_last": 58,
+      "role": "mechanism",
+      "claim": "Shared angular velocity creates readable motion.",
+      "subject": "Endurance module hull",
+      "action": "A dark spacecraft hull with a circular docking‑port ring, angular metallic panels, and a bright star glint on the upper right, filling the frame against a pale backdrop.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B04",
+      "word_first": 59,
+      "word_last": 66,
+      "role": "context",
+      "claim": "Visual aid confirms the matched rotation.",
+      "subject": "Endurance module hull",
+      "action": "A dark spacecraft hull with a circular docking‑port ring, angular metallic panels, and a bright star glint on the upper right, filling the frame against a pale backdrop.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B05",
+      "word_first": 67,
+      "word_last": 77,
+      "role": "payoff",
+      "claim": "Answers the opening question with the decisive visual observation.",
+      "subject": "Endurance module hull",
+      "action": "A dark spacecraft hull with a circular docking‑port ring, angular metallic panels, and a bright star glint on the upper right, filling the frame against a pale backdrop.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "asset": "A01",
+      "observation": "O01",
+      "start_frame": 0,
+      "end_frame": 202,
+      "source_in": 113.745,
+      "speed": 0.5,
+      "crop": [
+        752,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B01"
+      ],
+      "purpose": "The opening question frames the visual puzzle.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S02",
+      "asset": "A01",
+      "observation": "O02",
+      "start_frame": 202,
+      "end_frame": 421,
+      "source_in": 147.032,
+      "speed": 0.5,
+      "crop": [
+        464,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          540,
+          134,
+          456,
+          810
+        ],
+        [
+          540,
+          134,
+          456,
+          810
+        ],
+        [
+          540,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B02"
+      ],
+      "purpose": "Establishes a clear reference point for the spin.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S03",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 421,
+      "end_frame": 651,
+      "source_in": 213.798,
+      "speed": 0.5,
+      "crop": [
+        656,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B03"
+      ],
+      "purpose": "Shared angular velocity creates readable motion.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S04",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 651,
+      "end_frame": 796,
+      "source_in": 214.506,
+      "speed": 0.5,
+      "crop": [
+        656,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B04"
+      ],
+      "purpose": "Visual aid confirms the matched rotation.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S05",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 796,
+      "end_frame": 914,
+      "source_in": 214.731,
+      "speed": 0.5,
+      "crop": [
+        656,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B05"
+      ],
+      "purpose": "Answers the opening question with the decisive visual observation.",
+      "production_gain_db": -24
+    }
+  ],
+  "captions": [
+    {
+      "word_first": 0,
+      "word_last": 2,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 3,
+      "word_last": 6,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 7,
+      "word_last": 9,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 10,
+      "word_last": 12,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 13,
+      "word_last": 14,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 15,
+      "word_last": 16,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 17,
+      "word_last": 20,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 21,
+      "word_last": 24,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 25,
+      "word_last": 27,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 28,
+      "word_last": 30,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 31,
+      "word_last": 33,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 34,
+      "word_last": 36,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 37,
+      "word_last": 38,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 39,
+      "word_last": 40,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 41,
+      "word_last": 43,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 44,
+      "word_last": 47,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 48,
+      "word_last": 50,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 51,
+      "word_last": 52,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 53,
+      "word_last": 55,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 56,
+      "word_last": 59,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 60,
+      "word_last": 61,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 62,
+      "word_last": 63,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 64,
+      "word_last": 65,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 66,
+      "word_last": 68,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 69,
+      "word_last": 71,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 72,
+      "word_last": 75,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    },
+    {
+      "word_first": 76,
+      "word_last": 77,
+      "x": 540,
+      "y": 1380,
+      "font_size": 60
+    }
+  ],
+  "audio": [],
+  "reviews": [
+    {
+      "criterion": "purpose",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Autonomous commissioning brief defines one viewer question and one visible scene-level payoff.",
+      "fingerprint": "a217f78e95062fb0f7dcf5ed832f6e83684cb50f68c932691d432c6f4af5b432"
+    },
+    {
+      "criterion": "proof",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Groq vision inspected timestamped source frames; every beat is bound to one recorded observation and source range.",
+      "fingerprint": "a217f78e95062fb0f7dcf5ed832f6e83684cb50f68c932691d432c6f4af5b432"
+    },
+    {
+      "criterion": "voice",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Narration was generated as one continuous take and force-aligned from the accepted recording.",
+      "fingerprint": "a217f78e95062fb0f7dcf5ed832f6e83684cb50f68c932691d432c6f4af5b432"
+    },
+    {
+      "criterion": "framing",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Each shot uses a portrait crop centered from the inspected frame and three contained subject checkpoints.",
+      "fingerprint": "a217f78e95062fb0f7dcf5ed832f6e83684cb50f68c932691d432c6f4af5b432"
+    },
+    {
+      "criterion": "readability",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Captions are derived from measured word times and constrained to the mobile-safe region and house CPS ceiling.",
+      "fingerprint": "a217f78e95062fb0f7dcf5ed832f6e83684cb50f68c932691d432c6f4af5b432"
+    },
+    {
+      "criterion": "payoff",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "The final beat uses the chronologically last selected observation to resolve the opening visual question.",
+      "fingerprint": "a217f78e95062fb0f7dcf5ed832f6e83684cb50f68c932691d432c6f4af5b432"
+    }
+  ]
+}

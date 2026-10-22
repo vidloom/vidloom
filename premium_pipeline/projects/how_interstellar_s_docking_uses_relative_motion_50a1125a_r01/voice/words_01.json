@@ -1,0 +1,392 @@
+[
+  {
+    "word": "What",
+    "start": 0.0,
+    "end": 0.32
+  },
+  {
+    "word": "visual",
+    "start": 0.32,
+    "end": 0.76
+  },
+  {
+    "word": "trick",
+    "start": 0.76,
+    "end": 1.16
+  },
+  {
+    "word": "lets",
+    "start": 1.16,
+    "end": 1.4
+  },
+  {
+    "word": "us",
+    "start": 1.4,
+    "end": 1.62
+  },
+  {
+    "word": "follow",
+    "start": 1.62,
+    "end": 1.96
+  },
+  {
+    "word": "the",
+    "start": 1.96,
+    "end": 2.16
+  },
+  {
+    "word": "ENDurance",
+    "start": 2.16,
+    "end": 2.66
+  },
+  {
+    "word": "as",
+    "start": 2.66,
+    "end": 2.92
+  },
+  {
+    "word": "it",
+    "start": 2.92,
+    "end": 3.06
+  },
+  {
+    "word": "docks",
+    "start": 3.06,
+    "end": 3.48
+  },
+  {
+    "word": "with",
+    "start": 3.48,
+    "end": 3.72
+  },
+  {
+    "word": "the",
+    "start": 3.72,
+    "end": 3.84
+  },
+  {
+    "word": "spinning",
+    "start": 3.84,
+    "end": 4.14
+  },
+  {
+    "word": "station",
+    "start": 4.14,
+    "end": 4.7
+  },
+  {
+    "word": "without",
+    "start": 4.7,
+    "end": 5.04
+  },
+  {
+    "word": "getting",
+    "start": 5.04,
+    "end": 5.38
+  },
+  {
+    "word": "lost",
+    "start": 5.38,
+    "end": 5.78
+  },
+  {
+    "word": "in",
+    "start": 5.78,
+    "end": 6.0
+  },
+  {
+    "word": "the",
+    "start": 6.0,
+    "end": 6.12
+  },
+  {
+    "word": "chaos?",
+    "start": 6.12,
+    "end": 6.72
+  },
+  {
+    "word": "The",
+    "start": 6.72,
+    "end": 7.4
+  },
+  {
+    "word": "camera",
+    "start": 7.4,
+    "end": 7.72
+  },
+  {
+    "word": "opens",
+    "start": 7.72,
+    "end": 8.24
+  },
+  {
+    "word": "on",
+    "start": 8.24,
+    "end": 8.48
+  },
+  {
+    "word": "the",
+    "start": 8.48,
+    "end": 8.6
+  },
+  {
+    "word": "rotating",
+    "start": 8.6,
+    "end": 9.12
+  },
+  {
+    "word": "hub,",
+    "start": 9.12,
+    "end": 9.7
+  },
+  {
+    "word": "its",
+    "start": 9.7,
+    "end": 10.16
+  },
+  {
+    "word": "bright",
+    "start": 10.16,
+    "end": 10.46
+  },
+  {
+    "word": "rim",
+    "start": 10.46,
+    "end": 10.86
+  },
+  {
+    "word": "framing",
+    "start": 10.86,
+    "end": 11.38
+  },
+  {
+    "word": "the",
+    "start": 11.38,
+    "end": 11.64
+  },
+  {
+    "word": "void",
+    "start": 11.64,
+    "end": 11.98
+  },
+  {
+    "word": "and",
+    "start": 11.98,
+    "end": 12.24
+  },
+  {
+    "word": "setting",
+    "start": 12.24,
+    "end": 12.56
+  },
+  {
+    "word": "a",
+    "start": 12.56,
+    "end": 12.74
+  },
+  {
+    "word": "stable",
+    "start": 12.74,
+    "end": 13.18
+  },
+  {
+    "word": "horizon.",
+    "start": 13.18,
+    "end": 14.02
+  },
+  {
+    "word": "Matching",
+    "start": 14.02,
+    "end": 14.96
+  },
+  {
+    "word": "the",
+    "start": 14.96,
+    "end": 15.1
+  },
+  {
+    "word": "ENDurance’s",
+    "start": 15.1,
+    "end": 15.76
+  },
+  {
+    "word": "spin",
+    "start": 15.76,
+    "end": 16.06
+  },
+  {
+    "word": "to",
+    "start": 16.06,
+    "end": 16.28
+  },
+  {
+    "word": "the",
+    "start": 16.28,
+    "end": 16.44
+  },
+  {
+    "word": "hub’s",
+    "start": 16.44,
+    "end": 16.78
+  },
+  {
+    "word": "rate",
+    "start": 16.78,
+    "end": 17.04
+  },
+  {
+    "word": "lets",
+    "start": 17.04,
+    "end": 17.36
+  },
+  {
+    "word": "the",
+    "start": 17.36,
+    "end": 17.58
+  },
+  {
+    "word": "camera",
+    "start": 17.58,
+    "end": 17.94
+  },
+  {
+    "word": "follow",
+    "start": 17.94,
+    "end": 18.32
+  },
+  {
+    "word": "the",
+    "start": 18.32,
+    "end": 18.56
+  },
+  {
+    "word": "station,",
+    "start": 18.56,
+    "end": 19.12
+  },
+  {
+    "word": "turning",
+    "start": 19.12,
+    "end": 19.7
+  },
+  {
+    "word": "chaos",
+    "start": 19.7,
+    "end": 20.16
+  },
+  {
+    "word": "into",
+    "start": 20.16,
+    "end": 20.52
+  },
+  {
+    "word": "a",
+    "start": 20.52,
+    "end": 20.72
+  },
+  {
+    "word": "single",
+    "start": 20.72,
+    "end": 21.08
+  },
+  {
+    "word": "arc.",
+    "start": 21.08,
+    "end": 21.7
+  },
+  {
+    "word": "A",
+    "start": 21.7,
+    "end": 22.22
+  },
+  {
+    "word": "graphic",
+    "start": 22.22,
+    "end": 22.66
+  },
+  {
+    "word": "overlays",
+    "start": 22.66,
+    "end": 23.32
+  },
+  {
+    "word": "spin",
+    "start": 23.32,
+    "end": 23.8
+  },
+  {
+    "word": "arrows,",
+    "start": 23.8,
+    "end": 24.64
+  },
+  {
+    "word": "showing",
+    "start": 24.64,
+    "end": 25.24
+  },
+  {
+    "word": "equal",
+    "start": 25.24,
+    "end": 25.68
+  },
+  {
+    "word": "speeds.",
+    "start": 25.68,
+    "end": 26.52
+  },
+  {
+    "word": "Thus",
+    "start": 26.52,
+    "end": 27.1
+  },
+  {
+    "word": "the",
+    "start": 27.1,
+    "end": 27.34
+  },
+  {
+    "word": "matched",
+    "start": 27.34,
+    "end": 27.66
+  },
+  {
+    "word": "spin",
+    "start": 27.66,
+    "end": 28.08
+  },
+  {
+    "word": "gives",
+    "start": 28.08,
+    "end": 28.42
+  },
+  {
+    "word": "a",
+    "start": 28.42,
+    "end": 28.62
+  },
+  {
+    "word": "frame,",
+    "start": 28.62,
+    "end": 29.14
+  },
+  {
+    "word": "making",
+    "start": 29.14,
+    "end": 29.6
+  },
+  {
+    "word": "the",
+    "start": 29.6,
+    "end": 29.84
+  },
+  {
+    "word": "dock",
+    "start": 29.84,
+    "end": 29.98
+  },
+  {
+    "word": "clear.",
+    "start": 29.98,
+    "end": 30.0
+  }
+]
