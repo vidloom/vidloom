@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-10-22T05:01:43Z",
+  "generated_at": "2026-10-22T11:38:23Z",
   "system": {
     "status": "failed",
     "automation_enabled": true,
@@ -29,7 +29,7 @@
     ],
     "time": "20:00",
     "timezone": "Asia/Kolkata",
-    "next_publish_at": "2026-10-22T15:12+05:30"
+    "next_publish_at": "2026-10-22T20:00+05:30"
   },
   "health": {
     "runner": "online",
