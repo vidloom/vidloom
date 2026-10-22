@@ -1,0 +1,312 @@
+[
+  {
+    "word": "What",
+    "start": 0.0,
+    "end": 0.3
+  },
+  {
+    "word": "visual",
+    "start": 0.3,
+    "end": 0.74
+  },
+  {
+    "word": "cue",
+    "start": 0.74,
+    "end": 1.18
+  },
+  {
+    "word": "lets",
+    "start": 1.18,
+    "end": 1.54
+  },
+  {
+    "word": "us",
+    "start": 1.54,
+    "end": 1.7
+  },
+  {
+    "word": "follow",
+    "start": 1.7,
+    "end": 2.08
+  },
+  {
+    "word": "the",
+    "start": 2.08,
+    "end": 2.3
+  },
+  {
+    "word": "ENDurance",
+    "start": 2.3,
+    "end": 2.78
+  },
+  {
+    "word": "as",
+    "start": 2.78,
+    "end": 3.06
+  },
+  {
+    "word": "it",
+    "start": 3.06,
+    "end": 3.18
+  },
+  {
+    "word": "docks",
+    "start": 3.18,
+    "end": 3.62
+  },
+  {
+    "word": "amid",
+    "start": 3.62,
+    "end": 3.9
+  },
+  {
+    "word": "chaos?",
+    "start": 3.9,
+    "end": 4.72
+  },
+  {
+    "word": "A",
+    "start": 4.72,
+    "end": 5.26
+  },
+  {
+    "word": "dark",
+    "start": 5.26,
+    "end": 5.58
+  },
+  {
+    "word": "docking",
+    "start": 5.58,
+    "end": 6.16
+  },
+  {
+    "word": "module",
+    "start": 6.16,
+    "end": 6.62
+  },
+  {
+    "word": "silhouettes",
+    "start": 6.62,
+    "end": 7.36
+  },
+  {
+    "word": "against",
+    "start": 7.36,
+    "end": 7.8
+  },
+  {
+    "word": "bright",
+    "start": 7.8,
+    "end": 8.12
+  },
+  {
+    "word": "planet",
+    "start": 8.12,
+    "end": 8.58
+  },
+  {
+    "word": "surface,",
+    "start": 8.58,
+    "end": 9.3
+  },
+  {
+    "word": "tiny",
+    "start": 9.3,
+    "end": 9.94
+  },
+  {
+    "word": "debris",
+    "start": 9.94,
+    "end": 10.3
+  },
+  {
+    "word": "swirling.",
+    "start": 10.3,
+    "end": 11.04
+  },
+  {
+    "word": "A",
+    "start": 11.04,
+    "end": 11.72
+  },
+  {
+    "word": "side‑lit",
+    "start": 11.72,
+    "end": 12.3
+  },
+  {
+    "word": "crew",
+    "start": 12.3,
+    "end": 12.6
+  },
+  {
+    "word": "member†focused",
+    "start": 12.6,
+    "end": 13.48
+  },
+  {
+    "word": "stare",
+    "start": 13.48,
+    "end": 14.02
+  },
+  {
+    "word": "anchors",
+    "start": 14.02,
+    "end": 14.56
+  },
+  {
+    "word": "the",
+    "start": 14.56,
+    "end": 14.78
+  },
+  {
+    "word": "view,",
+    "start": 14.78,
+    "end": 15.18
+  },
+  {
+    "word": "implying",
+    "start": 15.18,
+    "end": 16.1
+  },
+  {
+    "word": "synced",
+    "start": 16.1,
+    "end": 16.56
+  },
+  {
+    "word": "spin.",
+    "start": 16.56,
+    "end": 17.16
+  },
+  {
+    "word": "The",
+    "start": 17.16,
+    "end": 17.78
+  },
+  {
+    "word": "camera",
+    "start": 17.78,
+    "end": 18.1
+  },
+  {
+    "word": "locks",
+    "start": 18.1,
+    "end": 18.58
+  },
+  {
+    "word": "on",
+    "start": 18.58,
+    "end": 18.84
+  },
+  {
+    "word": "the",
+    "start": 18.84,
+    "end": 18.98
+  },
+  {
+    "word": "rear",
+    "start": 18.98,
+    "end": 19.22
+  },
+  {
+    "word": "port,",
+    "start": 19.22,
+    "end": 19.72
+  },
+  {
+    "word": "centering",
+    "start": 19.72,
+    "end": 20.32
+  },
+  {
+    "word": "the",
+    "start": 20.32,
+    "end": 20.56
+  },
+  {
+    "word": "circular",
+    "start": 20.56,
+    "end": 21.06
+  },
+  {
+    "word": "opening",
+    "start": 21.06,
+    "end": 21.6
+  },
+  {
+    "word": "in",
+    "start": 21.6,
+    "end": 21.9
+  },
+  {
+    "word": "void.",
+    "start": 21.9,
+    "end": 22.46
+  },
+  {
+    "word": "The",
+    "start": 22.46,
+    "end": 22.98
+  },
+  {
+    "word": "dock",
+    "start": 22.98,
+    "end": 23.28
+  },
+  {
+    "word": "mechanism",
+    "start": 23.28,
+    "end": 23.88
+  },
+  {
+    "word": "clicks,",
+    "start": 23.88,
+    "end": 24.54
+  },
+  {
+    "word": "and",
+    "start": 24.54,
+    "end": 24.94
+  },
+  {
+    "word": "the",
+    "start": 24.94,
+    "end": 25.08
+  },
+  {
+    "word": "steady",
+    "start": 25.08,
+    "end": 25.34
+  },
+  {
+    "word": "frame",
+    "start": 25.34,
+    "end": 25.8
+  },
+  {
+    "word": "finally",
+    "start": 25.8,
+    "end": 26.34
+  },
+  {
+    "word": "reveals",
+    "start": 26.34,
+    "end": 26.96
+  },
+  {
+    "word": "the",
+    "start": 26.96,
+    "end": 27.2
+  },
+  {
+    "word": "precise",
+    "start": 27.2,
+    "end": 27.64
+  },
+  {
+    "word": "lock.",
+    "start": 27.64,
+    "end": 28.5
+  }
+]

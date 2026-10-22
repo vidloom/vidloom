@@ -1,0 +1,506 @@
+{
+  "version": 3,
+  "title": "How Interstellar’s Docking Uses Relative Motion to Turn Chaos into a Stable Target",
+  "fps": 30,
+  "total_frames": 855,
+  "brief": {
+    "audience": "cinema‑analysis enthusiasts",
+    "viewer_problem": "viewers struggle to see how the docking appears controlled despite the spin",
+    "promise": "explain the visual framing that makes the maneuver readable",
+    "original_contribution": "a concise five‑beat breakdown using only on‑screen observations",
+    "payoff": "The dock mechanism clicks, and the steady frame finally reveals the precise lock.",
+    "format": "explanation"
+  },
+  "assets": [
+    {
+      "id": "A01",
+      "path": "../interstellar_docking/assets/source.mkv",
+      "kind": "video",
+      "source_url": "local://registered-source",
+      "rights": "User-provided analysis source; publishing requires the owner's rights review.",
+      "observations": [
+        {
+          "id": "O01",
+          "start": 111.42857142857143,
+          "end": 120.42857142857143,
+          "subject": "Endurance hull",
+          "action": "is positioned in the foreground with its underside filling the top of the frame, facing a smaller distant spacecraft that emits a bright light and is surrounded by debris",
+          "continuity": "interstellar-docking-source",
+          "detail": "0.55 Evidence note: The large ship hull has a textured solar-panel array on the left and a windowed module on the right; the bright light source is centered against the black space backdrop with a thin planetary horizon below.",
+          "inspected": true
+        },
+        {
+          "id": "O02",
+          "start": 144.85714285714286,
+          "end": 153.85714285714286,
+          "subject": "Docking module",
+          "action": "is shown in close-up as a dark silhouetted module against a bright, textured planetary surface, with small particle debris visible",
+          "continuity": "interstellar-docking-source",
+          "detail": "0.45 Evidence note: A cylindrical docking mechanism with a circular port dominates the left-center, backlit by the pale surface on the right; a starburst glint appears on the module's edge.",
+          "inspected": true
+        },
+        {
+          "id": "O03",
+          "start": 178.28571428571428,
+          "end": 187.28571428571428,
+          "subject": "Crew member",
+          "action": "is seated inside a cockpit, facing slightly left with mouth partly open, lit from the side",
+          "continuity": "interstellar-docking-source",
+          "detail": "0.6 Evidence note: The astronaut wears a suit with a rigid neck ring and shoulder straps; the background contains blurred interior console elements, and a second framing shows him in profile on the left with a large dark shape to the right.",
+          "inspected": true
+        },
+        {
+          "id": "O04",
+          "start": 211.71428571428572,
+          "end": 220.71428571428572,
+          "subject": "endurance_hull",
+          "action": "is positioned in the foreground with its rear docking port facing the camera against a bright void background",
+          "continuity": "interstellar-docking-source",
+          "detail": "Dark Evidence note: The dark, boxy spacecraft hull with a prominent circular port in the center and a bright light flare on its upper right section",
+          "inspected": true
+        },
+        {
+          "id": "O05",
+          "start": 245.14285714285714,
+          "end": 254.14285714285714,
+          "subject": "dock_mechanism",
+          "action": "is mounted on a base plate inside a dimly lit module with a display screen behind it",
+          "continuity": "interstellar-docking-source",
+          "detail": "Dark, metallic Evidence note: A black, mechanical joint with two cylindrical tips (one red, one white) projecting forward from a vertical pivot on a square base",
+          "inspected": true
+        },
+        {
+          "id": "O06",
+          "start": 278.57142857142856,
+          "end": 287.57142857142856,
+          "subject": "pilot",
+          "action": "is shown in profile facing right, sweat visible on his face, with a red module background",
+          "continuity": "interstellar-docking-source",
+          "detail": "Mature, male Evidence note: A man with short hair in a spacesuit with a metallic neck ring, his face marked with sweat droplets under bright lighting",
+          "inspected": true
+        }
+      ]
+    }
+  ],
+  "narration": {
+    "path": "voice/take_01.wav",
+    "script": "What visual cue lets us follow the ENDurance as it docks amid chaos? A dark docking module silhouettes against bright planet surface, tiny debris swirling. A side‑lit crew member†focused stare anchors the view, implying synced spin. The camera locks on the rear port, centering the circular opening in void. The dock mechanism clicks, and the steady frame finally reveals the precise lock.",
+    "delivery": "One continuous, warm, confident explanation with natural phrasing and no artificial line breaks",
+    "generation": "continuous_take",
+    "alignment_path": "voice/words_01.json",
+    "alignment_method": "forced_alignment"
+  },
+  "beats": [
+    {
+      "id": "B01",
+      "word_first": 0,
+      "word_last": 12,
+      "role": "hook",
+      "claim": "What visual cue lets us follow the Endurance as it docks amid chaos?",
+      "subject": "Endurance hull",
+      "action": "is positioned in the foreground with its underside filling the top of the frame, facing a smaller distant spacecraft that emits a bright light and is surrounded by debris",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B02",
+      "word_first": 13,
+      "word_last": 23,
+      "role": "context",
+      "claim": "A dark docking module silhouettes against bright planet surface, tiny debris swirling.",
+      "subject": "Docking module",
+      "action": "is shown in close-up as a dark silhouetted module against a bright, textured planetary surface, with small particle debris visible",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B03",
+      "word_first": 24,
+      "word_last": 36,
+      "role": "mechanism",
+      "claim": "A side‑lit crew member’s focused stare anchors the view, implying synced spin.",
+      "subject": "Crew member",
+      "action": "is seated inside a cockpit, facing slightly left with mouth partly open, lit from the side",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B04",
+      "word_first": 37,
+      "word_last": 48,
+      "role": "mechanism",
+      "claim": "The camera locks on the rear port, centering the circular opening in void.",
+      "subject": "endurance_hull",
+      "action": "is positioned in the foreground with its rear docking port facing the camera against a bright void background",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B05",
+      "word_first": 49,
+      "word_last": 61,
+      "role": "payoff",
+      "claim": "The dock mechanism clicks, and the steady frame finally reveals the precise lock.",
+      "subject": "dock_mechanism",
+      "action": "is mounted on a base plate inside a dimly lit module with a display screen behind it",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "asset": "A01",
+      "observation": "O01",
+      "start_frame": 0,
+      "end_frame": 141,
+      "source_in": 114.254,
+      "speed": 0.5,
+      "crop": [
+        656,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B01"
+      ],
+      "purpose": "What visual cue lets us follow the Endurance as it docks amid chaos?",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S02",
+      "asset": "A01",
+      "observation": "O02",
+      "start_frame": 141,
+      "end_frame": 309,
+      "source_in": 147.457,
+      "speed": 0.5,
+      "crop": [
+        886,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          962,
+          134,
+          456,
+          810
+        ],
+        [
+          962,
+          134,
+          456,
+          810
+        ],
+        [
+          962,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B02"
+      ],
+      "purpose": "A dark docking module silhouettes against bright planet surface, tiny debris swirling.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S03",
+      "asset": "A01",
+      "observation": "O03",
+      "start_frame": 309,
+      "end_frame": 533,
+      "source_in": 180.419,
+      "speed": 0.5,
+      "crop": [
+        752,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B03"
+      ],
+      "purpose": "A side‑lit crew member’s focused stare anchors the view, implying synced spin.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S04",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 533,
+      "end_frame": 673,
+      "source_in": 214.548,
+      "speed": 0.5,
+      "crop": [
+        944,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          1020,
+          134,
+          456,
+          810
+        ],
+        [
+          1020,
+          134,
+          456,
+          810
+        ],
+        [
+          1020,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B04"
+      ],
+      "purpose": "The camera locks on the rear port, centering the circular opening in void.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S05",
+      "asset": "A01",
+      "observation": "O05",
+      "start_frame": 673,
+      "end_frame": 855,
+      "source_in": 247.626,
+      "speed": 0.5,
+      "crop": [
+        368,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          444,
+          134,
+          456,
+          810
+        ],
+        [
+          444,
+          134,
+          456,
+          810
+        ],
+        [
+          444,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B05"
+      ],
+      "purpose": "The dock mechanism clicks, and the steady frame finally reveals the precise lock.",
+      "production_gain_db": -24
+    }
+  ],
+  "captions": [
+    {
+      "word_first": 0,
+      "word_last": 3,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 4,
+      "word_last": 7,
+      "x": 484,
+      "y": 1380,
+      "font_size": 52
+    },
+    {
+      "word_first": 8,
+      "word_last": 11,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 12,
+      "word_last": 15,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 16,
+      "word_last": 18,
+      "x": 484,
+      "y": 1380,
+      "font_size": 46
+    },
+    {
+      "word_first": 19,
+      "word_last": 22,
+      "x": 484,
+      "y": 1380,
+      "font_size": 44
+    },
+    {
+      "word_first": 23,
+      "word_last": 26,
+      "x": 484,
+      "y": 1380,
+      "font_size": 44
+    },
+    {
+      "word_first": 27,
+      "word_last": 29,
+      "x": 484,
+      "y": 1380,
+      "font_size": 48
+    },
+    {
+      "word_first": 30,
+      "word_last": 33,
+      "x": 484,
+      "y": 1380,
+      "font_size": 46
+    },
+    {
+      "word_first": 34,
+      "word_last": 37,
+      "x": 484,
+      "y": 1380,
+      "font_size": 52
+    },
+    {
+      "word_first": 38,
+      "word_last": 41,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 42,
+      "word_last": 45,
+      "x": 484,
+      "y": 1380,
+      "font_size": 44
+    },
+    {
+      "word_first": 46,
+      "word_last": 49,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 50,
+      "word_last": 53,
+      "x": 484,
+      "y": 1380,
+      "font_size": 46
+    },
+    {
+      "word_first": 54,
+      "word_last": 57,
+      "x": 484,
+      "y": 1380,
+      "font_size": 50
+    },
+    {
+      "word_first": 58,
+      "word_last": 61,
+      "x": 484,
+      "y": 1380,
+      "font_size": 48
+    }
+  ],
+  "audio": [],
+  "reviews": [
+    {
+      "criterion": "purpose",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Autonomous commissioning brief defines one viewer question and one visible scene-level payoff.",
+      "fingerprint": "83fcb1c29f7a6d67e1f2ec45bae64a35054d26900123fcfd605962d42568930d"
+    },
+    {
+      "criterion": "proof",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Groq vision inspected timestamped source frames; every beat is bound to one recorded observation and source range.",
+      "fingerprint": "83fcb1c29f7a6d67e1f2ec45bae64a35054d26900123fcfd605962d42568930d"
+    },
+    {
+      "criterion": "voice",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Narration was generated as one continuous take and force-aligned from the accepted recording.",
+      "fingerprint": "83fcb1c29f7a6d67e1f2ec45bae64a35054d26900123fcfd605962d42568930d"
+    },
+    {
+      "criterion": "framing",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Each shot uses a portrait crop centered from the inspected frame and three contained subject checkpoints.",
+      "fingerprint": "83fcb1c29f7a6d67e1f2ec45bae64a35054d26900123fcfd605962d42568930d"
+    },
+    {
+      "criterion": "readability",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Captions are derived from measured word times and constrained to the mobile-safe region and house CPS ceiling.",
+      "fingerprint": "83fcb1c29f7a6d67e1f2ec45bae64a35054d26900123fcfd605962d42568930d"
+    },
+    {
+      "criterion": "payoff",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "The final beat uses the chronologically last selected observation to resolve the opening visual question.",
+      "fingerprint": "83fcb1c29f7a6d67e1f2ec45bae64a35054d26900123fcfd605962d42568930d"
+    }
+  ]
+}
