@@ -320,8 +320,6 @@ def caption_ranges(aligned: list[dict]) -> list[dict]:
 
 def make_project(idea: dict, source: dict, observations: list[dict], package: dict, project_dir: Path, width: int, height: int, script: str, aligned: list[dict], voice_duration: float) -> dict:
     fps = 30
-    total_frames = int(math.ceil(max(float(aligned[-1]["end"]), voice_duration) * fps))
-    beats_out, shots, cursor = [], [], 0
     original_counts = [max(1, len(words(beat["narration"]))) for beat in package["beats"]]
     total_original = sum(original_counts)
     boundaries, running = [], 0
@@ -330,6 +328,16 @@ def make_project(idea: dict, source: dict, observations: list[dict], package: di
         boundaries.append(min(len(aligned) - 1, max(1, round(running / total_original * len(aligned)))))
     word_starts = [0, *boundaries]
     word_ends = [value - 1 for value in boundaries] + [len(aligned) - 1]
+    # API alignment can overshoot the decoded WAV by a fraction of a second.
+    # Clamp that tail and quantize only beat junctions to the delivery timebase,
+    # so two contiguous evidence shots cover adjacent spoken beats exactly.
+    aligned[-1]["end"] = round(min(float(aligned[-1]["end"]), voice_duration), 6)
+    for first in word_starts[1:]:
+        junction = round(((float(aligned[first - 1]["end"]) + float(aligned[first]["start"])) / 2) * fps) / fps
+        aligned[first - 1]["end"] = round(junction, 6)
+        aligned[first]["start"] = round(junction, 6)
+    total_frames = int(math.ceil(max(float(aligned[-1]["end"]), voice_duration) * fps))
+    beats_out, shots, cursor = [], [], 0
     asset_observations = []
     for index, row in enumerate(observations):
         asset_observations.append({
@@ -356,7 +364,7 @@ def make_project(idea: dict, source: dict, observations: list[dict], package: di
             "action": observation["action"],
             "source": f"Inspected frame sequence from {source['movie']}: {source['scene']}",
         })
-        end_frame = total_frames if index == len(package["beats"]) - 1 else max(cursor + 1, int(math.floor(float(aligned[word_starts[index + 1]]["start"]) * fps)))
+        end_frame = total_frames if index == len(package["beats"]) - 1 else max(cursor + 1, int(round(float(aligned[word_starts[index + 1]]["start"]) * fps)))
         duration = (end_frame - cursor) / fps
         crop = crop_for(width, height, observations[obs_index]["center_x"])
         needed = duration * 0.5
@@ -473,9 +481,9 @@ def create(idea_id: str) -> str:
         synthesize(original_script, voice_path)
         final_script, aligned = align_voice(voice_path, original_script)
         # The v3 contract stores a bare array for alignment rather than an envelope.
-        (project_dir / "voice" / "words_01.json").write_text(json.dumps(aligned, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         set_idea_state(idea_id, "editing", "Compiling project timeline", 52)
         project = make_project(idea, source, observations, package, project_dir, width, height, final_script, aligned, media_duration(voice_path))
+        (project_dir / "voice" / "words_01.json").write_text(json.dumps(aligned, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         project_path = project_dir / "project.json"
         atomic_write_json(project_path, project)
         add_reviews(project_path)
