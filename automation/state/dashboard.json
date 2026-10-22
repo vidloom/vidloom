@@ -1,13 +1,15 @@
 {
   "version": 1,
-  "generated_at": "2026-10-21T19:30:31Z",
+  "generated_at": "2026-10-22T13:08:07Z",
   "system": {
     "status": "failed",
     "automation_enabled": true,
     "current_stage": "Stopped safely",
     "current_item_id": "jack-sparrow-entrance-001",
     "last_success_at": null,
-    "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2"
+    "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2",
+    "creator_enabled": true,
+    "publishing_enabled": true
   },
   "channel": {
     "name": "Vidloom Cinema",
@@ -17,39 +19,52 @@
   },
   "schedule": {
     "days": [
+      "Monday",
       "Tuesday",
+      "Wednesday",
       "Thursday",
-      "Saturday"
+      "Friday",
+      "Saturday",
+      "Sunday"
     ],
-    "time": "19:30",
+    "time": "20:00",
     "timezone": "Asia/Kolkata",
-    "next_publish_at": "2026-10-22T19:30+05:30"
+    "next_publish_at": "2026-10-22T20:00+05:30"
   },
   "health": {
     "runner": "online",
     "youtube": "connected",
     "pipeline": "ready",
     "queue": "low",
-    "ai": "complete"
+    "ai": "complete",
+    "creator": "active"
   },
   "metrics": {
     "queued": 0,
     "building": 0,
+    "ready": 0,
     "scheduled": 0,
     "published": 0,
-    "failed": 1
+    "needs_attention": 1
   },
   "queue": [
     {
       "id": "jack-sparrow-entrance-001",
       "project_path": "premium_pipeline/projects/jack_sparrow_entrance/project.json",
+      "source_id": "jack-sparrow-entrance-source",
+      "origin": "legacy",
       "title": "Why Jack Sparrow's Entrance Is Perfect",
       "genre": "cinema_scene_breakdown",
       "status": "failed",
+      "stage": "Needs attention",
+      "progress": 0,
       "scheduled_publish_at": null,
+      "youtube_id": null,
       "youtube_url": null,
+      "created_at": "2026-10-21T11:17:25Z",
+      "updated_at": "2026-10-22T02:13:47Z",
       "attempts": 4,
-      "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '-m', 'automation.groq_editorial', 'premium_pipeline/projects/jack_sparrow_entrance/project.json', '--model', 'openai/gpt-oss-120b', '--require-pass']' returned non-zero exit status 2"
+      "last_error": "Editorial audit did not pass; the legacy video was stopped before upload"
     }
   ],
   "events": [
@@ -132,5 +147,139 @@
       "Adjust B03 to describe the tiny leaking boat shown in O03 without implying a galleon or active sinking unless directly visible.",
       "Eliminate the exact‑timing language in B05 or qualify it (e.g., \"around the same moment\") to stay within the evidence."
     ]
+  },
+  "autopilot": {
+    "finished": 0,
+    "ready": 0,
+    "scheduled": 0,
+    "published": 0,
+    "active": 0,
+    "needs_attention": 1,
+    "target": 6,
+    "gap": 6,
+    "mode": "filling",
+    "creator_enabled": true,
+    "publishing_enabled": true,
+    "interval_hours": 2,
+    "next_action": "Creating 6 more videos to fill the release buffer"
+  },
+  "ideas": [
+    {
+      "id": "how-interstellar-s-docking-uses-relative-motion--50a1125a",
+      "origin": "autopilot",
+      "movie": "Interstellar",
+      "scene": "Endurance docking sequence",
+      "title": "How Interstellar’s Docking Uses Relative Motion to Turn Chaos into a Stable Target",
+      "concept": "A visual breakdown of the Endurance’s docking with the rotating station, showing how the camera frames relative motion to make a chaotic spin appear controlled and readable.",
+      "status": "blocked",
+      "stage": "Needs attention",
+      "progress": 0,
+      "created_at": "2026-10-22T02:32:43Z",
+      "updated_at": "2026-10-22T03:02:19Z",
+      "last_error": "Command '['/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/.venv-automation/bin/python', '/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/premium_pipeline/v3/pipeline.py', 'validate', '/home/omie/actions-runner-vidloom/_work/vidloom/vidloom/premium_pipeline/projects/how_interstellar_s_docking_uses_relative_motion_50a1125a_r07/project.json']' returned non-zero exit status 2."
+    }
+  ],
+  "scheduled_videos": [],
+  "finished_videos": [],
+  "attention_videos": [
+    {
+      "id": "jack-sparrow-entrance-001",
+      "project_path": "premium_pipeline/projects/jack_sparrow_entrance/project.json",
+      "source_id": "jack-sparrow-entrance-source",
+      "origin": "legacy",
+      "title": "Why Jack Sparrow's Entrance Is Perfect",
+      "genre": "cinema_scene_breakdown",
+      "status": "failed",
+      "stage": "Needs attention",
+      "progress": 0,
+      "scheduled_publish_at": null,
+      "youtube_id": null,
+      "youtube_url": null,
+      "created_at": "2026-10-21T11:17:25Z",
+      "updated_at": "2026-10-22T02:13:47Z",
+      "attempts": 4,
+      "last_error": "Editorial audit did not pass; the legacy video was stopped before upload"
+    }
+  ],
+  "settings": {
+    "autopilot": {
+      "creator_enabled": true,
+      "publishing_enabled": true,
+      "videos_per_day": 5,
+      "first_publish_time": "20:00",
+      "timezone": "Asia/Kolkata",
+      "publishing_mode": "fully_automatic",
+      "automatic_retries": true,
+      "finished_buffer_target": 6,
+      "monthly_modal_budget_usd": 10
+    },
+    "content_brain": {
+      "movie_preferences": [
+        "visually legible action",
+        "character introductions",
+        "practical filmmaking choices",
+        "editing and visual storytelling"
+      ],
+      "excluded_movies": [],
+      "avoid_recent_movie_count": 12,
+      "prevent_duplicate_scenes": true,
+      "prevent_duplicate_hooks": true,
+      "research_language": "en"
+    },
+    "production_rules": {
+      "duration_min_seconds": 24,
+      "duration_max_seconds": 34,
+      "narration_style": "Connected, confident, curious; one continuous performance",
+      "voice": "am_michael",
+      "subtitle_preset": "Clean kinetic",
+      "music_mix": "Cinematic source-aware ducking",
+      "crop_tracking": "Subject tracked 9:16",
+      "delivery_resolution": "1080x1920",
+      "delivery_fps": 30
+    },
+    "notifications": {
+      "weekly_summary": true,
+      "upload_failures": true,
+      "copyright_claims": true,
+      "credit_warnings": true,
+      "email": ""
+    }
+  },
+  "costs": {
+    "month": "2026-10",
+    "estimated_spend_usd": 0.35,
+    "budget_limit_usd": 10.0,
+    "safety_margin_usd": 1.0,
+    "remaining_usd": 9.65,
+    "estimated_cost_per_short_usd": 0.35,
+    "commissioned_this_month": 1,
+    "source": "Estimated from configured per-Short cost; connect Modal billing export for actual spend.",
+    "creation_allowed": true
+  },
+  "content_memory": {
+    "movies_used": [
+      "Interstellar"
+    ],
+    "scenes_tracked": 1,
+    "ideas_remembered": 1,
+    "duplicate_prevention": true
+  },
+  "analytics": {
+    "version": 1,
+    "generated_at": null,
+    "channel": {
+      "subscribers": null,
+      "views": null,
+      "videos": null
+    },
+    "weekly": {
+      "views": null,
+      "subscribers_gained": null,
+      "average_view_duration_seconds": null,
+      "average_percentage_viewed": null
+    },
+    "videos": [],
+    "retention_scope_connected": false,
+    "message": "YouTube statistics will appear after the first published video. Retention requires YouTube Analytics OAuth scope."
   }
 }
