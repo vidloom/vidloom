@@ -1,0 +1,401 @@
+{
+  "version": 3,
+  "title": "How Interstellar’s Docking Uses Relative Motion to Turn Chaos into a Stable Target",
+  "fps": 30,
+  "total_frames": 898,
+  "brief": {
+    "audience": "Film lovers interested in visual storytelling",
+    "viewer_problem": "Struggling to see how camera framing clarifies chaotic motion",
+    "promise": "We’ll reveal the visual trick that makes the docking readable",
+    "original_contribution": "Visual analysis of relative motion in Interstellar’s docking sequence",
+    "payoff": "Matching the Endurance’s rotation to the station creates a clear frame of reference",
+    "format": "explanation"
+  },
+  "assets": [
+    {
+      "id": "A01",
+      "path": "../interstellar_docking/assets/source.mkv",
+      "kind": "video",
+      "source_url": "local://registered-source",
+      "rights": "User-provided analysis source; publishing requires the owner's rights review.",
+      "observations": [
+        {
+          "id": "O01",
+          "start": 111.42857142857143,
+          "end": 120.42857142857143,
+          "subject": "Distant ship",
+          "action": "is positioned behind a large metal hull structure, with a bright light flaring from the distant vessel against a dark starfield",
+          "continuity": "interstellar-docking-source",
+          "detail": "A bright lens flare emanates from the distant spacecraft, with small debris particles visible in the foreground Evidence note: wide shot showing a vast metal surface occupying the upper and left portions of the frame, with the distant ship and bright light source centered",
+          "inspected": true
+        },
+        {
+          "id": "O02",
+          "start": 144.85714285714286,
+          "end": 153.85714285714286,
+          "subject": "Ship hull",
+          "action": "is seen at an angle where its corner aligns with a distant bright light source in the lower right",
+          "continuity": "interstellar-docking-source",
+          "detail": "The metal surface shows a grid-like texture and riveted panels, with small particles floating in the gap between the hull and the light Evidence note: close-up oblique view of the metal hull structure, with the bright light source visible in the lower right corner",
+          "inspected": true
+        },
+        {
+          "id": "O03",
+          "start": 178.28571428571428,
+          "end": 187.28571428571428,
+          "subject": "Astronaut",
+          "action": "is shown in close-up, facing left with an open mouth and a visible earpiece, with a blurred spacecraft or structure in the background",
+          "continuity": "interstellar-docking-source",
+          "detail": "The astronaut wears a white suit with a dark collar ring and has a small device attached to the ear Evidence note: the frame contains two views of the astronaut: one showing the face and upper torso centered, and one showing the face in profile on the left with a blurred object in the background",
+          "inspected": true
+        },
+        {
+          "id": "O04",
+          "start": 211.71428571428572,
+          "end": 220.71428571428572,
+          "subject": "Endurance spacecraft",
+          "action": "is positioned in space with its central docking port and surrounding pod structure visible against a planetary body.",
+          "continuity": "interstellar-docking-source",
+          "detail": "wideshot Evidence note: A large, gray mechanical structure occupies the center of the frame. It features a circular, ribbed opening on its left side and a cylindrical pod with a window on its upper right. A bright lens flare is visible near the pod. The structure is partially obscured by shadow on its left side, with a speckled, light-toned background filling the rest of the frame.",
+          "inspected": true
+        },
+        {
+          "id": "O05",
+          "start": 245.14285714285714,
+          "end": 254.14285714285714,
+          "subject": "Mechanical assembly",
+          "action": "is mounted vertically on a metallic base inside a dimly lit interior, with a long arm extending from it.",
+          "continuity": "interstellar-docking-source",
+          "detail": "closeup Evidence note: A dark, mechanical assembly stands on a square metallic pedestal. The assembly has a vertical post with two spherical caps, one red and one white, on top. A horizontal beam extends from the post to the right. In the background, a dark wall features a small digital display with green text and a blue panel with two red handwheels.",
+          "inspected": true
+        },
+        {
+          "id": "O06",
+          "start": 278.57142857142856,
+          "end": 287.57142857142856,
+          "subject": "Astronaut",
+          "action": "is shown in profile facing right, wearing a white and black suit with a metallic neck ring.",
+          "continuity": "interstellar-docking-source",
+          "detail": "closeup Evidence note: A man with short brown hair and a sweaty face is seen from the chest up. He is wearing a dark, bulky suit or harness over a lighter-colored garment, with a prominent silver ring around his neck. His gaze is directed downward and to the right. The background is out of focus, showing a bright, hazy environment with a large, reddish tubular structure.",
+          "inspected": true
+        }
+      ]
+    }
+  ],
+  "narration": {
+    "path": "voice/take_01.wav",
+    "script": "The Endurance’s",
+    "delivery": "One continuous, warm, confident explanation with natural phrasing and no artificial line breaks",
+    "generation": "continuous_take",
+    "alignment_path": "voice/words_01.json",
+    "alignment_method": "forced_alignment"
+  },
+  "beats": [
+    {
+      "id": "B01",
+      "word_first": 0,
+      "word_last": 0,
+      "role": "hook",
+      "claim": "The bright flare highlights the hull’s silhouette.",
+      "subject": "Distant ship",
+      "action": "is positioned behind a large metal hull structure, with a bright light flaring from the distant vessel against a dark starfield",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B02",
+      "word_first": 1,
+      "word_last": 0,
+      "role": "context",
+      "claim": "The hull’s corner points toward the flare, forming a visual line.",
+      "subject": "Ship hull",
+      "action": "is seen at an angle where its corner aligns with a distant bright light source in the lower right",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B03",
+      "word_first": 1,
+      "word_last": 0,
+      "role": "mechanism",
+      "claim": "The astronaut’s focus aligns with the camera’s low angle.",
+      "subject": "Astronaut",
+      "action": "is shown in close-up, facing left with an open mouth and a visible earpiece, with a blurred spacecraft or structure in the background",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B04",
+      "word_first": 1,
+      "word_last": 0,
+      "role": "mechanism",
+      "claim": "The Endurance’s port anchors the rotating scene.",
+      "subject": "Endurance spacecraft",
+      "action": "is positioned in space with its central docking port and surrounding pod structure visible against a planetary body.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B05",
+      "word_first": 1,
+      "word_last": 1,
+      "role": "payoff",
+      "claim": "Camera sync with spin makes docking readable.",
+      "subject": "Mechanical assembly",
+      "action": "is mounted vertically on a metallic base inside a dimly lit interior, with a long arm extending from it.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "asset": "A01",
+      "observation": "O01",
+      "start_frame": 0,
+      "end_frame": 13,
+      "source_in": 115.32,
+      "speed": 0.5,
+      "crop": [
+        810,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          886,
+          134,
+          456,
+          810
+        ],
+        [
+          886,
+          134,
+          456,
+          810
+        ],
+        [
+          886,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B01"
+      ],
+      "purpose": "The bright flare highlights the hull’s silhouette.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S02",
+      "asset": "A01",
+      "observation": "O02",
+      "start_frame": 13,
+      "end_frame": 14,
+      "source_in": 148.849,
+      "speed": 0.5,
+      "crop": [
+        752,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B02"
+      ],
+      "purpose": "The hull’s corner points toward the flare, forming a visual line.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S03",
+      "asset": "A01",
+      "observation": "O03",
+      "start_frame": 14,
+      "end_frame": 15,
+      "source_in": 182.277,
+      "speed": 0.5,
+      "crop": [
+        618,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          694,
+          134,
+          456,
+          810
+        ],
+        [
+          694,
+          134,
+          456,
+          810
+        ],
+        [
+          694,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B03"
+      ],
+      "purpose": "The astronaut’s focus aligns with the camera’s low angle.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S04",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 15,
+      "end_frame": 16,
+      "source_in": 215.706,
+      "speed": 0.5,
+      "crop": [
+        752,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B04"
+      ],
+      "purpose": "The Endurance’s port anchors the rotating scene.",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S05",
+      "asset": "A01",
+      "observation": "O05",
+      "start_frame": 16,
+      "end_frame": 898,
+      "source_in": 239.443,
+      "speed": 0.5,
+      "crop": [
+        464,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          540,
+          134,
+          456,
+          810
+        ],
+        [
+          540,
+          134,
+          456,
+          810
+        ],
+        [
+          540,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B05"
+      ],
+      "purpose": "Camera sync with spin makes docking readable.",
+      "production_gain_db": -24
+    }
+  ],
+  "captions": [
+    {
+      "word_first": 0,
+      "word_last": 1,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    }
+  ],
+  "audio": [],
+  "reviews": [
+    {
+      "criterion": "purpose",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Autonomous commissioning brief defines one viewer question and one visible scene-level payoff.",
+      "fingerprint": "ed2a5e5e7ff2f4573bdafa9ec82e876fc0e5f37df587a356d78b0dbe7f30d05c"
+    },
+    {
+      "criterion": "proof",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Groq vision inspected timestamped source frames; every beat is bound to one recorded observation and source range.",
+      "fingerprint": "ed2a5e5e7ff2f4573bdafa9ec82e876fc0e5f37df587a356d78b0dbe7f30d05c"
+    },
+    {
+      "criterion": "voice",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Narration was generated as one continuous take and force-aligned from the accepted recording.",
+      "fingerprint": "ed2a5e5e7ff2f4573bdafa9ec82e876fc0e5f37df587a356d78b0dbe7f30d05c"
+    },
+    {
+      "criterion": "framing",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Each shot uses a portrait crop centered from the inspected frame and three contained subject checkpoints.",
+      "fingerprint": "ed2a5e5e7ff2f4573bdafa9ec82e876fc0e5f37df587a356d78b0dbe7f30d05c"
+    },
+    {
+      "criterion": "readability",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Captions are derived from measured word times and constrained to the mobile-safe region and house CPS ceiling.",
+      "fingerprint": "ed2a5e5e7ff2f4573bdafa9ec82e876fc0e5f37df587a356d78b0dbe7f30d05c"
+    },
+    {
+      "criterion": "payoff",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "The final beat uses the chronologically last selected observation to resolve the opening visual question.",
+      "fingerprint": "ed2a5e5e7ff2f4573bdafa9ec82e876fc0e5f37df587a356d78b0dbe7f30d05c"
+    }
+  ]
+}
