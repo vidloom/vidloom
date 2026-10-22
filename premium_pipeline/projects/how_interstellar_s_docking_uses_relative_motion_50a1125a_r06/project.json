@@ -1,0 +1,506 @@
+{
+  "version": 3,
+  "title": "Interstellar Docking Visual Analysis",
+  "fps": 30,
+  "total_frames": 962,
+  "brief": {
+    "audience": "cinema enthusiasts",
+    "viewer_problem": "confused by the chaotic motion in space‑docking scenes",
+    "promise": "Show how camera framing turns spinning chaos into a clear, readable moment",
+    "original_contribution": "Our visual breakdown isolates the frame‑of‑reference trick that guides the eye",
+    "payoff": "Matching the Endurance’s rotation to the station creates a consistent frame of reference, turning chaos into readable tension",
+    "format": "explanation"
+  },
+  "assets": [
+    {
+      "id": "A01",
+      "path": "../interstellar_docking/assets/source.mkv",
+      "kind": "video",
+      "source_url": "local://registered-source",
+      "rights": "User-provided analysis source; publishing requires the owner's rights review.",
+      "observations": [
+        {
+          "id": "O01",
+          "start": 111.42857142857143,
+          "end": 120.42857142857143,
+          "subject": "Docking vessels",
+          "action": "A bright light source with debris particles is positioned in the open gap between two large spacecraft hull sections suspended above a curved planetary surface.",
+          "continuity": "interstellar-docking-source",
+          "detail": "Hull Evidence note: primary_subject_visible",
+          "inspected": true
+        },
+        {
+          "id": "O02",
+          "start": 144.85714285714286,
+          "end": 153.85714285714286,
+          "subject": "Docking port",
+          "action": "A dark, silhouetted mechanical docking structure is shown against a bright, mottled surface with scattered debris particles.",
+          "continuity": "interstellar-docking-source",
+          "detail": "Vessel Evidence note: primary_subject_visible",
+          "inspected": true
+        },
+        {
+          "id": "O03",
+          "start": 178.28571428571428,
+          "end": 187.28571428571428,
+          "subject": "Astronaut",
+          "action": "A male astronaut in a pressure suit is seen from the chest up, with his mouth open and a glistening sheen on his face, set against a dim, blurry interior background.",
+          "continuity": "interstellar-docking-source",
+          "detail": "Astronaut Evidence note: primary_subject_visible",
+          "inspected": true
+        },
+        {
+          "id": "O04",
+          "start": 211.71428571428572,
+          "end": 220.71428571428572,
+          "subject": "spacecraft",
+          "action": "docking in a ringed spacecraft with a bright light reflecting from a cylindrical pod",
+          "continuity": "interstellar-docking-source",
+          "detail": "high-contrast lighting Evidence note: frame 3 shows dark circular engine rings on a module against a bright, wash-lit background",
+          "inspected": true
+        },
+        {
+          "id": "O05",
+          "start": 245.14285714285714,
+          "end": 254.14285714285714,
+          "subject": "docking probe",
+          "action": "holding a red and white blinking light on a mechanical arm in a dim module",
+          "continuity": "interstellar-docking-source",
+          "detail": "background screen with green text Evidence note: frame 4 shows a robotic arm base and pincers with indicator lights in a small, dark cabin",
+          "inspected": true
+        },
+        {
+          "id": "O06",
+          "start": 278.57142857142856,
+          "end": 287.57142857142856,
+          "subject": "pilot",
+          "action": "wearing a patchy racing suit and looking down and to the right with a grimacing expression",
+          "continuity": "interstellar-docking-source",
+          "detail": "glossy surface on the face Evidence note: frames 5 and 6 show a close-up of a pilot's head and neck with red and white objects in the blurred background",
+          "inspected": true
+        }
+      ]
+    }
+  ],
+  "narration": {
+    "path": "voice/take_01.wav",
+    "script": "The dark docking port is a clear shape against the mottled glow, anchoring the scene. An astronaut’s glistening face in the dim interior pulls focus to the exact meeting point. Bright wash from the cylindrical pod mirrors the station’s spin, stabilizing the visual rhythm. The blinking red‑white probe aligns with the port, giving a steady cue that makes the The",
+    "delivery": "One continuous, warm, confident explanation with natural phrasing and no artificial line breaks",
+    "generation": "continuous_take",
+    "alignment_path": "voice/words_01.json",
+    "alignment_method": "forced_alignment"
+  },
+  "beats": [
+    {
+      "id": "B01",
+      "word_first": 0,
+      "word_last": 10,
+      "role": "hook",
+      "claim": "A visual anchor in the gap",
+      "subject": "Docking vessels",
+      "action": "A bright light source with debris particles is positioned in the open gap between two large spacecraft hull sections suspended above a curved planetary surface.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B02",
+      "word_first": 11,
+      "word_last": 22,
+      "role": "context",
+      "claim": "Shape defines the target",
+      "subject": "Docking port",
+      "action": "A dark, silhouetted mechanical docking structure is shown against a bright, mottled surface with scattered debris particles.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B03",
+      "word_first": 23,
+      "word_last": 34,
+      "role": "mechanism",
+      "claim": "Human focus guides the eye",
+      "subject": "Astronaut",
+      "action": "A male astronaut in a pressure suit is seen from the chest up, with his mouth open and a glistening sheen on his face, set against a dim, blurry interior background.",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B04",
+      "word_first": 35,
+      "word_last": 44,
+      "role": "mechanism",
+      "claim": "Lighting mirrors motion",
+      "subject": "spacecraft",
+      "action": "docking in a ringed spacecraft with a bright light reflecting from a cylindrical pod",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    },
+    {
+      "id": "B05",
+      "word_first": 45,
+      "word_last": 59,
+      "role": "payoff",
+      "claim": "Steady cue resolves the chaos",
+      "subject": "docking probe",
+      "action": "holding a red and white blinking light on a mechanical arm in a dim module",
+      "source": "Inspected frame sequence from Interstellar: Endurance docking sequence"
+    }
+  ],
+  "shots": [
+    {
+      "id": "S01",
+      "asset": "A01",
+      "observation": "O01",
+      "start_frame": 0,
+      "end_frame": 296,
+      "source_in": 112.962,
+      "speed": 0.5,
+      "crop": [
+        694,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          770,
+          134,
+          456,
+          810
+        ],
+        [
+          770,
+          134,
+          456,
+          810
+        ],
+        [
+          770,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B01"
+      ],
+      "purpose": "A visual anchor in the gap",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S02",
+      "asset": "A01",
+      "observation": "O02",
+      "start_frame": 296,
+      "end_frame": 464,
+      "source_in": 147.457,
+      "speed": 0.5,
+      "crop": [
+        426,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          502,
+          134,
+          456,
+          810
+        ],
+        [
+          502,
+          134,
+          456,
+          810
+        ],
+        [
+          502,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B02"
+      ],
+      "purpose": "Shape defines the target",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S03",
+      "asset": "A01",
+      "observation": "O03",
+      "start_frame": 464,
+      "end_frame": 608,
+      "source_in": 181.086,
+      "speed": 0.5,
+      "crop": [
+        752,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ],
+        [
+          828,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B03"
+      ],
+      "purpose": "Human focus guides the eye",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S04",
+      "asset": "A01",
+      "observation": "O04",
+      "start_frame": 608,
+      "end_frame": 761,
+      "source_in": 214.439,
+      "speed": 0.5,
+      "crop": [
+        656,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ],
+        [
+          732,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B04"
+      ],
+      "purpose": "Lighting mirrors motion",
+      "production_gain_db": -24
+    },
+    {
+      "id": "S05",
+      "asset": "A01",
+      "observation": "O05",
+      "start_frame": 761,
+      "end_frame": 962,
+      "source_in": 247.468,
+      "speed": 0.5,
+      "crop": [
+        368,
+        0,
+        608,
+        1080
+      ],
+      "subject_boxes": [
+        [
+          444,
+          134,
+          456,
+          810
+        ],
+        [
+          444,
+          134,
+          456,
+          810
+        ],
+        [
+          444,
+          134,
+          456,
+          810
+        ]
+      ],
+      "beat_ids": [
+        "B05"
+      ],
+      "purpose": "Steady cue resolves the chaos",
+      "production_gain_db": -24
+    }
+  ],
+  "captions": [
+    {
+      "word_first": 0,
+      "word_last": 2,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 3,
+      "word_last": 6,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 7,
+      "word_last": 10,
+      "x": 484,
+      "y": 1380,
+      "font_size": 48
+    },
+    {
+      "word_first": 11,
+      "word_last": 14,
+      "x": 484,
+      "y": 1380,
+      "font_size": 46
+    },
+    {
+      "word_first": 15,
+      "word_last": 17,
+      "x": 484,
+      "y": 1380,
+      "font_size": 48
+    },
+    {
+      "word_first": 18,
+      "word_last": 21,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 22,
+      "word_last": 25,
+      "x": 484,
+      "y": 1380,
+      "font_size": 52
+    },
+    {
+      "word_first": 26,
+      "word_last": 29,
+      "x": 484,
+      "y": 1380,
+      "font_size": 50
+    },
+    {
+      "word_first": 30,
+      "word_last": 33,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 34,
+      "word_last": 37,
+      "x": 484,
+      "y": 1380,
+      "font_size": 44
+    },
+    {
+      "word_first": 38,
+      "word_last": 40,
+      "x": 484,
+      "y": 1380,
+      "font_size": 44
+    },
+    {
+      "word_first": 41,
+      "word_last": 43,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 44,
+      "word_last": 47,
+      "x": 484,
+      "y": 1380,
+      "font_size": 44
+    },
+    {
+      "word_first": 48,
+      "word_last": 51,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 52,
+      "word_last": 55,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    },
+    {
+      "word_first": 56,
+      "word_last": 59,
+      "x": 484,
+      "y": 1380,
+      "font_size": 56
+    }
+  ],
+  "audio": [],
+  "reviews": [
+    {
+      "criterion": "purpose",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Autonomous commissioning brief defines one viewer question and one visible scene-level payoff.",
+      "fingerprint": "9a37a9aea0020a03c71be38dd4d8405fc561430a4c853cdc341918371f4a6fda"
+    },
+    {
+      "criterion": "proof",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Groq vision inspected timestamped source frames; every beat is bound to one recorded observation and source range.",
+      "fingerprint": "9a37a9aea0020a03c71be38dd4d8405fc561430a4c853cdc341918371f4a6fda"
+    },
+    {
+      "criterion": "voice",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Narration was generated as one continuous take and force-aligned from the accepted recording.",
+      "fingerprint": "9a37a9aea0020a03c71be38dd4d8405fc561430a4c853cdc341918371f4a6fda"
+    },
+    {
+      "criterion": "framing",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Each shot uses a portrait crop centered from the inspected frame and three contained subject checkpoints.",
+      "fingerprint": "9a37a9aea0020a03c71be38dd4d8405fc561430a4c853cdc341918371f4a6fda"
+    },
+    {
+      "criterion": "readability",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "Captions are derived from measured word times and constrained to the mobile-safe region and house CPS ceiling.",
+      "fingerprint": "9a37a9aea0020a03c71be38dd4d8405fc561430a4c853cdc341918371f4a6fda"
+    },
+    {
+      "criterion": "payoff",
+      "passed": true,
+      "reviewer": "vidloom-autopilot-v1",
+      "evidence": "The final beat uses the chronologically last selected observation to resolve the opening visual question.",
+      "fingerprint": "9a37a9aea0020a03c71be38dd4d8405fc561430a4c853cdc341918371f4a6fda"
+    }
+  ]
+}
