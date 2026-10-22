@@ -142,10 +142,10 @@ def inspect_frames(frames: list[dict], *, movie: str, scene: str) -> list[dict]:
 
     client = Groq(api_key=api_key)
     observations = []
-    # One compact call stays below Groq's free-tier 1,000 OTPM ceiling and avoids
-    # spending that allowance twice for the same six-frame inspection.
-    for offset in range(0, len(frames), 6):
-        batch = frames[offset:offset + 6]
+    # The vision model accepts three images per request. Two compact 450-token
+    # calls also stay within Groq's free-tier 1,000 output-token/minute ceiling.
+    for offset in range(0, len(frames), 3):
+        batch = frames[offset:offset + 3]
         text = f"""Inspect these ordered frames from {movie}, {scene}. Each frame is labelled in this
 request by image_index and timestamp. Describe only what is visibly established in that single
 frame. Use a short stable subject name and literal action/state wording. center_x is the primary
@@ -159,7 +159,7 @@ Frames: {json.dumps([{'image_index': f['index'], 'timestamp': round(f['time'], 3
             messages=[{"role": "user", "content": content}],
             response_format={"type": "json_schema", "json_schema": {"name": "frame_observations", "strict": True, "schema": OBSERVATION_SCHEMA}},
             reasoning_effort="low",
-            max_completion_tokens=900,
+            max_completion_tokens=450,
         )
         payload = json.loads(response.choices[0].message.content or "{}")
         observations.extend(payload.get("observations", []))
