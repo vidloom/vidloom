@@ -210,21 +210,22 @@ include hook first and payoff last. Return only the schema-constrained object.""
                 reasoning_format="hidden",
                 max_completion_tokens=2600,
             )
-            package = json.loads(response.choices[0].message.content or "{}")
+            candidate = json.loads(response.choices[0].message.content or "{}")
+            beats = candidate.get("beats", [])
+            if len(beats) != 5 or beats[0].get("role") != "hook" or beats[-1].get("role") != "payoff":
+                raise ValueError("draft did not return the required five-beat arc")
+            indices = [int(beat["observation_index"]) for beat in beats]
+            if indices != sorted(indices) or any(index < 0 or index >= len(observations) for index in indices):
+                raise ValueError("draft selected invalid or non-chronological observations")
+            count = len(words(" ".join(beat["narration"] for beat in beats)))
+            if not 52 <= count <= 84:
+                raise ValueError(f"draft length {count} is outside the autonomous safety range")
+            package = candidate
             break
         except Exception as error:
             last_error = error
     if package is None:
         raise RuntimeError(f"Script generation failed after three structured-output attempts: {last_error}")
-    beats = package.get("beats", [])
-    if len(beats) != 5 or beats[0].get("role") != "hook" or beats[-1].get("role") != "payoff":
-        raise RuntimeError("Script model did not return the required five-beat arc")
-    indices = [int(beat["observation_index"]) for beat in beats]
-    if indices != sorted(indices) or any(index < 0 or index >= len(observations) for index in indices):
-        raise RuntimeError("Script selected invalid or non-chronological observations")
-    count = len(words(" ".join(beat["narration"] for beat in beats)))
-    if not 52 <= count <= 84:
-        raise RuntimeError(f"Script length {count} is outside the autonomous safety range")
     return package
 
 
