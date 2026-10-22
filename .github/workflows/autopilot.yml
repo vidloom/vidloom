@@ -20,7 +20,9 @@ permissions:
   contents: write
 
 concurrency:
-  group: vidloom-autonomous-creator
+  # All jobs that write queue/config state share one lane. Rendering can take
+  # time, but serialized writes are preferable to losing production state.
+  group: vidloom-control-plane
   cancel-in-progress: false
 
 jobs:
