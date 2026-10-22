@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 
 from automation.schedule import next_publish_slot, requested_or_next
 from automation.production import select_item
+from automation.autopilot import autopilot_mode, recoverable_idea
 
 
 CONFIG = {
@@ -52,6 +53,23 @@ class ScheduleTests(unittest.TestCase):
         now = datetime(2026, 10, 20, 1, 30, tzinfo=timezone.utc)
         first = next_publish_slot(config, now)
         self.assertEqual(first.isoformat(), "2026-10-20T08:00:00+05:30")
+
+
+class AutopilotTests(unittest.TestCase):
+    def test_buffer_counts_active_work_before_commissioning(self):
+        config = {"automation": {"creator_enabled": True, "finished_buffer_target": 3}}
+        queue = {"items": [{"status": "ready"}, {"status": "scheduled"}]}
+        ideas = {"items": [{"id": "new", "status": "scripting"}]}
+        state = autopilot_mode(config, queue, ideas)
+        self.assertEqual(state["gap"], 0)
+        self.assertEqual(state["mode"], "creating")
+
+    def test_blocked_idea_is_retried_only_within_limit(self):
+        config = {"automation": {"automatic_retries": True, "maximum_job_retries": 3}}
+        ideas = {"items": [{"id": "retry", "origin": "autopilot", "status": "blocked", "attempts": 2}]}
+        self.assertEqual(recoverable_idea(config, ideas)["id"], "retry")
+        ideas["items"][0]["attempts"] = 3
+        self.assertIsNone(recoverable_idea(config, ideas))
 
 
 if __name__ == "__main__":

@@ -106,6 +106,17 @@ def set_idea_state(idea_id: str, status: str, stage: str, progress: int, error: 
     return idea
 
 
+def begin_idea_attempt(idea_id: str) -> dict:
+    document = load_json(IDEAS_PATH)
+    idea = next((item for item in document.get("items", []) if item["id"] == idea_id), None)
+    if not idea:
+        raise ValueError(f"Unknown idea: {idea_id}")
+    idea["attempts"] = int(idea.get("attempts", 0)) + 1
+    idea.update({"status": "analyzing", "stage": "Inspecting source frames", "progress": 16, "updated_at": iso_z(), "last_error": None})
+    atomic_write_json(IDEAS_PATH, document)
+    return idea
+
+
 def extract_frames(source: Path, destination: Path, start: float, end: float, count: int = 6) -> list[dict]:
     destination.mkdir(parents=True, exist_ok=True)
     padding = min(4.0, max(0.0, (end - start) / 20))
@@ -114,7 +125,7 @@ def extract_frames(source: Path, destination: Path, start: float, end: float, co
     frames = []
     for index, timestamp in enumerate(timestamps):
         target = destination / f"frame_{index:02d}.jpg"
-        run(["ffmpeg", "-y", "-ss", f"{timestamp:.3f}", "-i", str(source), "-frames:v", "1", "-vf", "scale=960:-2", "-q:v", "2", str(target)])
+        run(["ffmpeg", "-y", "-ss", f"{timestamp:.3f}", "-i", str(source), "-frames:v", "1", "-update", "1", "-vf", "scale=960:-2", "-q:v", "2", str(target)])
         frames.append({"index": index, "time": timestamp, "path": target})
     return frames
 
@@ -181,15 +192,26 @@ visually decisive observation. Natural connected speech only: no chopped fragmen
 engagement bait, unsupported superlatives, exact timing, or broad claims about other films. Select
 observation indexes in chronological order. Roles must include hook first and payoff last. Return
 only the schema-constrained object."""
-    response = Groq(api_key=os.environ["GROQ_API_KEY"]).chat.completions.create(
-        model=model,
-        messages=[{"role": "system", "content": system}, {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}],
-        response_format={"type": "json_schema", "json_schema": {"name": "vidloom_script", "strict": True, "schema": SCRIPT_SCHEMA}},
-        reasoning_effort="high",
-        reasoning_format="hidden",
-        max_completion_tokens=2600,
-    )
-    package = json.loads(response.choices[0].message.content or "{}")
+    client = Groq(api_key=os.environ["GROQ_API_KEY"])
+    package = None
+    last_error = None
+    for attempt, effort in enumerate(("high", "medium", "low"), start=1):
+        try:
+            retry_note = "" if attempt == 1 else f"\nRetry {attempt}: return every required field and exactly five beat objects; output no prose."
+            response = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "system", "content": system + retry_note}, {"role": "user", "content": json.dumps(packet, ensure_ascii=False)}],
+                response_format={"type": "json_schema", "json_schema": {"name": "vidloom_script", "strict": True, "schema": SCRIPT_SCHEMA}},
+                reasoning_effort=effort,
+                reasoning_format="hidden",
+                max_completion_tokens=2600,
+            )
+            package = json.loads(response.choices[0].message.content or "{}")
+            break
+        except Exception as error:
+            last_error = error
+    if package is None:
+        raise RuntimeError(f"Script generation failed after three structured-output attempts: {last_error}")
     beats = package.get("beats", [])
     if len(beats) != 5 or beats[0].get("role") != "hook" or beats[-1].get("role") != "payoff":
         raise RuntimeError("Script model did not return the required five-beat arc")
@@ -405,7 +427,7 @@ def enqueue_created(idea: dict, project_path: Path) -> str:
 
 
 def create(idea_id: str) -> str:
-    idea = set_idea_state(idea_id, "analyzing", "Inspecting source frames", 16)
+    idea = begin_idea_attempt(idea_id)
     source_doc = load_json(SOURCES_PATH)
     source = next((item for item in source_doc.get("items", []) if item["id"] == idea["source_id"]), None)
     if not source:
@@ -415,7 +437,7 @@ def create(idea_id: str) -> str:
         raise RuntimeError(f"Registered source is unavailable on the production host: {source['path']}")
     width, height, duration = probe_video(source_path)
     source["end"] = min(float(source["end"]), duration)
-    project_dir = ROOT / "premium_pipeline" / "projects" / slugify(idea["id"])
+    project_dir = ROOT / "premium_pipeline" / "projects" / f"{slugify(idea['id'])}_r{int(idea['attempts']):02d}"
     if project_dir.exists():
         raise RuntimeError(f"Project directory already exists: {project_dir}")
     project_dir.mkdir(parents=True)

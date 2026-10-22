@@ -189,6 +189,7 @@ def create_idea(*, request: str | None = None) -> dict:
         "status": "planned",
         "stage": "Idea approved",
         "progress": 8,
+        "attempts": 0,
         "created_at": iso_z(),
         "updated_at": iso_z(),
         "last_error": None,
@@ -234,6 +235,18 @@ def recoverable_item(config: dict, queue_doc: dict) -> dict | None:
     ), None)
 
 
+def recoverable_idea(config: dict, ideas_doc: dict) -> dict | None:
+    if not config["automation"].get("automatic_retries", True):
+        return None
+    maximum = int(config["automation"].get("maximum_job_retries", 3))
+    return next((
+        item for item in ideas_doc.get("items", [])
+        if item.get("status") == "blocked"
+        and item.get("origin") in {"autopilot", "manual"}
+        and int(item.get("attempts", 0)) < maximum
+    ), None)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Maintain Vidloom's finished-video buffer and commission new work automatically.")
     parser.add_argument("--request", help="Optional owner request; treated as an extra video outside the automatic buffer rule")
@@ -245,19 +258,24 @@ def main() -> None:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         config = load_json(CONFIG_PATH)
         queue_doc = load_json(QUEUE_PATH)
-        recovery = recoverable_item(config, queue_doc) if args.execute and not args.request else None
-        items = [] if recovery else plan_cycle(request=args.request, force=args.force)
+        ideas_doc = load_json(IDEAS_PATH)
+        queue_recovery = recoverable_item(config, queue_doc) if args.execute and not args.request else None
+        idea_recovery = recoverable_idea(config, ideas_doc) if args.execute and not args.request and not queue_recovery else None
+        if idea_recovery:
+            idea_recovery.update({"status": "planned", "stage": "Automatic retry queued", "progress": 8, "last_error": None, "updated_at": iso_z()})
+            atomic_write_json(IDEAS_PATH, ideas_doc)
+        items = [idea_recovery] if idea_recovery else [] if queue_recovery else plan_cycle(request=args.request, force=args.force)
         built = []
         if args.execute:
             from automation.creator import create, set_idea_state
             from automation.production import process
-            if recovery:
-                recovery["status"] = "build_ready"
-                recovery["stage"] = "Automatic retry queued"
-                recovery["last_error"] = None
+            if queue_recovery:
+                queue_recovery["status"] = "build_ready"
+                queue_recovery["stage"] = "Automatic retry queued"
+                queue_recovery["last_error"] = None
                 atomic_write_json(QUEUE_PATH, queue_doc)
-                process("build", recovery["id"], dry_run=False, force=True)
-                built.append(recovery["id"])
+                process("build", queue_recovery["id"], dry_run=False, force=True)
+                built.append(queue_recovery["id"])
             for item in items:
                 try:
                     queue_id = create(item["id"])
@@ -267,7 +285,8 @@ def main() -> None:
                 except Exception as error:
                     set_idea_state(item["id"], "blocked", "Needs attention", 0, str(error))
                     raise
-    print(json.dumps({"created": len(items), "recovered": recovery["id"] if recovery else None, "idea_ids": [item["id"] for item in items], "built_ids": built}, indent=2))
+    recovered = queue_recovery["id"] if queue_recovery else idea_recovery["id"] if idea_recovery else None
+    print(json.dumps({"created": len(items) if not recovered else 0, "recovered": recovered, "idea_ids": [item["id"] for item in items], "built_ids": built}, indent=2))
 
 
 if __name__ == "__main__":
