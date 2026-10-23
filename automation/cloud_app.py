@@ -9,7 +9,7 @@ store = modal.Dict.from_name("vidloom-control-v2", create_if_missing=True)
 secret = modal.Secret.from_name("vidloom-runtime")
 base = modal.Image.debian_slim(python_version="3.11").pip_install("fastapi==0.115.12", "httpx==0.28.1")
 control_image = (base
-    .env({"PYTHONPATH": "/app"})
+    .env({"PYTHONPATH": "/app:/app/premium_pipeline/v3"})
     .add_local_dir(ROOT / "automation", "/app/automation", ignore=["**/__pycache__/**", "tests/**"], copy=True))
 image = (base.apt_install("ffmpeg", "curl", "libespeak-ng1", "fonts-liberation", "fonts-dejavu-core")
     .pip_install("groq==1.7.0", "kokoro-onnx==0.6.1", "soundfile==0.13.1", "jsonschema==4.25.1",
@@ -22,7 +22,7 @@ image = (base.apt_install("ffmpeg", "curl", "libespeak-ng1", "fonts-liberation",
         "curl -fL --retry 4 -o /app/models/kokoro/voices.bin "
         "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files/voices.bin"
     )
-    .env({"OMP_NUM_THREADS": "4", "PYTHONPATH": "/app"})
+    .env({"OMP_NUM_THREADS": "4", "PYTHONPATH": "/app:/app/premium_pipeline/v3"})
     .add_local_dir(ROOT / "automation", "/app/automation", ignore=["**/__pycache__/**", "tests/**"], copy=True)
     .add_local_dir(ROOT / "premium_pipeline/v3", "/app/premium_pipeline/v3", ignore=["**/__pycache__/**", "tests/**"], copy=True))
 

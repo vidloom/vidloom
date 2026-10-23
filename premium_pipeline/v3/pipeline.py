@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 import jsonschema
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from schema import SCHEMA
 
 CRITERIA = {"purpose", "proof", "voice", "framing", "readability", "payoff"}
