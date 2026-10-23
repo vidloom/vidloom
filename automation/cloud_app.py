@@ -96,11 +96,81 @@ def api():
         return JSONResponse({"error": "Not found"}, status_code=404)
     return web
 
+
+@app.function(image=image, secrets=[secret], volumes={"/data": volume},
+              cpu=(2, 4), memory=(4096, 8192), timeout=1800, max_containers=1,
+              scaledown_window=2, retries=0)
+def render_and_upload_project(project_rel_path: str, test: bool = False):
+    import json, os, subprocess, sys, time, uuid
+    from pathlib import Path
+    from automation.cloud_runtime import Recorder, now, upload, youtube_client, RATE_RESERVED, RATE_UPPER
+
+    started = time.monotonic()
+    runtime = store.get("runtime", {"jobs": [], "events": [], "active": None})
+    cfg = store.get("config", {})
+
+    project_dir = Path("/data") / project_rel_path
+    project_path = project_dir / "project.json"
+    pipeline_py = Path("/app/premium_pipeline/v3/pipeline.py")
+
+    with open(project_path) as f:
+        project = json.load(f)
+
+    job_id = "v-jack-" + uuid.uuid4().hex[:8]
+    job = {
+        "id": job_id,
+        "title": project.get("title", "The Greatest Character Entrance in Cinema History")[:100],
+        "status": "building",
+        "created_at": now(),
+        "steps": [],
+        "description": "#Shorts #PiratesOfTheCaribbean #CinemaAnalysis" + chr(10) + chr(10) + "Captain Jack Sparrow's iconic entrance analyzed." + chr(10) + "Fair use film critique and cinematic commentary.",
+    }
+    runtime["jobs"].insert(0, job)
+    rec = Recorder(store, runtime, job)
+    rec.save()
+
+    with rec.step("Validate project"):
+        subprocess.run([sys.executable, str(pipeline_py), "validate", str(project_path)], check=True)
+
+    with rec.step("Render 1080x1920 master with highlighted captions"):
+        subprocess.run([sys.executable, str(pipeline_py), "render", str(project_path), "--encoder", "libx264"], check=True)
+
+    with rec.step("Decode and loudness quality control"):
+        subprocess.run([sys.executable, str(pipeline_py), "qc", str(project_path)], check=True)
+        video = project_dir / "build" / "draft.mp4"
+        job.update(status="ready", video_path=str(video))
+        rec.save()
+        volume.commit()
+
+    with rec.step("YouTube upload & schedule"):
+        upload(job, video, rec, runtime, store, volume, test=test)
+        runtime["last_success_at"] = now()
+
+    elapsed = time.monotonic() - started
+    job["elapsed_seconds"] = round(elapsed, 3)
+    job["cost"] = {
+        "modal_reserved_usd": round((elapsed + 2) * RATE_RESERVED, 6),
+        "modal_upper_usd": round((elapsed + 2) * RATE_UPPER, 6),
+        "actual_invoice_usd": None,
+        "groq_actual_usd": 0.0,
+        "groq_plan_assumption": "User free tier; no paid billing enabled by Vidloom",
+        "includes": "Function wall time and 2-second idle allowance; excludes image build/cold start and control calls",
+    }
+    runtime["active"] = None
+    runtime["updated_at"] = now()
+    store["runtime"] = runtime
+    volume.commit()
+    return {"status": job["status"], "job": job}
+
 @app.local_entrypoint()
-def main(test: bool = False, status: bool = False):
+def main(test: bool = False, status: bool = False, render_project: str = "", jack: bool = False):
     import json
     if status:
         from automation.cloud_runtime import public_state
         print(json.dumps(public_state(store), indent=2))
+    elif jack:
+        print(json.dumps(render_and_upload_project.remote("projects/jack_sparrow_entrance", test=test), indent=2))
+    elif render_project:
+        print(json.dumps(render_and_upload_project.remote(render_project, test=test), indent=2))
     else:
         print(json.dumps(cycle.remote(test=test), indent=2))
