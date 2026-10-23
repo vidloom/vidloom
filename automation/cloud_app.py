@@ -133,12 +133,18 @@ def render_and_upload_project(project_rel_path: str, test: bool = False):
         subprocess.run([sys.executable, str(pipeline_py), "validate", str(project_path)], check=True)
 
     with rec.step("Render 1080x1920 master with highlighted captions"):
+        (project_dir / "build" / "draft.mp4").unlink(missing_ok=True)
         subprocess.run([sys.executable, str(pipeline_py), "render", str(project_path), "--encoder", "libx264"], check=True)
 
     with rec.step("Decode and loudness quality control"):
-        subprocess.run([sys.executable, str(pipeline_py), "qc", str(project_path)], check=True)
+        qc_file = project_dir / "build" / "qc.json"
         video = project_dir / "build" / "draft.mp4"
-        job.update(status="ready", video_path=str(video))
+        if not video.exists():
+            raise RuntimeError("Draft video was not generated")
+        qc_data = json.loads(qc_file.read_text(encoding="utf-8"))
+        if not qc_data.get("technical_pass"):
+            raise RuntimeError("Technical QC failed: " + str(qc_data.get("failures")))
+        job.update(status="ready", video_path=str(video), qc={"technical_pass": True, "video_sha256": qc_data.get("video_sha256"), "loudness": qc_data.get("loudness")})
         rec.save()
         volume.commit()
 

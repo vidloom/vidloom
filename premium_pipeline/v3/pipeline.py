@@ -402,6 +402,7 @@ def main():
     write(build/"plan.json",{"fingerprint":fingerprint(p,root),"command":command,"shots":p["shots"]})
     if args.command == "plan":
         print(f"Plan written: {build}. No video rendered."); return
+    (build / "draft.mp4").unlink(missing_ok=True)
     subprocess.run(command,cwd=build,check=True)
     result = qc(build/"draft.mp4",p)
     write(build/"qc.json",result)
