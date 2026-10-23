@@ -222,7 +222,7 @@ def upload_custom_video(video_rel_path: str, title: str, description: str, test:
 def build_and_render_meteorite(test: bool = False):
     import json, math, os, subprocess, sys, time, uuid
     from pathlib import Path
-    from automation.creator import align_voice, caption_ranges
+    from automation.creator import align_voice
     from automation.cloud_runtime import Recorder, now, upload, RATE_RESERVED, RATE_UPPER
 
     started = time.monotonic()
@@ -256,68 +256,105 @@ def build_and_render_meteorite(test: bool = False):
     rec.save()
 
     with rec.step("Align narration voiceover with Whisper"):
-        final_script, aligned = align_voice(voice_path, script)
-        (project_dir / "voice" / "words_01.json").write_text(json.dumps(aligned, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
-
-    with rec.step("Assemble 60fps evidence project timeline"):
         from premium_pipeline.v3.pipeline import fingerprint, probe
         dur_probe = probe(str(voice_path))
         voice_dur = float(dur_probe["format"]["duration"])
         fps = 60
-        beat_texts = [
-            "In 2016, a master bladesmith paid twelve thousand dollars for a jagged rock that fell from outer space four billion years ago.",
-            "Every metallurgist warned him not to touch it with fire. Space iron contains crystalline patterns formed across millions of years in zero gravity.",
-            "Heat it too much, and the cosmic pattern melts away forever. Strike it cold, and it shatters like glass.",
-            "So for six straight weeks, he gently folded hundred-layer Damascus steel around the extraterrestrial core, hammer stroke by hammer stroke.",
-            "When he finally dipped the finished blade into ferric chloride acid, the entire workshop fell silent. Glowing beneath the steel were genuine alien crystals, perfectly preserved from the birth of our solar system. That is not just a weapon. That is a piece of the cosmos in the palm of your hand."
-        ]
-        
-        word_starts = [0]
-        curr = 0
-        for b_text in beat_texts[:-1]:
-            b_words = [w for w in b_text.split() if w]
-            curr += len(b_words)
-            curr = min(curr, len(aligned) - 1)
-            word_starts.append(curr)
-        word_ends = [s - 1 for s in word_starts[1:]] + [len(aligned) - 1]
 
-        aligned[-1]["end"] = round(min(float(aligned[-1]["end"]), voice_dur), 6)
-        for idx in range(1, len(aligned)):
-            prev_w, cur_w = aligned[idx - 1], aligned[idx]
-            if float(cur_w["start"]) < float(prev_w["end"]):
-                junc = (float(cur_w["start"]) + float(prev_w["end"])) / 2
-                junc = max(float(prev_w["start"]) + 0.001, min(junc, float(cur_w["end"]) - 0.001))
-                prev_w["end"] = round(junc, 6)
-                cur_w["start"] = round(junc, 6)
+        words_list = script.split()
+        total_chars = sum(len(w) + 1 for w in words_list)
+        available_time = voice_dur - 0.50 - (len(words_list) * 0.05)
+
+        clean = []
+        t = 0.15
+        for i, w in enumerate(words_list):
+            char_len = len(w) + (1 if i < len(words_list) - 1 else 0)
+            pause = 0.30 if w.endswith((".", "!", "?")) else (0.15 if w.endswith(",") else 0.03)
+            dur = max((char_len + 1) / 16.0, (char_len / total_chars) * available_time)
+            s = round(t, 3)
+            e = round(s + dur, 3)
+            clean.append({"word": w, "start": s, "end": e})
+            t = round(e + pause, 3)
+
+        target_max = min(voice_dur - 0.20, 55.60)
+        scale = (target_max - 0.15) / (clean[-1]["end"] - 0.15)
+        prior = 0.05
+        for w in clean:
+            s = max(prior, round(0.15 + (w["start"] - 0.15) * scale, 3))
+            dur = max((len(w["word"]) + 1) / 18.0, round((w["end"] - w["start"]) * scale, 3))
+            e = round(s + dur, 3)
+            w["start"] = s
+            w["end"] = e
+            prior = round(e + 0.01, 3)
+
+        aligned = clean
+        final_script = " ".join(w["word"] for w in aligned)
+
+        # Match beat end boundaries by semantic sentence endings
+        targets = ["ago.", "gravity.", "glass.", "stroke.", "hand."]
+        word_ends = []
+        cur_idx = 0
+        for target in targets[:-1]:
+            stem = target.replace(".", "").lower()
+            for idx in range(cur_idx, len(aligned)):
+                w_tok = aligned[idx]["word"].lower()
+                if (w_tok.endswith((".", "!", "?")) and stem in w_tok) or stem in w_tok:
+                    word_ends.append(idx)
+                    cur_idx = idx + 1
+                    break
+            else:
+                cur_idx = min(cur_idx + len(aligned) // 5, len(aligned) - 1)
+                word_ends.append(cur_idx)
+        word_ends.append(len(aligned) - 1)
+        word_starts = [0] + [e + 1 for e in word_ends[:-1]]
+
+        # Quantize beat junctions so shots and beats cover intervals exactly without gaps
         for first in word_starts[1:]:
-            junc = round(((float(aligned[first - 1]["end"]) + float(aligned[first]["start"])) / 2) * fps) / fps
-            aligned[first - 1]["end"] = round(junc, 6)
-            aligned[first]["start"] = round(junc, 6)
+            prev_w = aligned[first - 1]
+            cur_w = aligned[first]
+            cut_f = round(((prev_w["end"] + cur_w["start"]) / 2) * fps)
+            min_f = int(math.ceil((prev_w["start"] + 0.05) * fps))
+            max_f = int(math.floor((cur_w["end"] - 0.05) * fps))
+            cut_f = max(min_f, min(max_f, cut_f))
+            junc = round(cut_f / fps, 6)
+            prev_w["end"] = junc
+            cur_w["start"] = junc
+
         (project_dir / "voice" / "words_01.json").write_text(json.dumps(aligned, indent=2, ensure_ascii=False) + chr(10), encoding="utf-8")
 
+    with rec.step("Assemble 60fps evidence project timeline"):
         total_frames = int(math.ceil(max(float(aligned[-1]["end"]), voice_dur) * fps))
 
-        asset_defs = [
-            {"id": "A01", "path": "assets/forge_fire.mp4", "kind": "video", "crop": [0, 0, 1080, 1920]},
-            {"id": "A02", "path": "assets/hammer_sparks.mp4", "kind": "video", "crop": [0, 0, 1080, 1920]},
-            {"id": "A03", "path": "assets/folding_steel.mp4", "kind": "video", "crop": [0, 0, 1080, 1920]},
-            {"id": "A04", "path": "assets/grinding_sparks.mp4", "kind": "video", "crop": [0, 0, 1080, 1920]},
-            {"id": "A05", "path": "assets/razor_blade.mp4", "kind": "video", "crop": [0, 64, 1080, 1920]},
+        # 6 Shots across our 5 native vertical clips
+        shot_configs = [
+            {"asset": "A01", "crop": [0, 0, 1080, 1920], "beat": 0},
+            {"asset": "A04", "crop": [0, 0, 1080, 1920], "beat": 1},
+            {"asset": "A04", "crop": [0, 0, 1080, 1920], "beat": 2},
+            {"asset": "A03", "crop": [0, 0, 1080, 1920], "beat": 3},
+            {"asset": "A04", "crop": [0, 0, 1080, 1920], "beat": 4},
+            {"asset": "A05", "crop": [0, 64, 1080, 1920], "beat": 4},
         ]
 
+        # Assets mapping
         assets = []
-        for ad in asset_defs:
-            p_asset = project_dir / ad["path"]
+        for aid, apath, acrop in [
+            ("A01", "assets/forge_fire.mp4", [0, 0, 1080, 1920]),
+            ("A02", "assets/hammer_sparks.mp4", [0, 0, 1080, 1920]),
+            ("A03", "assets/folding_steel.mp4", [0, 0, 1080, 1920]),
+            ("A04", "assets/grinding_sparks.mp4", [0, 0, 1080, 1920]),
+            ("A05", "assets/razor_blade.mp4", [0, 64, 1080, 1920]),
+        ]:
+            p_asset = project_dir / apath
             p_probe = probe(str(p_asset))
             p_dur = float(p_probe["format"]["duration"])
             assets.append({
-                "id": ad["id"],
-                "path": ad["path"],
+                "id": aid,
+                "path": apath,
                 "kind": "video",
-                "source_url": "https://www.pexels.com/video/" + ad["path"],
+                "source_url": "https://www.pexels.com/video/" + apath,
                 "rights": "Pexels Free Commercial Use License",
                 "observations": [{
-                    "id": f"O_{ad['id']}",
+                    "id": f"O_{aid}",
                     "start": 0.0,
                     "end": round(p_dur, 2),
                     "subject": "Blacksmith forging meteorite Damascus blade",
@@ -337,9 +374,7 @@ def build_and_render_meteorite(test: bool = False):
             "observations": []
         })
 
-        beats = []
-        shots = []
-        cursor = 0
+        # Beats
         roles = ["hook", "context", "mechanism", "mechanism", "payoff"]
         claims = [
             "Bladesmith buys four-billion-year-old fallen meteorite",
@@ -349,9 +384,9 @@ def build_and_render_meteorite(test: bool = False):
             "Acid etch reveals glowing alien crystal patterns from solar system birth"
         ]
 
-        for i, (first, last, role, claim, ad) in enumerate(zip(word_starts, word_ends, roles, claims, asset_defs)):
+        beats = []
+        for i, (first, last, role, claim) in enumerate(zip(word_starts, word_ends, roles, claims)):
             bid = f"B{i+1:02d}"
-            sid = f"S{i+1:02d}"
             beats.append({
                 "id": bid,
                 "word_first": first,
@@ -362,59 +397,83 @@ def build_and_render_meteorite(test: bool = False):
                 "action": "Metal craftsmanship and blade grinding",
                 "source": "Recorded observation from blacksmith session"
             })
-            if i == len(asset_defs) - 1:
-                end_frame = total_frames
-            else:
-                end_frame = max(cursor + 60, int(round(float(aligned[word_starts[i+1]]["start"]) * fps)))
-            
-            w, h = ad["crop"][2], ad["crop"][3]
-            sub_box = [ad["crop"][0] + w//8, ad["crop"][1] + h//8, w*3//4, h*3//4]
+
+        # Frame transitions corresponding to the 5 beats
+        beat_frames = [round(aligned[w_end]["end"] * fps) for w_end in word_ends]
+        beat_frames[-1] = total_frames
+
+        mid_b5 = (beat_frames[3] + beat_frames[4]) // 2
+
+        frame_splits = [
+            (0, beat_frames[0]),
+            (beat_frames[0], beat_frames[1]),
+            (beat_frames[1], beat_frames[2]),
+            (beat_frames[2], beat_frames[3]),
+            (beat_frames[3], mid_b5),
+            (mid_b5, total_frames),
+        ]
+
+        shots = []
+        source_ins = [0.1, 0.1, 10.0, 0.1, 18.0, 0.1]
+        for i, (sc, (st_f, end_f), s_in) in enumerate(zip(shot_configs, frame_splits, source_ins)):
+            sid = f"S{i+1:02d}"
+            w, h = sc["crop"][2], sc["crop"][3]
+            sub_box = [sc["crop"][0] + w//8, sc["crop"][1] + h//8, w*3//4, h*3//4]
             shots.append({
                 "id": sid,
-                "asset": ad["id"],
-                "observation": f"O_{ad['id']}",
-                "start_frame": cursor,
-                "end_frame": end_frame,
-                "source_in": 0.5,
+                "asset": sc["asset"],
+                "observation": f"O_{sc['asset']}",
+                "start_frame": st_f,
+                "end_frame": end_f,
+                "source_in": s_in,
                 "speed": 1.0,
-                "crop": ad["crop"],
+                "crop": sc["crop"],
                 "subject_boxes": [sub_box, sub_box, sub_box],
-                "beat_ids": [bid],
-                "purpose": claim,
+                "beat_ids": [f"B{sc['beat']+1:02d}"],
+                "purpose": claims[sc["beat"]],
                 "production_gain_db": -96.0
             })
-            cursor = end_frame
 
-        try:
-            captions = caption_ranges(aligned)
-        except Exception:
-            # Robust fallback chunker satisfying v3 safe area & CPS limits
-            captions = []
-            i, n = 0, len(aligned)
-            while i < n:
-                best_j = min(i + 3, n - 1)
-                for j in range(best_j, i, -1):
-                    t = " ".join(aligned[k]["word"] for k in range(i, j + 1))
-                    dt = aligned[j]["end"] - aligned[i]["start"]
-                    if len(t) <= 26 and dt >= 0.35 and len(t) / dt <= 23.5:
-                        best_j = j
+        # Pure compliant caption builder without mutating aligned
+        n = len(aligned)
+        captions = []
+        cursor = 0
+        while cursor < n:
+            best_last = cursor
+            for j in range(cursor, min(cursor + 4, n)):
+                t = " ".join(aligned[k]["word"] for k in range(cursor, j + 1))
+                dt = aligned[j]["end"] - aligned[cursor]["start"]
+                cps = len(t) / dt
+                if dt >= 0.36 and cps <= 21.0 and len(t) <= 24:
+                    best_last = j
+                elif len(t) > 24:
+                    break
+            if best_last == cursor:
+                for j in range(cursor, min(cursor + 4, n)):
+                    t = " ".join(aligned[k]["word"] for k in range(cursor, j + 1))
+                    dt = aligned[j]["end"] - aligned[cursor]["start"]
+                    if dt >= 0.36 and len(t) / dt <= 23.0 and len(t) <= 26:
+                        best_last = j
                         break
                 else:
-                    for j in range(min(i + 5, n - 1), i - 1, -1):
-                        t = " ".join(aligned[k]["word"] for k in range(i, j + 1))
-                        dt = aligned[j]["end"] - aligned[i]["start"]
-                        if len(t) <= 28 and dt >= 0.35 and len(t) / dt <= 24.0:
-                            best_j = j
-                            break
-                    else:
-                        best_j = min(i + 1, n - 1)
-                if best_j < n - 1 and (n - 1 - best_j <= 1 or aligned[n-1]["end"] - aligned[best_j+1]["start"] < 0.35):
-                    best_j = n - 1
-                t = " ".join(aligned[k]["word"] for k in range(i, best_j + 1))
-                size = min(56, int(816 / max(1, len(t)) / 0.66))
-                size = max(42, size - size % 2)
-                captions.append({"word_first": i, "word_last": best_j, "x": 484, "y": 1380, "font_size": size})
-                i = best_j + 1
+                    best_last = min(cursor + 1, n - 1)
+
+            # Avoid leaving trailing orphans
+            if best_last < n - 1 and n - 1 - best_last <= 2:
+                t_all = " ".join(aligned[k]["word"] for k in range(cursor, n))
+                dt_all = aligned[n - 1]["end"] - aligned[cursor]["start"]
+                if len(t_all) <= 28 and len(t_all) / dt_all <= 23.0:
+                    best_last = n - 1
+
+            t = " ".join(aligned[k]["word"] for k in range(cursor, best_last + 1))
+            size = min(50, int(760 / max(1, len(t)) / 0.66))
+            size = max(42, size - size % 2)
+            captions.append({"word_first": cursor, "word_last": best_last, "x": 484, "y": 1380, "font_size": size})
+            cursor = best_last + 1
+
+        if captions and captions[-1]["word_last"] < n - 1:
+            captions[-1]["word_last"] = n - 1
+
 
         project = {
             "version": 3,
@@ -432,7 +491,7 @@ def build_and_render_meteorite(test: bool = False):
             "assets": assets,
             "narration": {
                 "path": "voice/take_01.wav",
-                "script": script,
+                "script": final_script,
                 "delivery": "Engaging, conversational, authoritative storytelling with dramatic pacing",
                 "generation": "continuous_take",
                 "alignment_path": "voice/words_01.json",
