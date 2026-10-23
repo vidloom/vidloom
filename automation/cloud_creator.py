@@ -113,12 +113,11 @@ def repair_script(package: dict, observations: list[dict], audit_result: dict, m
         "audit": {key: audit_result.get(key) for key in ("summary", "claim_checks", "risks", "recommended_edits")},
         "allowed_evidence": evidence,
     }
-    system = """Rewrite this rejected five-beat Short so every claim is a literal description or
-careful explanation directly established by its selected observation. Resolve every audit objection.
-Do not infer mood, motive, causation, symbolism, speed, story facts, or comparisons unless the exact
-evidence text establishes it. Keep exactly five connected beats, 58–78 natural spoken words, a
-concrete visual question first, and an evidence-backed answer last. Select valid observation indexes
-in chronological order. Return only the schema-constrained object."""
+    system = """Rewrite this five-beat cinema Short to make it high-retention, entertaining, and punchy while keeping every claim grounded in its selected observation.
+Resolve every audit objection.
+Keep exactly five connected beats, 58–75 natural spoken words, an immediate conversational hook first, and a decisive, punchy payoff last.
+Deliver charismatic commentary like a passionate film creator—avoid clinical pixel descriptions or robotic phrasing.
+Select valid observation indexes in chronological order. Return only the schema-constrained object."""
     client = Groq(api_key=os.environ["GROQ_API_KEY"])
     result = None
     last_error = None
@@ -189,11 +188,11 @@ def build_video(job: dict, recorder, runtime: dict, config: dict, volume) -> Pat
     idea = {
         "movie": source["name"],
         "scene": "selected visual sequence",
-        "youtube_title": f"The Visual Detail That Makes {source['name']} Work"[:100],
-        "concept": job.get("request") or "Explain one visible filmmaking idea that connects the selected shots.",
-        "hook": "What visible choice makes this sequence easy to follow?",
-        "payoff": "Resolve the opening question with the strongest final visible observation.",
-        "script_direction": "Use one connected evidence-bound explanation. Ignore any claim not established by inspected frames.",
+        "youtube_title": (job.get("request") or f"The Clever Visual Trick That Makes {source['name']} Genius")[:100],
+        "concept": job.get("request") or "Explain the visual timing, comedic contrast, or character tension that makes this moment work.",
+        "hook": "Notice how this scene completely flips the expectation the second you look closer?",
+        "payoff": "Deliver a sharp, satisfying realization that ties the entire sequence together.",
+        "script_direction": "Tell an entertaining, high-retention visual story. Build momentum and contrast, then hit a decisive final punchline.",
     }
     with recorder.step("Write evidence-bound script"):
         package = write_script(idea, observations, "openai/gpt-oss-120b")

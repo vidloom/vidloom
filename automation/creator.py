@@ -208,16 +208,13 @@ def write_script(idea: dict, observations: list[dict], model: str) -> dict:
             for index, row in enumerate(observations)
         ],
     }
-    system = """Write one premium 24–34 second cinema-analysis Short as exactly five connected beats.
-Use 58–78 spoken words total. Beat one must ask or create a concrete visual question immediately.
-Every sentence must be supported by its selected observation; never use movie memory. Build one
-explanation, not a plot recap or list of facts. The final beat must answer the opening with the most
-visually decisive observation. Natural connected speech only: no chopped fragments, fake urgency,
-engagement bait, unsupported superlatives, exact timing, or broad claims about other films. Select
-observation indexes in chronological order. Do not mention overlays, graphics, arrows, freeze frames,
-slow motion, measurements, or editing that is not literally present in the supplied observations.
-Treat the commission's script_direction as an editorial question, never as evidence. Roles must
-include hook first and payoff last. Return only the schema-constrained object."""
+    system = """Write one high-retention, entertaining 24–34 second cinema-analysis YouTube Short as exactly five connected beats.
+Use 58–75 spoken words total.
+Beat 1 (Hook): Immediately grab the viewer with an intriguing, conversational hook about the scene's visual tension, contrast, or character action. Make the viewer lean in, wondering what happens next or what detail they missed.
+Beats 2-4 (Development & Escalation): Walk through the key visual beats with charisma, rhythm, and sharp cinematic insight. Build momentum and contrast toward the climax.
+Beat 5 (Payoff): Deliver a punchy, satisfying climax and payoff that lands the final thought with style and purpose.
+Natural, charismatic spoken voice: energetic, witty, and confident. Avoid clinical robot descriptions, avoid stating coordinate metadata like 'in the left-center of the frame', and avoid academic jargon. Speak like a passionate filmmaker breaking down an awesome moment to a friend.
+Every beat must be supported by its selected observation index in chronological order. Roles must include hook first and payoff last. Return only the schema-constrained object."""
     client = Groq(api_key=os.environ["GROQ_API_KEY"])
     package = None
     last_error = None
