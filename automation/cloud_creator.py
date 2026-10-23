@@ -127,6 +127,9 @@ in chronological order. Return only the schema-constrained object."""
     )
     result = json.loads(response.choices[0].message.content or "{}")
     beats = result.get("beats", [])
+    if len(beats) == 5:
+        for beat, role in zip(beats, ("hook", "context", "mechanism", "mechanism", "payoff")):
+            beat["role"] = role
     indices = [int(row.get("observation_index", -1)) for row in beats]
     count = len(words(" ".join(row.get("narration", "") for row in beats)))
     if len(beats) != 5 or beats[0].get("role") != "hook" or beats[-1].get("role") != "payoff":
