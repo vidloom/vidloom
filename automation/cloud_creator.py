@@ -119,25 +119,37 @@ Do not infer mood, motive, causation, symbolism, speed, story facts, or comparis
 evidence text establishes it. Keep exactly five connected beats, 58–78 natural spoken words, a
 concrete visual question first, and an evidence-backed answer last. Select valid observation indexes
 in chronological order. Return only the schema-constrained object."""
-    response = Groq(api_key=os.environ["GROQ_API_KEY"]).chat.completions.create(
-        model=model,
-        messages=[{"role": "system", "content": system}, {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}],
-        response_format={"type": "json_schema", "json_schema": {"name": "vidloom_repaired_script", "strict": True, "schema": SCRIPT_SCHEMA}},
-        reasoning_effort="high", reasoning_format="hidden", max_completion_tokens=2600,
-    )
-    result = json.loads(response.choices[0].message.content or "{}")
-    beats = result.get("beats", [])
-    if len(beats) == 5:
-        for beat, role in zip(beats, ("hook", "context", "mechanism", "mechanism", "payoff")):
-            beat["role"] = role
-    indices = [int(row.get("observation_index", -1)) for row in beats]
-    count = len(words(" ".join(row.get("narration", "") for row in beats)))
-    if len(beats) != 5 or beats[0].get("role") != "hook" or beats[-1].get("role") != "payoff":
-        raise RuntimeError("Editorial repair did not preserve the required five-beat arc")
-    if indices != sorted(indices) or any(index < 0 or index >= len(observations) for index in indices):
-        raise RuntimeError("Editorial repair selected invalid evidence")
-    if not 52 <= count <= 84:
-        raise RuntimeError(f"Editorial repair length {count} is outside the safety range")
+    client = Groq(api_key=os.environ["GROQ_API_KEY"])
+    result = None
+    last_error = None
+    for attempt, effort in enumerate(("medium", "low", "high"), start=1):
+        try:
+            retry_note = "" if attempt == 1 else f"{chr(10)}Retry {attempt}: return every required field and exactly five beat objects; output no prose."
+            response = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "system", "content": system + retry_note}, {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}],
+                response_format={"type": "json_schema", "json_schema": {"name": "vidloom_repaired_script", "strict": True, "schema": SCRIPT_SCHEMA}},
+                reasoning_effort=effort, reasoning_format="hidden", max_completion_tokens=4096,
+            )
+            candidate = json.loads(response.choices[0].message.content or "{}")
+            beats = candidate.get("beats", [])
+            if len(beats) == 5:
+                for beat, role in zip(beats, ("hook", "context", "mechanism", "mechanism", "payoff")): 
+                    beat["role"] = role
+            indices = [int(row.get("observation_index", -1)) for row in beats]
+            count = len(words(" ".join(row.get("narration", "") for row in beats)))
+            if len(beats) != 5 or beats[0].get("role") != "hook" or beats[-1].get("role") != "payoff":
+                raise ValueError("Editorial repair did not preserve the required five-beat arc")
+            if indices != sorted(indices) or any(index < 0 or index >= len(observations) for index in indices):
+                raise ValueError("Editorial repair selected invalid evidence")
+            if not 52 <= count <= 84:
+                raise ValueError(f"Editorial repair length {count} is outside the safety range")
+            result = candidate
+            break
+        except Exception as error:
+            last_error = error
+    if result is None:
+        raise RuntimeError(f"Editorial repair failed after structured-output attempts: {last_error}")
     return result
 
 
