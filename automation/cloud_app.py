@@ -132,7 +132,7 @@ def render_and_upload_project(project_rel_path: str, test: bool = False):
     with rec.step("Validate project"):
         subprocess.run([sys.executable, str(pipeline_py), "validate", str(project_path)], check=True)
 
-    with rec.step("Render 1080x1920 master with highlighted captions"):
+    with rec.step("Render 1440x2560 2K 60fps master with highlighted captions & RTX grading"):
         (project_dir / "build" / "draft.mp4").unlink(missing_ok=True)
         subprocess.run([sys.executable, str(pipeline_py), "render", str(project_path), "--encoder", "libx264"], check=True)
 

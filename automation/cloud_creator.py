@@ -264,7 +264,7 @@ def build_video(job: dict, recorder, runtime: dict, config: dict, volume) -> Pat
                 raise RuntimeError("Repaired draft still failed editorial audit: " + str(result.get("summary", result.get("verdict"))))
             recorder.save()
 
-    with recorder.step("Render 1080x1920 master"):
+    with recorder.step("Render 1440x2560 2K 60fps master with RTX grading"):
         subprocess.run([sys.executable, str(PIPELINE), "render", str(project_path), "--encoder", "libx264"], check=True)
 
     video = project_dir / "build" / "draft.mp4"
