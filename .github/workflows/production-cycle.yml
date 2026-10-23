@@ -1,10 +1,7 @@
 name: Production cycle
 
 on:
-  schedule:
-    # The release manager wakes hourly, schedules at most one finished video,
-    # and exits cleanly when publishing is paused or the vault is empty.
-    - cron: "17 * * * *"
+  # Legacy laptop recovery only. Continuous production now runs on Modal.
   workflow_dispatch:
     inputs:
       mode:

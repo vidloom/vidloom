@@ -1,8 +1,7 @@
 name: Sync YouTube status
 
 on:
-  schedule:
-    - cron: "23 */6 * * *"
+  # Legacy manual recovery. Modal now owns status reconciliation.
   workflow_dispatch:
 
 permissions:

@@ -1,9 +1,7 @@
 name: Autonomous creator
 
 on:
-  schedule:
-    # Every two hours, offset from the top of the hour to avoid scheduler congestion.
-    - cron: "23 */2 * * *"
+  # Legacy laptop recovery only. Continuous production now runs on Modal.
   workflow_dispatch:
     inputs:
       request:

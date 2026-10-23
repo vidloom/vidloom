@@ -25,6 +25,7 @@ export default {
       if (!await isAuthenticated(request, env)) return json({ error: "Authentication required" }, 401);
 
       if (url.pathname === "/api/state" && request.method === "GET") {
+        if (env.MODAL_API_URL) return modal(env, "/api/state");
         return json(await readRepoJson(env, "control_center/data/dashboard.json"));
       }
       if (url.pathname === "/api/runs" && request.method === "GET") {
@@ -34,6 +35,7 @@ export default {
       if (url.pathname === "/api/action" && request.method === "POST") {
         assertSameOrigin(request);
         const body = await readBody(request);
+        if (env.MODAL_API_URL) return modal(env, "/api/action", { method: "POST", body });
         const spec = actionSpec(body.action, body);
         await github(env, `/actions/workflows/${spec.workflow}/dispatches`, {
           method: "POST",
@@ -47,6 +49,7 @@ export default {
         const prompt = String(body.prompt || "").trim();
         if (!prompt) throw new HttpError(400, "Describe the video you want Vidloom to create");
         if (prompt.length > 1200) throw new HttpError(400, "Creative request must be 1200 characters or fewer");
+        if (env.MODAL_API_URL) return modal(env, "/api/create", { method: "POST", body: { prompt } });
         const spec = actionSpec("create", { prompt });
         await github(env, `/actions/workflows/${spec.workflow}/dispatches`, {
           method: "POST",
@@ -57,6 +60,7 @@ export default {
       if (url.pathname === "/api/settings" && request.method === "PATCH") {
         assertSameOrigin(request);
         const body = await readBody(request);
+        if (env.MODAL_API_URL) return modal(env, "/api/settings", { method: "PATCH", body });
         const current = await readRepoDocument(env, "automation/config.json");
         const updated = applySettings(current.value, body);
         await writeRepoJson(env, "automation/config.json", updated, current.sha, "settings: update Vidloom autopilot");
@@ -220,6 +224,23 @@ async function github(env, path, options = {}) {
     throw new HttpError(response.status >= 500 ? 502 : response.status, detail);
   }
   return response.status === 204 ? null : response.json();
+}
+
+async function modal(env, path, options = {}) {
+  if (!env.MODAL_API_URL || !env.MODAL_CONTROL_SECRET) throw new Error("Modal control endpoint is not configured");
+  const response = await fetch(`${String(env.MODAL_API_URL).replace(/\/$/, "")}${path}`, {
+    method: options.method || "GET",
+    headers: {
+      authorization: `Bearer ${env.MODAL_CONTROL_SECRET}`,
+      "content-type": "application/json",
+      "user-agent": "vidloom-cloudflare-control",
+    },
+    body: options.body ? JSON.stringify(options.body) : undefined,
+  });
+  let value;
+  try { value = await response.json(); } catch (_) { value = { error: `Modal returned ${response.status}` }; }
+  if (!response.ok) throw new HttpError(response.status >= 500 ? 502 : response.status, value.error || `Modal returned ${response.status}`);
+  return json(value, response.status);
 }
 
 async function readRepoDocument(env, path) {

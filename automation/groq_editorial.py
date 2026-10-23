@@ -139,7 +139,7 @@ only the schema-constrained result. Do not invent timestamps, observations, metr
         "model": model,
         "status": "complete",
         "project_id": project_path.parent.name,
-        "project_path": str(project_path.relative_to(ROOT)),
+        "project_path": str(project_path.relative_to(ROOT)) if project_path.is_relative_to(ROOT) else str(project_path),
         "project_digest": project_digest(project_path),
         "generated_at": iso_z(),
     })
