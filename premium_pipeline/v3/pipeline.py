@@ -260,15 +260,36 @@ def ass_time(seconds):
 def captions(p, words):
     lines = ["[Script Info]", "ScriptType: v4.00+", "PlayResX: 1080", "PlayResY: 1920", "WrapStyle: 2", "ScaledBorderAndShadow: yes", "[V4+ Styles]",
              "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-             "Style: Main,DejaVu Sans,64,&H00FFFFFF,&H0000C8FF,&H00101010,&H70000000,-1,0,0,0,100,100,0,0,1,3,1,5,80,180,360,1",
+             "Style: Main,DejaVu Sans,64,&H00FFFFFF,&H0000C8FF,&H00000000,&H80000000,-1,0,0,0,100,100,0,0,1,4.5,2.5,5,80,80,360,1",
              "[Events]", "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text"]
+    c_active = r"{\c&H0000FFFF&}"
+    c_white = r"{\c&H00FFFFFF&}"
     for c in p["captions"]:
         ws = words[c["word_first"]:c["word_last"]+1]
-        text = " ".join(w["word"] for w in ws).replace("\\", "／").replace("{", "(").replace("}", ")").replace("\n", " ")
-        lines.append(f"Dialogue: 0,{ass_time(ws[0]['start'])},{ass_time(ws[-1]['end'])},Main,,0,0,0,,{{\\pos({c['x']},{c['y']})\\fs{c['font_size']}}}{text}")
-    return "\n".join(lines)+"\n"
-
-
+        if not ws:
+            continue
+        pos_tag = r"{\pos(" + str(c["x"]) + "," + str(c["y"]) + r")\fs" + str(c["font_size"]) + "}"
+        if len(ws) == 1:
+            w_clean = ws[0]["word"].replace(chr(92), "／").replace("{", "(").replace("}", ")").replace(chr(10), " ")
+            text = c_active + w_clean + c_white
+            lines.append(f"Dialogue: 0,{ass_time(ws[0]['start'])},{ass_time(ws[0]['end'])},Main,,0,0,0,,{pos_tag}{text}")
+            continue
+        for i in range(len(ws)):
+            t_start = ws[i]["start"]
+            if i < len(ws) - 1:
+                t_end = max(ws[i+1]["start"], ws[i]["end"], t_start + 0.05)
+            else:
+                t_end = max(ws[-1]["end"], t_start + 0.05)
+            phrase_words = []
+            for j, w in enumerate(ws):
+                w_clean = w["word"].replace(chr(92), "／").replace("{", "(").replace("}", ")").replace(chr(10), " ")
+                if j == i:
+                    phrase_words.append(c_active + w_clean + c_white)
+                else:
+                    phrase_words.append(w_clean)
+            text = " ".join(phrase_words)
+            lines.append(f"Dialogue: 0,{ass_time(t_start)},{ass_time(t_end)},Main,,0,0,0,,{pos_tag}{text}")
+    return chr(10).join(lines) + (chr(10) * 3)
 def compile_graph(p, root, encoder="libx264"):
     """Pure compiler; never rescales shot times to narration or inserts voice pauses."""
     fps, duration = p["fps"], p["total_frames"]/p["fps"]

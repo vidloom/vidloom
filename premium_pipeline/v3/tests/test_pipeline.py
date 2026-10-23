@@ -156,8 +156,11 @@ class Gates(unittest.TestCase):
 
     def test_caption_uses_recorded_timestamps(self):
         text=m.captions(self.p,self.words)
-        self.assertIn("0:00:00.10,0:00:00.90",text)
-        self.assertIn("Watch this.",text)
+        self.assertIn("0:00:00.10",text)
+        self.assertIn("0:00:00.90",text)
+        self.assertIn("&H0000FFFF&",text)
+        self.assertIn("Watch",text)
+        self.assertIn("this.",text)
         self.assertNotIn("\\t(",text)
 
     def test_actual_media_bounds_probed(self):
