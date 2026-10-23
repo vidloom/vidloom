@@ -168,12 +168,64 @@ def render_and_upload_project(project_rel_path: str, test: bool = False):
     volume.commit()
     return {"status": job["status"], "job": job}
 
+
+@app.function(image=image, secrets=[secret], volumes={"/data": volume},
+              cpu=(2, 4), memory=(4096, 8192), timeout=1800, max_containers=1,
+              scaledown_window=2, retries=0)
+def upload_custom_video(video_rel_path: str, title: str, description: str, test: bool = False):
+    import time, uuid
+    from pathlib import Path
+    from automation.cloud_runtime import Recorder, now, upload, RATE_RESERVED, RATE_UPPER
+
+    started = time.monotonic()
+    runtime = store.get("runtime", {"jobs": [], "events": [], "active": None})
+    cfg = store.get("config", {})
+    video = Path("/data") / video_rel_path
+
+    job_id = "v-topgun-" + uuid.uuid4().hex[:8]
+    job = {
+        "id": job_id,
+        "title": title[:100],
+        "status": "ready",
+        "video_path": str(video),
+        "created_at": now(),
+        "steps": [],
+        "description": description,
+    }
+    runtime["jobs"].insert(0, job)
+    rec = Recorder(store, runtime, job)
+    rec.save()
+
+    with rec.step("YouTube upload & schedule"):
+        upload(job, video, rec, runtime, store, volume, test=test)
+        runtime["last_success_at"] = now()
+
+    elapsed = time.monotonic() - started
+    job["elapsed_seconds"] = round(elapsed, 3)
+    job["cost"] = {
+        "modal_reserved_usd": round((elapsed + 2) * RATE_RESERVED, 6),
+        "modal_upper_usd": round((elapsed + 2) * RATE_UPPER, 6),
+        "actual_invoice_usd": None,
+        "groq_actual_usd": 0.0,
+        "groq_plan_assumption": "User free tier; no paid billing enabled by Vidloom",
+        "includes": "Function wall time and 2-second idle allowance; excludes image build/cold start and control calls",
+    }
+    runtime["active"] = None
+    runtime["updated_at"] = now()
+    store["runtime"] = runtime
+    volume.commit()
+    return {"status": job["status"], "job": job}
+
 @app.local_entrypoint()
-def main(test: bool = False, status: bool = False, render_project: str = "", jack: bool = False):
+def main(test: bool = False, status: bool = False, render_project: str = "", jack: bool = False, topgun: bool = False):
     import json
     if status:
         from automation.cloud_runtime import public_state
         print(json.dumps(public_state(store), indent=2))
+    elif topgun:
+        title = "Why Maverick's Canyon Run is the Greatest Stunt in Cinema History"
+        desc = "#Shorts #TopGun #TopGunMaverick #TomCruise #Cinema #Film" + chr(10) + chr(10) + "The Navy said the mission was suicide: fly an F-18 at 660 knots through a winding canyon and hit a 3-meter target in under 2 minutes 15 seconds. Every pilot called it impossible. So Maverick stole a jet to prove them wrong."
+        print(json.dumps(upload_custom_video.remote("shorts/topgun_maverick_epic_short.mp4", title, desc, test=test), indent=2))
     elif jack:
         print(json.dumps(render_and_upload_project.remote("projects/jack_sparrow_entrance", test=test), indent=2))
     elif render_project:
