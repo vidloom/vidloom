@@ -385,7 +385,36 @@ def build_and_render_meteorite(test: bool = False):
             })
             cursor = end_frame
 
-        captions = caption_ranges(aligned)
+        try:
+            captions = caption_ranges(aligned)
+        except Exception:
+            # Robust fallback chunker satisfying v3 safe area & CPS limits
+            captions = []
+            i, n = 0, len(aligned)
+            while i < n:
+                best_j = min(i + 3, n - 1)
+                for j in range(best_j, i, -1):
+                    t = " ".join(aligned[k]["word"] for k in range(i, j + 1))
+                    dt = aligned[j]["end"] - aligned[i]["start"]
+                    if len(t) <= 26 and dt >= 0.35 and len(t) / dt <= 23.5:
+                        best_j = j
+                        break
+                else:
+                    for j in range(min(i + 5, n - 1), i - 1, -1):
+                        t = " ".join(aligned[k]["word"] for k in range(i, j + 1))
+                        dt = aligned[j]["end"] - aligned[i]["start"]
+                        if len(t) <= 28 and dt >= 0.35 and len(t) / dt <= 24.0:
+                            best_j = j
+                            break
+                    else:
+                        best_j = min(i + 1, n - 1)
+                if best_j < n - 1 and (n - 1 - best_j <= 1 or aligned[n-1]["end"] - aligned[best_j+1]["start"] < 0.35):
+                    best_j = n - 1
+                t = " ".join(aligned[k]["word"] for k in range(i, best_j + 1))
+                size = min(56, int(816 / max(1, len(t)) / 0.66))
+                size = max(42, size - size % 2)
+                captions.append({"word_first": i, "word_last": best_j, "x": 484, "y": 1380, "font_size": size})
+                i = best_j + 1
 
         project = {
             "version": 3,
