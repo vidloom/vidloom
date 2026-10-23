@@ -164,6 +164,28 @@ Frames: {json.dumps([{'image_index': f['index'], 'timestamp': round(f['time'], 3
         payload = json.loads(response.choices[0].message.content or "{}")
         observations.extend(payload.get("observations", []))
     by_index = {int(row["image_index"]): row for row in observations}
+    # Vision providers occasionally omit one image from a valid multi-image
+    # response. Retry only the missing frames individually; never fabricate an
+    # observation or silently continue with incomplete evidence.
+    for frame in [item for item in frames if item["index"] not in by_index]:
+        retry_text = f"""Inspect this single frame from {movie}, {scene}. Its image_index is
+{frame['index']} and timestamp is {frame['time']:.3f}. Describe only what is visibly established.
+Use a short stable subject name and literal action/state wording. center_x is the primary subject's
+horizontal center from 0.0 left to 1.0 right. Never infer motives, plot, dialogue, speed, causation,
+or off-screen events. Return exactly one observation for image_index {frame['index']}."""
+        response = client.chat.completions.create(
+            model=VISION_MODEL,
+            messages=[{"role": "user", "content": [
+                {"type": "text", "text": retry_text},
+                {"type": "image_url", "image_url": {"url": data_url(frame["path"])}},
+            ]}],
+            response_format={"type": "json_schema", "json_schema": {"name": "frame_observation_retry", "strict": True, "schema": OBSERVATION_SCHEMA}},
+            reasoning_effort="low",
+            max_completion_tokens=300,
+        )
+        for row in json.loads(response.choices[0].message.content or "{}").get("observations", []):
+            if int(row.get("image_index", -1)) == frame["index"]:
+                by_index[frame["index"]] = row
     if any(frame["index"] not in by_index for frame in frames):
         raise RuntimeError("Vision inspection did not return every requested frame")
     result = []
