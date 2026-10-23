@@ -299,13 +299,14 @@ def compile_graph(p, root, encoder="libx264"):
     indexes = {k: i for i, k in enumerate(used)}
     voice_index = len(inputs)
     inputs.append(str(resolve(root, p["narration"]["path"])))
+    w_target, h_target = 1440, 2560
     graph, beds = [], []
     for i, s in enumerate(p["shots"]):
         n = s["end_frame"]-s["start_frame"]
         d = n/fps
         x,y,w,h = s["crop"]
         inp = indexes[s["asset"]]
-        graph.append(f"[{inp}:v]trim=start={s['source_in']}:duration={d*s['speed']},setpts=(PTS-STARTPTS)/{s['speed']},crop={w}:{h}:{x}:{y},scale=1080:1920:flags=lanczos,setsar=1,fps={fps},tpad=stop_mode=clone:stop_duration={1/fps},trim=end_frame={n},setpts=N/({fps}*TB),format=yuv420p[v{i}]")
+        graph.append(f"[{inp}:v]trim=start={s['source_in']}:duration={d*s['speed']},setpts=(PTS-STARTPTS)/{s['speed']},crop={w}:{h}:{x}:{y},scale={w_target}:{h_target}:flags=lanczos,cas=strength=0.55,eq=contrast=1.12:brightness=0.01:saturation=1.20:gamma=0.98,setsar=1,fps={fps},tpad=stop_mode=clone:stop_duration={1/fps},trim=end_frame={n},setpts=N/({fps}*TB),format=yuv420p[v{i}]")
         if s["production_gain_db"] > -96:
             graph.append(f"[{inp}:a]atrim=start={s['source_in']}:duration={d*s['speed']},asetpts=PTS-STARTPTS,atempo={s['speed']},aresample=48000,aformat=channel_layouts=stereo,volume={s['production_gain_db']}dB,afade=t=in:d=0.008,afade=t=out:st={max(0,d-.015)}:d=0.015,adelay={round(1000*s['start_frame']/fps)}:all=1[p{i}]")
             beds.append(f"[p{i}]")
@@ -324,9 +325,9 @@ def compile_graph(p, root, encoder="libx264"):
     command = ["ffmpeg", "-n", "-hide_banner", "-loglevel", "warning", "-filter_complex_threads", "2"]
     for inp in inputs:
         command += ["-i", inp]
-    options = {"libx264": ["-preset", "slow", "-crf", "18"],
-               "h264_nvenc": ["-preset", "p6", "-rc", "vbr", "-cq", "18", "-b:v", "10M"],
-               "libopenh264": ["-b:v", "12M"]}[encoder]
+    options = {"libx264": ["-preset", "slow", "-crf", "17", "-maxrate", "25M", "-bufsize", "50M"],
+               "h264_nvenc": ["-preset", "p6", "-rc", "vbr", "-cq", "17", "-b:v", "22M", "-maxrate", "30M"],
+               "libopenh264": ["-b:v", "20M"]}[encoder]
     command += ["-filter_complex_script", "filtergraph.txt", "-map", "[video]", "-map", "[audio]", "-c:v", encoder, *options, "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2", "-t", str(duration), "-movflags", "+faststart", "draft.mp4"]
     return ";\n".join(graph), command
 
@@ -335,7 +336,7 @@ def qc(path, p):
     md = probe(path)
     issues = []
     v = next(s for s in md["streams"] if s["codec_type"] == "video")
-    if (v["width"],v["height"]) != (1080,1920):
+    if (v["width"], v["height"]) not in ((1440, 2560), (1080, 1920)):
         issues.append("wrong dimensions")
     if abs(float(md["format"]["duration"])-p["total_frames"]/p["fps"]) > 1/p["fps"]+.03:
         issues.append("duration drift")

@@ -339,7 +339,7 @@ def caption_ranges(aligned: list[dict]) -> list[dict]:
 
 
 def make_project(idea: dict, source: dict, observations: list[dict], package: dict, project_dir: Path, width: int, height: int, script: str, aligned: list[dict], voice_duration: float) -> dict:
-    fps = 30
+    fps = 60
     original_counts = [max(1, len(words(beat["narration"]))) for beat in package["beats"]]
     total_original = sum(original_counts)
     boundaries, running = [], 0

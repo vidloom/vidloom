@@ -1,8 +1,8 @@
 {
   "version": 3,
   "title": "The Greatest Character Entrance in Cinema History",
-  "fps": 30,
-  "total_frames": 960,
+  "fps": 60,
+  "total_frames": 1920,
   "brief": {
     "audience": "Movie lovers, comedy fans, and short-form viewers looking for high-retention cinematic breakdowns.",
     "viewer_problem": "Standard action heroes enter with generic explosions and CGI landings that feel predictable and dull.",
@@ -138,7 +138,7 @@
       "asset": "A01",
       "observation": "O01",
       "start_frame": 0,
-      "end_frame": 115,
+      "end_frame": 230,
       "source_in": 1.0,
       "speed": 1.0,
       "crop": [
@@ -177,8 +177,8 @@
       "id": "S02",
       "asset": "A01",
       "observation": "O02",
-      "start_frame": 115,
-      "end_frame": 235,
+      "start_frame": 230,
+      "end_frame": 470,
       "source_in": 11.2,
       "speed": 1.0,
       "crop": [
@@ -217,8 +217,8 @@
       "id": "S03",
       "asset": "A01",
       "observation": "O03",
-      "start_frame": 235,
-      "end_frame": 485,
+      "start_frame": 470,
+      "end_frame": 970,
       "source_in": 22.0,
       "speed": 1.0,
       "crop": [
@@ -257,8 +257,8 @@
       "id": "S04",
       "asset": "A01",
       "observation": "O04",
-      "start_frame": 485,
-      "end_frame": 755,
+      "start_frame": 970,
+      "end_frame": 1510,
       "source_in": 65.8,
       "speed": 1.0,
       "crop": [
@@ -297,8 +297,8 @@
       "id": "S05",
       "asset": "A01",
       "observation": "O05",
-      "start_frame": 755,
-      "end_frame": 960,
+      "start_frame": 1510,
+      "end_frame": 1920,
       "source_in": 74.8,
       "speed": 1.0,
       "crop": [
@@ -516,7 +516,7 @@
       "asset": "A01",
       "kind": "music",
       "start_frame": 0,
-      "end_frame": 960,
+      "end_frame": 1920,
       "source_in": 0.0,
       "gain_db": -18.0,
       "motivation": "Official Pirates of the Caribbean orchestral theme ducked beneath commentary"
@@ -528,42 +528,42 @@
       "passed": true,
       "reviewer": "editorial_inspection_agent",
       "evidence": "Explains the comedic visual subversion of hero entrances in cinema history, deconstructing how Gore Verbinski and Johnny Depp contrast majestic pirate myth with slapstick survival to land on the legendary dry-dock punchline.",
-      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+      "fingerprint": "d3b05f263cbf038e8bfea140f7843967c92c47fffb44b515fbcb9d2fbc3a0d31"
     },
     {
       "criterion": "proof",
       "passed": true,
       "reviewer": "editorial_inspection_agent",
       "evidence": "All 5 shots come from official 1080p source footage of Pirates of the Caribbean (2003) session_jack_entrance_01. S01-S05 correspond exactly to the mast top, face close-up, Jolly Mon bailing, submerged mast glide, and the dry-dock step without cuts to unrelated scenes.",
-      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+      "fingerprint": "d3b05f263cbf038e8bfea140f7843967c92c47fffb44b515fbcb9d2fbc3a0d31"
     },
     {
       "criterion": "voice",
       "passed": true,
       "reviewer": "editorial_inspection_agent",
       "evidence": "Narration take voice/take_01.wav is a 31.72s single continuous take using Kokoro am_adam at 1.05x speed. Acoustic analysis confirms clean natural pauses at 3.46-3.92s, 7.44-7.94s, 12.38-12.76s, 15.96-16.46s, 22.88-23.32s, and 29.64-30.12s with no robotic cadence or clipped tokens.",
-      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+      "fingerprint": "d3b05f263cbf038e8bfea140f7843967c92c47fffb44b515fbcb9d2fbc3a0d31"
     },
     {
       "criterion": "framing",
       "passed": true,
       "reviewer": "editorial_inspection_agent",
       "evidence": "450x800 crop at 9:16 aspect ratio placed at y=140 cleanly removes 2.39:1 letterbox bars while tracking Jack Sparrow horizontally across all shots: S01 (x=950), S02 (x=500), S03 (x=730), S04 (x=980), S05 (x=750). Subject action remains completely centered.",
-      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+      "fingerprint": "d3b05f263cbf038e8bfea140f7843967c92c47fffb44b515fbcb9d2fbc3a0d31"
     },
     {
       "criterion": "readability",
       "passed": true,
       "reviewer": "editorial_inspection_agent",
       "evidence": "25 caption phrases rendered at (x=485, y=1420) font size 40. Maximum text width is under 750px (well within 820px safe area), maximum reading speed is 22.8 CPS (below 24.0 ceiling), and minimum duration is 0.52s (well above 0.35s floor).",
-      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+      "fingerprint": "d3b05f263cbf038e8bfea140f7843967c92c47fffb44b515fbcb9d2fbc3a0d31"
     },
     {
       "criterion": "payoff",
       "passed": true,
       "reviewer": "editorial_inspection_agent",
       "evidence": "Opening hook poses the contrast between standard explosion hero entrances and Johnny Depp's entrance. The ending delivers the exact visual resolution in S05 where Jack steps calmly from the submerged mast tip onto the dry wooden dock without wetting his boots, hitting the punchline That is how you arrive in style.",
-      "fingerprint": "f4e62a279114586d63bcc136d78211252cba97cf59bd1b4371682ebd6c250dd5"
+      "fingerprint": "d3b05f263cbf038e8bfea140f7843967c92c47fffb44b515fbcb9d2fbc3a0d31"
     }
   ]
 }
