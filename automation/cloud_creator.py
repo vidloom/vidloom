@@ -99,6 +99,45 @@ def download(url: str, target: Path) -> None:
     temporary.replace(target)
 
 
+def repair_script(package: dict, observations: list[dict], audit_result: dict, model: str) -> dict:
+    """Rewrite a rejected package against the same evidence, never inventing new claims."""
+    from groq import Groq
+    from automation.creator import SCRIPT_SCHEMA, words
+    evidence = [
+        {"index": index, "subject": row["subject"], "action": row["action"],
+         "detail": row["detail"], "evidence": row["evidence"]}
+        for index, row in enumerate(observations)
+    ]
+    prompt = {
+        "rejected_package": package,
+        "audit": {key: audit_result.get(key) for key in ("summary", "claim_checks", "risks", "recommended_edits")},
+        "allowed_evidence": evidence,
+    }
+    system = """Rewrite this rejected five-beat Short so every claim is a literal description or
+careful explanation directly established by its selected observation. Resolve every audit objection.
+Do not infer mood, motive, causation, symbolism, speed, story facts, or comparisons unless the exact
+evidence text establishes it. Keep exactly five connected beats, 58–78 natural spoken words, a
+concrete visual question first, and an evidence-backed answer last. Select valid observation indexes
+in chronological order. Return only the schema-constrained object."""
+    response = Groq(api_key=os.environ["GROQ_API_KEY"]).chat.completions.create(
+        model=model,
+        messages=[{"role": "system", "content": system}, {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}],
+        response_format={"type": "json_schema", "json_schema": {"name": "vidloom_repaired_script", "strict": True, "schema": SCRIPT_SCHEMA}},
+        reasoning_effort="high", reasoning_format="hidden", max_completion_tokens=2600,
+    )
+    result = json.loads(response.choices[0].message.content or "{}")
+    beats = result.get("beats", [])
+    indices = [int(row.get("observation_index", -1)) for row in beats]
+    count = len(words(" ".join(row.get("narration", "") for row in beats)))
+    if len(beats) != 5 or beats[0].get("role") != "hook" or beats[-1].get("role") != "payoff":
+        raise RuntimeError("Editorial repair did not preserve the required five-beat arc")
+    if indices != sorted(indices) or any(index < 0 or index >= len(observations) for index in indices):
+        raise RuntimeError("Editorial repair selected invalid evidence")
+    if not 52 <= count <= 84:
+        raise RuntimeError(f"Editorial repair length {count} is outside the safety range")
+    return result
+
+
 def build_video(job: dict, recorder, runtime: dict, config: dict, volume) -> Path:
     from automation.creator import (
         add_reviews, align_voice, extract_frames, inspect_frames, make_project, media_duration,
@@ -185,9 +224,31 @@ def build_video(job: dict, recorder, runtime: dict, config: dict, volume) -> Pat
         from automation.groq_editorial import audit
         result = audit(project_path, "openai/gpt-oss-120b", refresh=True)
         job["editorial_audit"] = {key:result.get(key) for key in ("verdict","summary","hook_score","clarity_score","payoff_score","evidence_score","voice_score","risks")}
-        if result.get("verdict") != "pass":
-            raise RuntimeError("Editorial audit rejected the draft: " + str(result.get("summary", result.get("verdict"))))
         recorder.save()
+
+    if result.get("verdict") != "pass":
+        with recorder.step("Repair rejected editorial draft"):
+            package = repair_script(package, observations, result, "openai/gpt-oss-120b")
+            script = " ".join(beat["narration"].strip() for beat in package["beats"])
+            job["title"], job["script"] = package["project_title"][:100], script
+            synthesize(script, voice_path)
+            duration = media_duration(voice_path)
+            if not 20 <= duration <= 40:
+                raise RuntimeError(f"Repaired narration duration {duration:.2f}s is outside the production guardrail")
+            final_script, aligned = align_voice(voice_path, script)
+            project = make_project(idea, project_source, observations, package, project_dir.resolve(), width, height, final_script, aligned, duration)
+            project["title"] = package["project_title"]
+            atomic_write_json(project_dir / "voice" / "words_01.json", aligned)
+            atomic_write_json(project_path, project)
+            add_reviews(project_path)
+            subprocess.run([sys.executable, str(PIPELINE), "validate", str(project_path)], check=True)
+            recorder.save()
+        with recorder.step("Verify repaired editorial draft"):
+            result = audit(project_path, "openai/gpt-oss-120b", refresh=True)
+            job["editorial_audit"] = {key:result.get(key) for key in ("verdict","summary","hook_score","clarity_score","payoff_score","evidence_score","voice_score","risks")}
+            if result.get("verdict") != "pass":
+                raise RuntimeError("Repaired draft still failed editorial audit: " + str(result.get("summary", result.get("verdict"))))
+            recorder.save()
 
     with recorder.step("Render 1080x1920 master"):
         subprocess.run([sys.executable, str(PIPELINE), "render", str(project_path), "--encoder", "libx264"], check=True)
