@@ -166,7 +166,10 @@ def build_video(job: dict, recorder, runtime: dict, config: dict, volume) -> Pat
         "rights": f"CC BY; Blender Foundation; {source['url']}",
     }
     with recorder.step("Compile v3 edit plan"):
-        project = make_project(idea, project_source, observations, package, project_dir, width, height, final_script, aligned, duration)
+        # Modal exposes /data through a physical volume symlink. Resolve both
+        # ends before make_project calculates relative asset paths, otherwise
+        # the mount prefix can be serialized twice during validation.
+        project = make_project(idea, project_source, observations, package, project_dir.resolve(), width, height, final_script, aligned, duration)
         # make_project finalizes beat boundaries in-memory. Persist those exact
         # timestamps so captions and validation consume the same edit truth.
         atomic_write_json(project_dir / "voice" / "words_01.json", aligned)
